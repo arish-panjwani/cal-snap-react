@@ -3,9 +3,10 @@
 // LoginForm.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../res/styles.css";
+import login_img from "../../src/assets/img/chicken_img.jpeg";
 import { colors } from "../res/colors";
 import { strings } from "../res/strings";
+import "../res/styles.css";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +44,8 @@ const LoginForm = () => {
       </div>
       <div className="image-section">
         <img
-          src="https://via.placeholder.com/600x800" // Replace with your image URL
+          // src="https://via.placeholder.com/600x800" // Replace with your image URL
+          src={login_img} // Replace with your image URL
           alt="Placeholder"
           className="image"
         />
