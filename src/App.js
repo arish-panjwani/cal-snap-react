@@ -3,21 +3,30 @@
 // App.js
 import React from "react";
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
   Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
 } from "react-router-dom";
-import LoginForm from "./pages/LoginForm";
 import Dashboard from "./pages/Dashboard";
+import LoginForm from "./pages/LoginForm";
+
+const routeArr = [
+  { Page: Dashboard, path: "/dashboard" },
+  { Page: LoginForm, path: "/login" },
+];
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<LoginForm />} />
+        {/* Default Page */}
         <Route path="/" element={<Navigate to="/login" />} />
+        {/* Other Pages */}
+        {routeArr.map((item, index) => {
+          const { Page, path } = item || {};
+          return <Route path={path} element={<Page />} />;
+        })}
       </Routes>
     </Router>
   );

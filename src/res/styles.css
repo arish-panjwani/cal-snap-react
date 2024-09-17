@@ -105,22 +105,6 @@
       font-size: 1rem;
     }
   }
-  
-  /* .theme-switcher {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-  } */
-
-  /* styles.css */
-/* ... existing styles ... */
 
 .theme-switcher {
     position: absolute;
