@@ -1,10 +1,12 @@
+/** @format */
+
 // strings.js
 export const strings = {
-    logoText: 'MyApp',
-    slogan: 'Your Success, Our Commitment',
-    heading: 'Login',
-    emailPlaceholder: 'Email',
-    passwordPlaceholder: 'Password',
-    buttonText: 'Login',
-  };
-  
+  logoText: "Cal Snap",
+  slogan: "Your calories in a snap!",
+  heading: "Login",
+  emailPlaceholder: "Email",
+  passwordPlaceholder: "Password",
+  buttonText: "Login",
+  LOGOUT: "Log Out",
+};

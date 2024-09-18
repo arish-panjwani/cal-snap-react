@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px;
+    padding: 60px;
     box-sizing: border-box;
     transition: background 0.3s;
   }
@@ -13,9 +13,9 @@
   .image-section {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    padding-left: 60px;
   }
   
   .image {
@@ -29,7 +29,7 @@
     flex: 1;
     max-width: 400px;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     padding: 20px;
     box-sizing: border-box;
@@ -50,7 +50,7 @@
   }
   
   .button {
-    width: 100%;
+    width: 85%;
     padding: 12px;
     border-radius: 4px;
     border: none;
@@ -59,6 +59,7 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 30px;
   }
   
   .button:hover {
@@ -83,10 +84,17 @@
   .slogan {
     font-size: 1.2rem;
   }
+
+  .image-slider {
+    width: 21vw;
+    height: 50vh;
+    border-radius: 23px;
+  }
   
   @media (max-width: 768px) {
     .container {
       flex-direction: column;
+      padding: 10px;
     }
   
     .image-section {
@@ -103,6 +111,14 @@
   
     .slogan {
       font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .image-slider {
+      width: 24vw;
+      height: 50vh;
+      border-radius: 20px;
     }
   }
 
@@ -169,4 +185,21 @@
     border-radius: 50%;
   }
   
+  .logout-button {
+    font-size: 14px; /* Smaller font size */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 6px 12px; /* Small padding */
+    width: auto; /* Ensure it doesn’t take up 100% width */
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .logout-button:hover {
+    background-color: #ff4d4d; /* Visual feedback on hover */
+  }
   

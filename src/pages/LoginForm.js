@@ -3,7 +3,11 @@
 // LoginForm.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import login_img from "../../src/assets/img/chicken_img.jpeg";
+import dish1 from "../../src/assets/img/Dish1.jpg";
+import dish2 from "../../src/assets/img/Dish2.jpg";
+import dish3 from "../../src/assets/img/Dish3.jpg";
+import dish4 from "../../src/assets/img/Dish4.jpeg";
+import ImageSlider from "../components/ImageSlider";
 import { colors } from "../res/colors";
 import { strings } from "../res/strings";
 import "../res/styles.css";
@@ -40,15 +44,24 @@ const LoginForm = () => {
           />
           <span className="slider round"></span>
         </label>
-        <span>{isDarkTheme ? "Dark Mode" : "Light Mode"}</span>
+        <span
+          style={{
+            color: isDarkTheme ? colors.dark.textColor : colors.light.textColor,
+          }}>
+          {/* <div */}
+
+          {isDarkTheme ? "Dark Mode" : "Light Mode"}
+          {/* </div> */}
+        </span>
       </div>
       <div className="image-section">
-        <img
+        {/* <img
           // src="https://via.placeholder.com/600x800" // Replace with your image URL
           src={login_img} // Replace with your image URL
           alt="Placeholder"
           className="image"
-        />
+        /> */}
+        <ImageSlider imgArr={[dish1, dish2, dish3, dish4]} />
       </div>
       <div
         className="form-section"
@@ -69,7 +82,15 @@ const LoginForm = () => {
             </div>
             <div className="slogan">{strings.slogan}</div>
           </div>
-          <h2 className="heading">{strings.heading}</h2>
+          <h2
+            className="heading"
+            style={{
+              color: isDarkTheme
+                ? colors.dark.textColor
+                : colors.light.textColor,
+            }}>
+            {strings.heading}
+          </h2>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
