@@ -48,10 +48,7 @@ const LoginForm = () => {
           style={{
             color: isDarkTheme ? colors.dark.textColor : colors.light.textColor,
           }}>
-          {/* <div */}
-
           {isDarkTheme ? "Dark Mode" : "Light Mode"}
-          {/* </div> */}
         </span>
       </div>
       <div className="image-section">
