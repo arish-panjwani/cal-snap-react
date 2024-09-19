@@ -23,7 +23,9 @@ const LoginForm = () => {
     onSuccess: (data) => {
       // Success actions
       console.log(data);
-      navigate("/dashboard");
+      if (data){
+        navigate("/dashboard");  
+      }
     },
     onError: (error) => {
       // Error actions
