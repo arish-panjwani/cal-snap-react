@@ -26,6 +26,9 @@ const LoginForm = () => {
       if (data){
         navigate("/dashboard");  
       }
+      else {
+        alert("Invalid user!")
+      }
     },
     onError: (error) => {
       // Error actions

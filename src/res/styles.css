@@ -104,6 +104,10 @@
     .slogan {
       font-size: 1rem;
     }
+
+    .login-image {
+      display: none !important;
+    }
   }
 
 .theme-switcher {
