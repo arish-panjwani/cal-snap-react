@@ -18,14 +18,12 @@ const ImageSlider = ({ imgArr }) => {
   }, [images.length]);
 
   return (
-    <div>
       <img
-        className="image-slider"
+        className="image-slider logo"
         src={images[currentImageIndex]}
         alt="Sliding images"
         // style={{ width: "20vw", height: "50vh", borderRadius: "20px" }} // Adjust the styling as needed
       />
-    </div>
   );
 };
 

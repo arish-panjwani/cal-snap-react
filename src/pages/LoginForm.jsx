@@ -11,6 +11,11 @@ import "../res/styles.css";
 import { URLs } from "../api/apiConstant";
 import { APIRequest } from "../api/helper";
 import { useMutation } from "@tanstack/react-query";
+import dish1 from "../../src/assets/img/Dish1.jpg";
+import dish2 from "../../src/assets/img/Dish2.jpg";
+import dish3 from "../../src/assets/img/Dish3.jpg";
+import dish4 from "../../src/assets/img/Dish4.jpeg";
+import ImageSlider from "../components/ImageSlider";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -45,7 +50,8 @@ const LoginForm = () => {
     <div className="login-container">
       <div className="login-box">
         <div className="login-image">
-          <img src={login_page_img} alt="Calorie Tracking App"/>
+          {/* <img src={login_page_img} alt="Calorie Tracking App"/> */}
+          <ImageSlider imgArr={[dish1, dish2, dish3, dish4]} />
         </div>
         <div className="login-form-box">
           <div className="form-container">
