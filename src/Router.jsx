@@ -4,6 +4,7 @@ import App from "./App";
 import {
   Dashboard,
   Login,
+  ExercisePage,
   Team,
   Invoices,
   Contacts,
@@ -24,6 +25,7 @@ const AppRouter = () => {
         <Route path="/" element={<App />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/exercise" element={<ExercisePage />} />
           {/* <Route path="/team" element={<Team />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/invoices" element={<Invoices />} />

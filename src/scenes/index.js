@@ -12,7 +12,8 @@ import Pie from "./pie";
 import Stream from "./stream";
 import FAQ from "./faq";
 import Geography from "./geography";
-import Login from "./login"
+import Login from "./login";
+import ExercisePage from "./exercise"
 
 export {
   Navbar,
@@ -29,5 +30,6 @@ export {
   Stream,
   FAQ,
   Geography,
-  Login
+  Login,
+  ExercisePage
 };
