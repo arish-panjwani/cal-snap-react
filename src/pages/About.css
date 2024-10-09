@@ -1,0 +1,32 @@
+.container {
+    max-width: 800px;
+    margin: auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+    border-radius: 8px;
+  }
+  
+  h1, h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* Accordion styles */
+  .accordion-item {
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.5rem; /* Smaller font size for mobile */
+    }
+  
+    h2 {
+      font-size: 1.25rem; /* Smaller font size for mobile */
+        display: block; /* Ensure it takes up its own line */
+        margin-bottom: 20px; /* Add space below "Our Team" */
+        margin-top: 40px; /* Add space above "Our Team" */
+    
+      
+    }
+  }
+  
