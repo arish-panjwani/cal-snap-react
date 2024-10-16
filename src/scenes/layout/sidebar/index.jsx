@@ -17,6 +17,7 @@ import {
   ReceiptOutlined,
   TimelineOutlined,
   WavesOutlined,
+  UploadOutlined
 } from "@mui/icons-material";
 import avatar from "../../../assets/images/avatar.png";
 import logo from "../../../assets/images/logo.png";
@@ -133,8 +134,14 @@ const SideBar = () => {
             colors={colors}
             icon={<DashboardOutlined />}
           />
+          <Item
+            title="Upload"
+            path="/upload"
+            colors={colors}
+            icon={<UploadOutlined />}
+          />
         </Menu>
-        <Typography
+        {/* <Typography
           variant="h6"
           color={colors.gray[300]}
           sx={{ m: "15px 0 5px 20px" }}
@@ -256,7 +263,7 @@ const SideBar = () => {
             colors={colors}
             icon={<WavesOutlined />}
           />
-        </Menu>
+        </Menu> */}
       </Box>
     </Sidebar>
   );
