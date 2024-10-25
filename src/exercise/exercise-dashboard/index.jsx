@@ -7,17 +7,16 @@ import StatisticsChart from './statisticsChart';
 import Profile from './profile';
 import CalendarComponent from './calendar';
 
-
 const ExerciseDashboard = () => {
   return (
     <div className="dashboard-container">
-      <Sidebar />
+      <Sidebar className="sidebar" />
       <div className="main">
-        <TopBar />
-        <ProgressMetrics />
-        <StatisticsChart />
-        <Profile />
-        <CalendarComponent />
+        <TopBar className="top-bar" />
+        <ProgressMetrics className="progress-metrics" />
+        <StatisticsChart className="statistics-chart" />
+        <Profile className="profile" />
+        <CalendarComponent className="calendar" />
       </div>
     </div>
   );
