@@ -10,12 +10,14 @@ import {
 } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import LoginForm from "./pages/LoginForm";
-import About from './pages/About'; 
+import AboutUs from './pages/AboutUs';
+
 
 const routeArr = [
   { Page: Dashboard, path: "/dashboard" },
   { Page: LoginForm, path: "/login" },
-  { Page: About, path: "/about" },
+
+  { Page: AboutUs, path: "/aboutUs" },
 ];
 
 const App = () => {

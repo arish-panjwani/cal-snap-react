@@ -1,0 +1,74 @@
+.aboutUsChild {
+  width: 207px;
+  height: 44px;
+  position: relative;
+  border-radius: 5px;
+  background-color: #00a7cb;
+  display: none;
+  z-index: 1;
+}
+.dGraphicWallpaperWithColor {
+  position: absolute;
+  top: -635px;
+  left: -646px;
+  width: 2731px;
+  height: 4096px;
+  background-image: url(../assets/img/2dgraphicwallpaperwithcolorfulgrainygradients-1@3x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.untitled11Icon {
+  position: absolute;
+  top: -129px;
+  left: 0;
+  width: 1440px;
+  height: 1302px;
+  object-fit: cover;
+  z-index: 1;
+}
+.dGraphicWallpaperWithColorParent {
+  align-self: stretch;
+  height: 1043px;
+  position: relative;
+}
+.aboutUs,
+.aboutUsInner {
+  display: flex;
+  align-items: flex-start;
+}
+.aboutUsInner {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 21px 0 var(--padding-xl);
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-top: -773px;
+}
+.aboutUs {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 1043px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
+  .untitled11Icon {
+    display: flex;
+  }
+}
+@media screen and (max-width: 350px) {
+  .untitled11Icon {
+    display: flex;
+    width: auto;
+    align-self: unset;
+    height: auto;
+    padding-top: var(--padding-19xl);
+    box-sizing: border-box;
+  }
+}

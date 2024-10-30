@@ -1,0 +1,184 @@
+.logoIcon,
+.sliderIcon {
+  position: absolute;
+  object-fit: cover;
+}
+.sliderIcon {
+  top: 0;
+  left: 0;
+  border-radius: 0 var(--br-21xl) var(--br-21xl) 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.logoIcon {
+  top: 28px;
+  left: 3px;
+  width: 78px;
+  height: 75px;
+  z-index: 1;
+}
+.homePageIcon {
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/img/home-page@3x.png);
+}
+.foodBar,
+.foodBarIcon,
+.homePage,
+.homePageIcon {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  z-index: 1;
+}
+.homePage {
+  padding: 0;
+  position: absolute;
+  top: 152px;
+  left: 23px;
+  width: 44px;
+  height: 36px;
+  background-image: url(../assets/img/home-page@3x.png);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.foodBar,
+.foodBarIcon {
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/img/food-bar@3x.png);
+}
+.foodBar {
+  padding: 0;
+  position: absolute;
+  top: 384px;
+  left: 27px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frameChild {
+  position: absolute;
+  top: 474px;
+  left: 19px;
+  background-color: var(--color-gainsboro);
+  width: 53px;
+  height: 34px;
+  display: none;
+}
+.dumbbellIcon {
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/img/dumbbell@3x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.calendar,
+.calendarIcon,
+.dumbbell,
+.dumbbellIcon {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+}
+.dumbbell {
+  padding: 0;
+  position: absolute;
+  top: 474px;
+  left: 23px;
+  width: 46px;
+  height: 35px;
+  background-image: url(../assets/img/dumbbell@3x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calendar,
+.calendarIcon {
+  background-image: url(../assets/img/calendar@3x.png);
+}
+.calendarIcon {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.calendar {
+  padding: 0;
+  position: absolute;
+  top: 293px;
+  left: 24px;
+  width: 44px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calendar,
+.person1,
+.person1Icon,
+.sliderParent {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.person1Icon {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/img/person-1@3x.png);
+  z-index: 1;
+}
+.person1,
+.sliderParent {
+  position: absolute;
+}
+.person1 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  top: 220px;
+  left: 26px;
+  width: 41px;
+  height: 41px;
+  background-image: url(../assets/img/person-1@3x.png);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sliderParent {
+  top: 31px;
+  left: 0;
+  border-radius: 0 var(--br-21xl) var(--br-21xl) 0;
+  width: 91px;
+  height: 981px;
+  background-image: url(../assets/img/slider@2x.png);
+  z-index: 2;
+}
+@media screen and (max-width: 750px) {
+  .sliderParent {
+    display: flex;
+  }
+}
+@media screen and (max-width: 675px) {
+  .sliderParent {
+    display: none;
+  }
+}
