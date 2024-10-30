@@ -11,7 +11,7 @@ import {
 import Dashboard from "./pages/Dashboard";
 import LoginForm from "./pages/LoginForm";
 import ExercisePage from "./exercise/index";
-import ExerciseDashboard from "./exercise/exercise-dashboard/index";
+import ExerciseDashboard from "./exercise-dashboard/index";
 
 
 const routeArr = [

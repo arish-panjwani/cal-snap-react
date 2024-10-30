@@ -1,17 +1,29 @@
-/* Main container */
+/* Full-page background styling */
+body, html {
+    height: 100%; /* Ensure the background covers the full height */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #2e6da0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main container styling */
 .exercise-container {
     max-width: 500px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f2f3f5;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #2fd0ff, #38a7ff);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 /* Title styling */
 h1 {
-    color: #000;  /* This will change the font color to black */
+    color: #0c0c0c;
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
@@ -31,71 +43,61 @@ h1 {
 label {
     font-size: 16px;
     margin-bottom: 5px;
-    color: #333;
+    color: #0f0e0e;
     display: block;
+    font-weight: bold;
 }
 
 /* Input fields */
 .input-field {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #0a0101;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+.input-field:focus {
+    border-color: #38a7ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(56, 167, 255, 0.3);
 }
 
 /* Submit button */
 .submit-btn {
-    background-color: #1976d2;
-    color: white;
-    padding: 10px 15px;
+    background-color: #05386e;
+    color: #ffffff;
+    padding: 12px;
     font-size: 18px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 30px;
 }
 
 .submit-btn:hover {
-    background-color: #155a9c;
+    background-color: #0056b3;
 }
 
-/* Add this style for dropdown options */
-.input-field {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+/* Error message styling */
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-/* Style for dropdown options */
-.input-field option {
-    display: flex; /* Allows the icon and text to be flex items */
-    align-items: center; /* Center aligns items vertically */
-}
-
-/* Optional: add a specific style for the icon */
-.input-field option svg {
-    margin-right: 8px; /* Add spacing between icon and text */
-    vertical-align: middle; /* Align icon in the middle */
-}
-
-/* Responsiveness */
+/* Responsive adjustments */
 @media (max-width: 600px) {
     .exercise-container {
         padding: 10px;
     }
-
     .input-field {
         padding: 8px;
     }
-
     .submit-btn {
-        padding: 8px 12px;
+        padding: 10px;
     }
 }
-.error-message {
-    color: red; /* Change this to your preferred error color */
-    margin-top: 10px;
-    font-size: 14px;
-  }
