@@ -1,38 +1,141 @@
-.App {
+/* Full-page background styling */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #2e6da0;
+  display: flex;
+  padding: 0;
+}
+
+/* Container for sidebar and content */
+.app-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+
+
+/* Content container that holds the ExerciseTracker */
+.content-container {
+  margin-left: 250px; /* Offset to the right by sidebar width */
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100vh; /* Ensure it fills the full height */
+  box-sizing: border-box;
+}
+
+/* Full-page background styling for the ExerciseTracker component */
+.exercise-container {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(135deg, #2fd0ff, #38a7ff);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Title styling */
+h1 {
+  color: #0c0c0c;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Form styling */
+.exercise-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.form-group {
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #0f0e0e;
+  display: block;
+  font-weight: bold;
+}
+
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+.input-field:focus {
+  border-color: #38a7ff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(56, 167, 255, 0.3);
+}
+
+/* Submit button */
+.submit-btn {
+  background-color: #05386e;
+  color: #ffffff;
+  padding: 12px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 30px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  /* Adjust content-container width */
+  .content-container {
+      margin-left: 0; /* Remove sidebar offset for small screens */
+      width: 100%; /* Make it full width */
+      padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  /* Adjust container width */
+  .exercise-container {
+      padding: 15px;
+      max-width: 100%;
+  }
+
+  /* Reduce padding on input fields and button */
+  .input-field {
+      padding: 10px;
+      font-size: 15px;
+  }
+
+  .submit-btn {
+      padding: 10px;
+      font-size: 16px;
+  }
+
+  /* Adjust title font size */
+  h1 {
+      font-size: 24px;
   }
 }
