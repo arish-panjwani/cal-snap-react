@@ -1,12 +1,13 @@
 /* Full-page background styling */
 body, html {
-    height: 100%; /* Ensure the background covers the full height */
+    height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
     background: #2e6da0;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px; /* Add padding to prevent content from touching screen edges */
 }
 
 /* Main container styling */
@@ -91,13 +92,25 @@ label {
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+    /* Adjust container width */
     .exercise-container {
-        padding: 10px;
+        padding: 15px;
+        max-width: 100%;
     }
+
+    /* Reduce padding on input fields and button */
     .input-field {
-        padding: 8px;
+        padding: 10px;
+        font-size: 15px;
     }
+
     .submit-btn {
         padding: 10px;
+        font-size: 16px;
+    }
+
+    /* Adjust title font size */
+    h1 {
+        font-size: 24px;
     }
 }

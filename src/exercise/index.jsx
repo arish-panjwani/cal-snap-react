@@ -1,37 +1,39 @@
 import React, { useState } from "react";
 import { FaRunning, FaBicycle, FaSwimmer, FaDumbbell, FaYinYang } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
-import './styles.css';  // Import your CSS file
+import { useNavigate } from "react-router-dom";
+import './styles.css';
 
 const ExercisePage = () => {
   const [exerciseType, setExerciseType] = useState("");
   const [weight, setWeight] = useState("");
-  const [duration, setDuration] = useState("");
-  const [calories, setCalories] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [date, setDate] = useState(""); // New state for Date
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Validate inputs
-    if (isNaN(duration) || isNaN(calories) || isNaN(weight)) {
-      setError("Please enter valid numbers for Duration, Calories, and Weight.");
+    if (isNaN(weight) || !startTime || !endTime || !date) {
+      setError("Please enter valid numbers and times for all fields.");
       return;
     }
     setError("");
 
-    // Log the data for now (this could be replaced with a real API call to log the exercise)
-    console.log(`Exercise: ${exerciseType}, Weight: ${weight}, Duration: ${duration}, Calories: ${calories}`);
+    // Log the data for now
+    console.log(`Exercise: ${exerciseType}, Weight: ${weight}, Start Time: ${startTime}, End Time: ${endTime}, Date: ${date}`);
     
     // Reset the form
     setExerciseType("");
     setWeight("");
-    setDuration("");
-    setCalories("");
+    setStartTime("");
+    setEndTime("");
+    setDate("");
 
-    // Redirect to the Exercise Dashboard after logging exercise
+    // Redirect to the Exercise Dashboard
     navigate("/exercise-dashboard");
   };
 
@@ -52,7 +54,7 @@ const ExercisePage = () => {
   return (
     <div className="exercise-container">
       <h1>Exercise Tracker</h1>
-      {error && <p className="error">{error}</p>} {/* Display error message */}
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit} className="exercise-form">
         <div className="form-group">
           <label>Type of Exercise</label>
@@ -70,6 +72,7 @@ const ExercisePage = () => {
             ))}
           </select>
         </div>
+        
         <div className="form-group">
           <label>Weight (in kg)</label>
           <input
@@ -79,29 +82,38 @@ const ExercisePage = () => {
             placeholder="e.g., 70"
             className="input-field"
             required
-            min="0" // Ensure no negative weight
+            min="0"
           />
         </div>
 
         <div className="form-group">
-          <label>Duration (in minutes)</label>
+          <label>Date</label> {/* New Date field */}
           <input
-            type="number"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            placeholder="e.g., 30"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="input-field"
             required
           />
         </div>
 
         <div className="form-group">
-          <label>Calories Burnt</label>
+          <label>Start Time</label>
           <input
-            type="number"
-            value={calories}
-            onChange={(e) => setCalories(e.target.value)}
-            placeholder="e.g., 300"
+            type="time"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+            className="input-field"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>End Time</label>
+          <input
+            type="time"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
             className="input-field"
             required
           />
