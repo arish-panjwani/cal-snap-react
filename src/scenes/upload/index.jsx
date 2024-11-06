@@ -9,10 +9,14 @@ import {
   import { tokens } from "../../theme";
   import { mockTransactions } from "../../data/mockData";
   import { useState } from 'react';
+  import { Header } from "../../components";
   
   function Upload() {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const isNonMobile = useMediaQuery("(min-width:600px)");
+    
     const isXlDevices = useMediaQuery("(min-width: 1260px)");
     const isMdDevices = useMediaQuery("(min-width: 724px)");
     const isXsDevices = useMediaQuery("(max-width: 436px)");
@@ -32,14 +36,15 @@ import {
       };
 
     return (
-        <Box display="grid">
-        <Box display="flex" justifyContent="center" p={4}>
+      <Box m="20px">
+      <Header title="UPLOAD" subtitle="Upload picture to figure out calorie" />
+        <Box display="grid" gridColumn={
+            isXlDevices ? "span 8" : isMdDevices ? "span 4" : "span 2"
+          }>
+        <Box display="flex" justifyContent="center" p={4} backgroundColor={colors.primary[400]}>
         <Box width="50%" textAlign="center" border="2px dashed #ccc" borderRadius="10px" p={4}>
             <Typography variant="h3" gutterBottom color={colors.greenAccent[600]} fontWeight="600">
-                Upload Files
-            </Typography>
-            <Typography variant="h5" color={colors.gray[100]} fontWeight="600">
-                Upload picture to figure out calorie
+                Upload File
             </Typography>
             <Box p={4} display="flex" flexDirection="column" alignItems="center">
                 <UploadFile sx={{ fontSize: 60, color: '#ccc' }} />
@@ -73,6 +78,7 @@ import {
           </Typography>
             )}
         </Box>
+      </Box>
       </Box>
       </Box>
     );

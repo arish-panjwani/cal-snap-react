@@ -22,7 +22,7 @@ import {
   Traffic,
 } from "@mui/icons-material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
+import { mockTransactions, mockDailyCalorie } from "../../data/mockData";
 
 function Dashboard() {
   const theme = useTheme();
@@ -33,29 +33,7 @@ function Dashboard() {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-        {!isXsDevices && (
-          <Box>
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: colors.blueAccent[700],
-                color: "#fcfcfc",
-                fontSize: isMdDevices ? "14px" : "10px",
-                fontWeight: "bold",
-                p: "10px 20px",
-                mt: "18px",
-                transition: ".3s ease",
-                ":hover": {
-                  bgcolor: colors.blueAccent[800],
-                },
-              }}
-              startIcon={<DownloadOutlined />}
-            >
-              DOWNLOAD REPORTS
-            </Button>
-          </Box>
-        )}
+        <Header title="Hello, Sana" subtitle="Let's start eating healthy from now on" />
       </Box>
 
       {/* GRID & CHARTS */}
@@ -71,8 +49,164 @@ function Dashboard() {
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* Statistic Items */}
+        {/* Line Chart */}
         <Box
+          gridColumn={
+            isXlDevices ? "span 8" : isMdDevices ? "span 6" : "span 3"
+          }
+          gridRow="span 2"
+          bgcolor={colors.primary[400]}
+        >
+          {/* <Box
+            mt="25px"
+            px="30px"
+            display="flex"
+            justifyContent="space-between"
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.gray[100]}
+              >
+                Revenue Generated
+              </Typography>
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                color={colors.greenAccent[500]}
+              >
+                $59,342.32
+              </Typography>
+            </Box>
+          </Box> */}
+          <Box height="300px" mt="-20px">
+            <LineChart isDashboard={true} />
+          </Box>
+        </Box>
+
+        {/* Revenue Details */}
+        <Box
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          p="30px"
+        >
+          <Typography variant="h5" fontWeight="600" textAlign="center">
+            Calories Budget
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="25px"
+          >
+            <ProgressCircle size="125" />
+            <Typography
+              textAlign="center"
+              variant="h5"
+              color={colors.greenAccent[500]}
+              sx={{ mt: "15px" }}
+            >
+              My Analytics
+            </Typography>
+            {/* <Typography textAlign="center">
+              Includes extra misc expenditures and costs
+            </Typography> */}
+          </Box>
+        </Box>
+
+        {/* Transaction Data */}
+        <Box
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
+          gridRow="span 2"
+          bgcolor={colors.primary[400]}
+          overflow="auto"
+        >
+          <Box borderBottom={`4px solid ${colors.primary[500]}`} p="15px">
+            <Typography color={colors.gray[100]} variant="h5" fontWeight="600">
+              Daily Recap
+            </Typography>
+          </Box>
+
+          {mockTransactions.map((transaction, index) => (
+            <Box
+              key={`${transaction.txId}-${index}`}
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              borderBottom={`4px solid ${colors.primary[500]}`}
+              p="15px"
+            >
+              <Box>
+                <Typography
+                  color={colors.greenAccent[500]}
+                  variant="h5"
+                  fontWeight="600"
+                >
+                  {transaction.txId}
+                </Typography>
+              </Box>
+              <Typography color={colors.gray[100]}>
+                {transaction.date}
+              </Typography>
+              <Box
+                bgcolor={colors.greenAccent[500]}
+                p="5px 10px"
+                borderRadius="4px"
+              >
+                {transaction.cost}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
+        {/* Transaction Data */}
+        <Box
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
+          gridRow="span 2"
+          bgcolor={colors.primary[400]}
+          overflow="auto"
+        >
+          <Box borderBottom={`4px solid ${colors.primary[500]}`} p="15px">
+            <Typography color={colors.gray[100]} variant="h5" fontWeight="600">
+              Daily Calories
+            </Typography>
+          </Box>
+
+          {mockDailyCalorie.map((transaction, index) => (
+            <Box
+              key={`${transaction.type}-${index}`}
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              borderBottom={`4px solid ${colors.primary[500]}`}
+              p="15px"
+            >
+              <Box>
+                <Typography
+                  color={colors.greenAccent[500]}
+                  variant="h5"
+                  fontWeight="600"
+                >
+                  {transaction.type}
+                </Typography>
+                <Typography color={colors.gray[100]}>
+                  {transaction.name}
+                </Typography>
+              </Box>
+              <Box
+                p="5px 10px"
+                borderRadius="4px"
+              >
+                {transaction.intake}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
+        {/* Statistic Items */}
+        {/* <Box
           gridColumn="span 3"
           bgcolor={colors.primary[400]}
           display="flex"
@@ -147,132 +281,14 @@ function Dashboard() {
               />
             }
           />
-        </Box>
+        </Box> */}
 
         {/* ---------------- Row 2 ---------------- */}
 
-        {/* Line Chart */}
-        <Box
-          gridColumn={
-            isXlDevices ? "span 8" : isMdDevices ? "span 6" : "span 3"
-          }
-          gridRow="span 2"
-          bgcolor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            px="30px"
-            display="flex"
-            justifyContent="space-between"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.gray[100]}
-              >
-                Revenue Generated
-              </Typography>
-              <Typography
-                variant="h5"
-                fontWeight="bold"
-                color={colors.greenAccent[500]}
-              >
-                $59,342.32
-              </Typography>
-            </Box>
-            <IconButton>
-              <DownloadOutlined
-                sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-              />
-            </IconButton>
-          </Box>
-          <Box height="250px" mt="-20px">
-            <LineChart isDashboard={true} />
-          </Box>
-        </Box>
-
-        {/* Transaction Data */}
-        <Box
-          gridColumn={isXlDevices ? "span 4" : "span 3"}
-          gridRow="span 2"
-          bgcolor={colors.primary[400]}
-          overflow="auto"
-        >
-          <Box borderBottom={`4px solid ${colors.primary[500]}`} p="15px">
-            <Typography color={colors.gray[100]} variant="h5" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-
-          {mockTransactions.map((transaction, index) => (
-            <Box
-              key={`${transaction.txId}-${index}`}
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.gray[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Typography color={colors.gray[100]}>
-                {transaction.date}
-              </Typography>
-              <Box
-                bgcolor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
-            </Box>
-          ))}
-        </Box>
-
-        {/* Revenue Details */}
-        <Box
-          gridColumn={isXlDevices ? "span 4" : "span 3"}
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              textAlign="center"
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography textAlign="center">
-              Includes extra misc expenditures and costs
-            </Typography>
-          </Box>
-        </Box>
+        
 
         {/* Bar Chart */}
-        <Box
+        {/* <Box
           gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -293,10 +309,10 @@ function Dashboard() {
           >
             <BarChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
 
         {/* Geography Chart */}
-        <Box
+        {/* <Box
           gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -313,7 +329,7 @@ function Dashboard() {
           >
             <GeographyChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

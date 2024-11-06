@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import App from "./App";
 import {
   Dashboard,
   Login,
-  ExercisePage,
+  Exercise,
+  Upload,
   Team,
   Invoices,
   Contacts,
@@ -17,15 +18,23 @@ import {
   Calendar,
   Stream,
 } from "./scenes";
+import { useAuth } from "./api/AuthContext";
+
+const PrivateRoute = ({ element: Component, ...rest }) => {
+  const { user } = useAuth(); // Get user state from AuthContext
+
+  return user ? <Component {...rest} /> : <Navigate to="/login" />; // Redirect to login if not authenticated
+};
 
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<PrivateRoute element={Dashboard} />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/exercise" element={<ExercisePage />} />
+          <Route path="/exercise" element={<PrivateRoute element={Exercise} />} />
+          <Route path="/upload" element={<PrivateRoute element={Upload} />} />
           {/* <Route path="/team" element={<Team />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/invoices" element={<Invoices />} />

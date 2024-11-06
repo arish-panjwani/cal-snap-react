@@ -2,37 +2,36 @@
   import logo_img  from "../../assets/images/logo.png"
   import { strings } from "../../res/strings"
   import React, { useState } from "react";
-  import "../../scenes/login/styles.css"
+  import "../../scenes/login/styles.css";
+  import { useAuth } from '../../api/AuthContext';
+  import { useNavigate } from 'react-router-dom';
   
-
   function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { login, isLoggingIn, loginError } = useAuth();
+    const navigate = useNavigate();
 
-//   const { mutate, isLoading, error: loginError } = useMutation({
-//     mutationFn: APIRequest,
-//     onSuccess: (data) => {
-//       // Success actions
-//       console.log(data);
-//       if (data){
-//         navigate("/dashboard");  
-//       }
-//       else {
-//         alert("Invalid user!")
-//       }
-//     },
-//     onError: (error) => {
-//       // Error actions
-//       console.error(error);
-//     },
-//   });
+const mockUserData = {
+  id: 1,
+  name: "John Doe",
+  email: "johndoe@example.com",
+  token: "mock-jwt-token",
+};
 
-  const handleSubmit = async (event) => {
-    // event.preventDefault();
-    // const body = { username: email, password };
-    // mutate({ urlRequest: URLs.GET_USER});
-  };
+const handleLogin = async () => {
+    const body = { username: email, password };
+    console.log(email + " " + password)
+    try {
+      login(mockUserData);
+      navigate("/");
+      // await login({ username: email, password }); // Call the login function
+      console.log("Logged in successfully");
+    } catch (error) {
+      console.error("Login failed: ", error);
+    }
+};
   
     return (
         <div className="login-container">
@@ -45,9 +44,9 @@
             <div className="logo-container">
               <img src={logo_img} alt="Calsnap Logo" className="logo" />
             </div>
-            <h2>{strings.heading}</h2>
+            <h2 className="login-heading-two">{strings.heading}</h2>
             <p>{strings.subHeading}</p>
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={handleLogin}>
               <div className="input-field">
                 <label htmlFor="username">{strings.usernameLabel}</label>
                 <input

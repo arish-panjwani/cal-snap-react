@@ -13,7 +13,7 @@ import Stream from "./stream";
 import FAQ from "./faq";
 import Geography from "./geography";
 import Login from "./login";
-import ExercisePage from "./exercise"
+import Exercise from "./exercise";
 import Upload from "./upload";
 
 export {
@@ -32,6 +32,6 @@ export {
   FAQ,
   Geography,
   Login,
-  ExercisePage, 
+  Exercise, 
   Upload
 };
