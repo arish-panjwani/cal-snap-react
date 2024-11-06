@@ -12,7 +12,7 @@ function App() {
   const values = { toggled, setToggled };
   
   const location = useLocation()
-  const isLoginPage = location.pathname === "/login";
+  const isLoginPage = location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <ColorModeContext.Provider value={colorMode}>

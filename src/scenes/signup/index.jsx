@@ -3,38 +3,18 @@
   import { strings } from "../../res/strings"
   import React, { useState } from "react";
   import "../../scenes/login/styles.css"
-  import { useNavigate } from "react-router-dom";
+  
 
-  function Login() {
+  function Signup() {
 
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [dob, setDOB] = useState("");
     const [password, setPassword] = useState("");
-      const navigate = useNavigate();
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-//   const { mutate, isLoading, error: loginError } = useMutation({
-//     mutationFn: APIRequest,
-//     onSuccess: (data) => {
-//       // Success actions
-//       console.log(data);
-//       if (data){
-//         navigate("/dashboard");  
-//       }
-//       else {
-//         alert("Invalid user!")
-//       }
-//     },
-//     onError: (error) => {
-//       // Error actions
-//       console.error(error);
-//     },
-//   });
 
   const handleSubmit = async (event) => {
-    // event.preventDefault();
-    // const body = { username: email, password };
-    // mutate({ urlRequest: URLs.GET_USER});
-    
-    navigate("/dashboard");  
   };
   
     return (
@@ -52,11 +32,33 @@
             <p>{strings.subHeading}</p>
             <form className="login-form" onSubmit={handleSubmit}>
               <div className="input-field">
-                <label htmlFor="username">{strings.usernameLabel}</label>
+                <label htmlFor="name">{strings.fullNameLabel}</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder={strings.fullNamePlaceHolder}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="input"
+                    required />
+              </div>
+              <div className="input-field">
+                <label htmlFor="dateOfBirth">{strings.dateOfBirthLabel}</label>
+                <input
+                    type="date"
+                    id="dob"
+                    placeholder={strings.dateOfBirthPlaceHolder}
+                    value={dob}
+                    onChange={(e) => setDOB(e.target.value)}
+                    className="input"
+                    required />
+              </div>
+              <div className="input-field">
+                <label htmlFor="username">{strings.emailLabel}</label>
                 <input
                     type="email"
                     id="email"
-                    placeholder={strings.usernamePlaceholder}
+                    placeholder={strings.emailPlaceholder}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="input"
@@ -73,17 +75,21 @@
                     className="input"
                     required />
               </div>
-              <div className="form-options">
-                <div className="remember-me">
-                  <input type="checkbox" id="remember-me" />
-                  <label htmlFor="remember-me">Remember Me</label>
-                </div>
-                <a href="#" className="forgot-password">Forgot Password?</a>
+              <div className="input-field">
+                <label htmlFor="password">{strings.confirmPasswordLabel}</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder={strings.confirmPasswordPlaceholder}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="input"
+                    required />
               </div>
-              <button type="submit" className="login-button">Login</button>
+              <button type="submit" className="login-button">Signup</button>
             </form>
             <p className="signup-link">
-              New Here? <a href="/signup">Sign Up</a>
+              Already have an account? <a href="/login">Login</a>
             </p>
           </div>
           </div>
@@ -92,5 +98,5 @@
     );
   }
   
-  export default Login;
+  export default Signup;
   
