@@ -23,7 +23,8 @@ import {
   FastfoodOutlined,
   MedicalServicesOutlined,
   DashboardCustomizeOutlined,
-  SportsGymnasticsOutlined
+  SportsGymnasticsOutlined,
+  InfoOutlined
 } from "@mui/icons-material";
 import avatar from "../../../assets/images/avatar.png";
 import logo from "../../../assets/images/logo.png";
@@ -270,6 +271,12 @@ const SideBar = () => {
             path="/health"
             colors={colors}
             icon={<MedicalInformationOutlined />}
+          />
+          <Item
+            title="About Us"
+            path="/about"
+            colors={colors}
+            icon={<InfoOutlined />}
           />
         </Menu>
       </Box>

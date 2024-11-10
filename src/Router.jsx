@@ -6,6 +6,7 @@ import {
   Login,
   Exercise,
   Upload,
+  AboutUs,
   Team,
   Invoices,
   Contacts,
@@ -35,6 +36,7 @@ const AppRouter = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/exercise" element={<PrivateRoute element={Exercise} />} />
           <Route path="/upload" element={<PrivateRoute element={Upload} />} />
+          <Route path="/about" element={<PrivateRoute element={AboutUs} />} />
           {/* <Route path="/team" element={<Team />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/invoices" element={<Invoices />} />

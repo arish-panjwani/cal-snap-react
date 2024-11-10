@@ -15,6 +15,7 @@ import Geography from "./geography";
 import Login from "./login";
 import Exercise from "./exercise";
 import Upload from "./upload";
+import AboutUs from "./about";
 
 export {
   Navbar,
@@ -33,5 +34,6 @@ export {
   Geography,
   Login,
   Exercise, 
-  Upload
+  Upload,
+  AboutUs
 };
