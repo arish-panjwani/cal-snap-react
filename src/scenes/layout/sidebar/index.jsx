@@ -199,7 +199,7 @@ const SideBar = () => {
         >
           <Item
             title="Summary"
-            path="/exercise-dashboard"
+            path="/exercise-summary"
             colors={colors}
             icon={<DashboardCustomizeOutlined />}
           />

@@ -7,6 +7,7 @@ import {
   Exercise,
   Upload,
   AboutUs,
+  ExerciseSummary,
   Team,
   Invoices,
   Contacts,
@@ -37,6 +38,7 @@ const AppRouter = () => {
           <Route path="/exercise" element={<PrivateRoute element={Exercise} />} />
           <Route path="/upload" element={<PrivateRoute element={Upload} />} />
           <Route path="/about" element={<PrivateRoute element={AboutUs} />} />
+          <Route path="/exercise-summary" element={<PrivateRoute element={ExerciseSummary} />} />
           {/* <Route path="/team" element={<Team />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/invoices" element={<Invoices />} />
