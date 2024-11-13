@@ -13,6 +13,8 @@ import {
   ProgressCircle,
   BarChart,
   GeographyChart,
+  PieChart,
+  GaugeChart
 } from "../../components";
 import {
   DownloadOutlined,
@@ -24,16 +26,22 @@ import {
 import { tokens } from "../../theme";
 import { mockTransactions, mockDailyCalorie } from "../../data/mockData";
 
+
 function Dashboard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const isXlDevices = useMediaQuery("(min-width: 1260px)");
   const isMdDevices = useMediaQuery("(min-width: 724px)");
   const isXsDevices = useMediaQuery("(max-width: 436px)");
+  
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
         <Header title="Hello, Sana" subtitle="Let's start eating healthy from now on" />
+        <select justifyContent="right">
+        <option value="Last Week">Last Week</option>
+        <option value="Last Month">Last Month</option>
+      </select>
       </Box>
 
       {/* GRID & CHARTS */}
@@ -47,8 +55,94 @@ function Dashboard() {
             : "repeat(3, 1fr)"
         }
         gridAutoRows="140px"
-        gap="20px"
+        gap="5px"
       >
+        <Box
+          gridColumn={isXlDevices ? "span 3" : "span 3"}
+          gridRow="span 1"
+          backgroundColor={colors.primary[400]}
+          p="15px"
+        >
+          <Box height="300px" mt="-150px">
+            {/* <Box> */}
+          {/* <select value=
+          {dateRange} onChange={(e) => setDateRange(e.target.value)}> */}
+          {/* <ResponsiveRadialBar
+        data={data}
+        startAngle={-90}
+        endAngle={90}
+        margin={{ top: 10, bottom: -200 }}
+        cornerRadius={4}
+        circularAxisOuter={null}
+        enableTracks={true}
+        colors={(dat) => dat.data.color}
+        maxValue={100}
+        enableRadialGrid={false}
+        enableCircularGrid={false}
+        radialAxisStart={null}
+        innerRadius={0.50}
+        enableLabels={true}
+        label="value"
+        labelsRadiusOffset={0.5}
+        tooltip={(x) => {
+          return (
+            <div style={{ backgroundColor: "white", padding: 8 }}>
+              {x.bar.data.tip}: {x.bar.data.y}
+            </div>
+          );
+
+          return null;
+        }}
+        layers={["grid", "tracks", "bars", "labels", "legends"]}
+      /> */}
+      <GaugeChart />
+          </Box>
+        </Box>
+        <Box
+          gridColumn={isXlDevices ? "span 3" : "span 3"}
+          gridRow="span 1"
+          backgroundColor={colors.primary[400]}
+          p="15px"
+        >
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="15px"
+          >
+            <ProgressCircle size="100" />
+          </Box>
+        </Box>
+        <Box
+          gridColumn={isXlDevices ? "span 3" : "span 3"}
+          gridRow="span 1"
+          backgroundColor={colors.primary[400]}
+          p="15px"
+        >
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="15px"
+          >
+            <ProgressCircle size="100" />
+          </Box>
+        </Box>
+        <Box
+          gridColumn={isXlDevices ? "span 3" : "span 3"}
+          gridRow="span 1"
+          backgroundColor={colors.primary[400]}
+          p="15px"
+        >
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="15px"
+          >
+            <ProgressCircle size="100" />
+          </Box>
+        </Box>
         {/* Line Chart */}
         <Box
           gridColumn={
@@ -81,6 +175,7 @@ function Dashboard() {
             </Box>
           </Box> */}
           <Box height="300px" mt="-20px">
+          {/* <select value={dateRange} onChange={(e) => setDateRange(e.target.value)}> */}
             <LineChart isDashboard={true} />
           </Box>
         </Box>
@@ -93,27 +188,9 @@ function Dashboard() {
           p="30px"
         >
           <Typography variant="h5" fontWeight="600" textAlign="center">
-            Calories Budget
+            Macronutrients Breakdown
           </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              textAlign="center"
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              My Analytics
-            </Typography>
-            {/* <Typography textAlign="center">
-              Includes extra misc expenditures and costs
-            </Typography> */}
-          </Box>
+          <PieChart />
         </Box>
 
         {/* Transaction Data */}

@@ -7,8 +7,8 @@ export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const URLs = {
     USER_LOGIN: {
-      // URL: `${BASE_URL}/login`,
-      URL: `/login`,
+      URL: `${BASE_URL}/login`,
+      // URL: `/login`,
       METHOD: POST
     },
     GET_USERS:{
