@@ -7,41 +7,97 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function AboutPage() {
   const teamMembers = [
     {
-      name: "John Doe",
-      role: "CEO",
-      image: Image,
+        name: "Arish Panjwani",
+        role: "Front End Lead, Project Lead",
+        image: Image,
     },
     {
-      name: "Jane Smith",
-      role: "CTO",
-      image: Image,
+        name: "Anju Sunny Chungath",
+        role: "Data Lead, Project Co-Lead",
+        image: Image,
     },
     {
-      name: "Mike Johnson",
-      role: "COO",
-      image: Image,
+        name: "Adarsh Shriram Pednekar",
+        role: "Backend Developer, Data Scientist",
+        image: Image,
     },
     {
-      name: "Alice Brown",
-      role: "Marketing Director",
-      image: Image,
+        name: "Ashish Lama",
+        role: "Front End Developer, Data Scientist",
+        image: Image,
     },
     {
-      name: "David Wilson",
-      role: "Lead Designer",
-      image: Image,
+        name: "Devanshi Adhikari",
+        role: "Front End Developer",
+        image: Image,
     },
     {
-      name: "Sarah Lee",
-      role: "Product Manager",
-      image: Image,
+        name: "Indraja Badepalli",
+        role: "Data Scientist, Documentation",
+        image: Image,
     },
     {
-      name: "Chris Davis",
-      role: "Software Engineer",
-      image: Image,
+        name: "Moksh Naresh Jaiswal",
+        role: "Data Analyst, Data Science Member",
+        image: Image,
     },
-  ];
+    {
+        name: "Mueez Ur Rehman Amjad",
+        role: "Data Scraping Team Lead, Data Science Team Member",
+        image: Image,
+    },
+    {
+        name: "Mukul Garg",
+        role: "Backend Lead",
+        image: Image,
+    },
+    {
+        name: "Neha Tamang",
+        role: "UI/UX Lead",
+        image: Image,
+    },
+    {
+        name: "Om Kiranbhai Patel",
+        role: "Front End Developer, Data Scientist",
+        image: Image,
+    },
+    {
+        name: "Safna Mohammed Fayas",
+        role: "Data Analyst",
+        image: Image,
+    },
+    {
+        name: "Shabda Kafle",
+        role: "UI/UX",
+        image: Image,
+    },
+    {
+        name: "Siddhi Pravinbhai Patel",
+        role: "Front End Developer, Data Analyst",
+        image: Image,
+    },
+    {
+        name: "Sri Datta Nadipolla",
+        role: "Data Science Team Lead",
+        image: Image,
+    },
+    {
+        name: "Stephen David Chitilapalli Mathew",
+        role: "DevOps Lead, Data Analyst",
+        image: Image,
+    },
+    {
+        name: "Thejaswee Badepalle",
+        role: "Data Scientist, Documentation",
+        image: Image,
+    },
+    {
+        name: "Utsav Harshadbhai Khamar",
+        role: "Data Analyst, Front End Developer",
+        image: Image,
+    },
+];
+
 
   return (
     <div>
@@ -49,6 +105,9 @@ function AboutPage() {
       <section className="hero-section">
         <div>
           <h1 style={{ color: "inherit" }}>About Our Team</h1>
+          <p>
+            Welcome to CalSnap! We aim to provide the best service possible.
+          </p>
           <p>
             We are passionate about what we do and committed to excellence. Get to
             know the faces behind our success.
