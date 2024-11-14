@@ -541,27 +541,27 @@ export const mockLineData = [
     data: [
       {
         x: "Day 1",
-        y: 40,
+        y: 2200,
       },
       {
         x: "Day 2",
-        y: -80,
+        y: 1900,
       },
       {
         x: "Day 3",
-        y: 80,
+        y: 2500,
       },
       {
         x: "Day 4",
-        y: 30,
+        y: 2300,
       },
       {
         x: "Day 5",
-        y: 85,
+        y: 2050,
       },
       {
         x: "Day 6",
-        y:-85,
+        y:2000,
       }
     ],
   },
@@ -1367,18 +1367,39 @@ export const mockGaugeData = [
     id: "Gauge",
     data: [
       {
-        x: "red",
-        y: 35,
+        x: "Calorie",
+        y: 2000,
         color: "#ee6055",
         tip: "Calorie Consumed",
       },
 
+      // {
+      //   x: "green",
+      //   y:500,
+      //   color: "#008000",
+      //   tip: "Calorie Goal",
+      // },
+    ],
+  },
+];
+
+export const mockHealthGaugeData = [
+  {
+    id: "Gauge",
+    data: [
       {
-        x: "green",
-        y:10,
-        color: "#aaf683",
-        tip: "Calorie Goal",
+        x: "score",
+        y: 60,
+        color: "#ee6055",
+        tip: "Health Score",
       },
+
+      // {
+      //   x: "green",
+      //   y:10,
+      //   color: "#aaf683",
+      //   tip: "Calorie Goal",
+      // },
     ],
   },
 ];

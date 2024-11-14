@@ -8,6 +8,7 @@ const GaugeChart = () => {
   const colors = tokens(theme.palette.mode);
   return (
     <ResponsiveRadialBar
+      
         data={data}
         valueFormat=" >-.2f"
         startAngle={-90}
@@ -15,9 +16,22 @@ const GaugeChart = () => {
         innerRadius={0.4}
         padding={0.3}
         cornerRadius={4}
-        maxValue={100}
-        margin={{ top: 10, bottom: -200}}
-        colors={{ scheme: 'nivo' }}
+        maxValue={5000}
+        margin={{bottom: -1925}}
+        // colors={['#007BFF', '#28A745','#FFA500','#DC3545']}
+        colors={({ value }) => {
+          // Color based on value (this can be customized)
+          if (value <= 1925) return '#66B2FF';    // Blue
+          if (value <= 2425) return '#66D97F ';    // Green
+          if (value <= 3750) return '#FFBF47';    // Orange
+          return '#F5727D';  // Red
+        }}
+        theme={{
+          // Customize text, labels, etc.
+          labels: {
+            text: { fontSize: 12, fill: '#333' }
+          }
+        }}
         borderColor={{
             from: 'color',
             modifiers: [
@@ -38,27 +52,47 @@ const GaugeChart = () => {
         labelsRadiusOffset={0.5}
         // legends={[
         //     {
-        //         anchor: 'right',
-        //         direction: 'column',
+        //         anchor: 'bottom',
+        //         direction: 'row',
         //         justify: false,
-        //         translateX: 80,
-        //         translateY: 0,
-        //         itemsSpacing: 6,
+        //         translateX: 30,
+        //         translateY: -100,
+        //         itemsSpacing: 0,
         //         itemDirection: 'left-to-right',
-        //         itemWidth: 100,
+        //         itemWidth: 80,
         //         itemHeight: 18,
         //         itemTextColor: '#999',
         //         symbolSize: 18,
-        //         symbolShape: 'square',
-        //         effects: [
-        //             {
-        //                 on: 'hover',
-        //                 style: {
-        //                     itemTextColor: '#000'
-        //                 }
-        //             }
+        //         symbolShape: 'circle',
+        //         data: [
+        //           { id: 'Low', label: 'Low', color: '#66B2FF' },
+        //           { id: 'Medium', label: 'Medium', color: '#66D97F' },
+        //           { id: 'High', label: 'High', color: '#FFBF47' },
+        //           { id: 'Critical', label: 'Critical', color: '#F5727D' },
         //         ]
         //     }
+        // ]}
+        // legends={[
+        //   {
+        //     anchor: 'bottom',
+        //     direction: 'row',
+        //     justify: false,
+        //     translateY: 30,
+        //     itemsSpacing: 0,
+        //     itemWidth: 80,
+        //     itemHeight: 20,
+        //     itemDirection: 'left-to-right',
+        //     symbolSize: 20,
+        //     symbolShape: 'circle',
+        //     symbolBorderColor: 'rgba(0, 0, 0, .5)',
+        //     // Mapping of legend items to colors
+        //     data: [
+        //       { id: 'Low', label: 'Low', color: '#66B2FF' },
+        //       { id: 'Medium', label: 'Medium', color: '#66D97F' },
+        //       { id: 'High', label: 'High', color: '#FFBF47' },
+        //       { id: 'Critical', label: 'Critical', color: '#F5727D' },
+        //     ]
+        //   }
         // ]}
     />
   );

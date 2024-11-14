@@ -14,11 +14,13 @@ import {
   BarChart,
   GeographyChart,
   PieChart,
-  GaugeChart
+  GaugeChart,
+  HealthGaugeChart
 } from "../../components";
 import {
   DownloadOutlined,
   Email,
+  Padding,
   PersonAdd,
   PointOfSale,
   Traffic,
@@ -26,6 +28,25 @@ import {
 import { tokens } from "../../theme";
 import { mockTransactions, mockDailyCalorie } from "../../data/mockData";
 
+const legendDatas = [
+  { id: 'Low', label: '1925 & Under', color: '#66B2FF' },
+  { id: 'Medium', label: '1926-2425', color: '#66D97F' },
+  { id: 'High', label: '2426-3750', color: '#FFBF47' },
+  { id: 'Critical', label: '3750 & Over', color: '#F5727D' },
+];
+
+const legendHealthDatas = [
+  { id: 'Low', label: '0-25 (Worse)', color: '#F5727D' },
+  { id: 'Medium', label: '26-50 (Moderate)', color: '#FFBF47' },
+  { id: 'High', label: '51-75 (Fair)', color: '#66B2FF' },
+  { id: 'Critical', label: '76-100 (Good)', color: '#66D97F' },
+];
+const CustomLegendItem = ({ color, label }) => (
+  <div style={{ display: 'flex', alignItems: 'center', marginRight: 10 }}>
+    <div style={{ width: 15, height: 15, borderRadius: '50%', backgroundColor: color, marginRight: 5 }} />
+    <span style={{ fontSize: 12 }}>{label}</span>
+  </div>
+);
 
 function Dashboard() {
   const theme = useTheme();
@@ -33,11 +54,21 @@ function Dashboard() {
   const isXlDevices = useMediaQuery("(min-width: 1260px)");
   const isMdDevices = useMediaQuery("(min-width: 724px)");
   const isXsDevices = useMediaQuery("(max-width: 436px)");
+
+  const legendData = legendDatas.map((item) => ({
+    color: item.color,
+    label: item.label,
+  }));
+
+  const legendHealthData = legendHealthDatas.map((item) => ({
+    color: item.color,
+    label: item.label,
+  }));
   
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
-        <Header title="Hello, Sana" subtitle="Let's start eating healthy from now on" />
+        <Header title="Hello, Sam" subtitle="Let's start eating healthy from now on" />
         <select justifyContent="right">
         <option value="Last Week">Last Week</option>
         <option value="Last Month">Last Month</option>
@@ -59,90 +90,99 @@ function Dashboard() {
       >
         <Box
           gridColumn={isXlDevices ? "span 3" : "span 3"}
-          gridRow="span 1"
+          gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="15px"
+          p="10px"
         >
-          <Box height="300px" mt="-150px">
-            {/* <Box> */}
-          {/* <select value=
-          {dateRange} onChange={(e) => setDateRange(e.target.value)}> */}
-          {/* <ResponsiveRadialBar
-        data={data}
-        startAngle={-90}
-        endAngle={90}
-        margin={{ top: 10, bottom: -200 }}
-        cornerRadius={4}
-        circularAxisOuter={null}
-        enableTracks={true}
-        colors={(dat) => dat.data.color}
-        maxValue={100}
-        enableRadialGrid={false}
-        enableCircularGrid={false}
-        radialAxisStart={null}
-        innerRadius={0.50}
-        enableLabels={true}
-        label="value"
-        labelsRadiusOffset={0.5}
-        tooltip={(x) => {
-          return (
-            <div style={{ backgroundColor: "white", padding: 8 }}>
-              {x.bar.data.tip}: {x.bar.data.y}
-            </div>
-          );
+          <Typography variant="h5" fontWeight="550" textAlign="center">
+            Calorie Consumption
+          </Typography>
+          <GaugeChart/>
+          <div style={{ marginTop: -50, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {legendData.map((item, index) => (
+          <CustomLegendItem key={index} {...item} />
+        ))}
+      </div>
+        </Box>
+        <Box
+          gridColumn={isXlDevices ? "span 3" : "span 3"}
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          p="30px"
+        >
+          <Typography variant="h5" fontWeight="550" textAlign="center">
+            Calorie Consumption (Summary)
+          </Typography>
+          <br/>
+          <Typography variant="h2" fontWeight="550" textAlign="center">
+            2000
+          </Typography>
 
-          return null;
-        }}
-        layers={["grid", "tracks", "bars", "labels", "legends"]}
-      /> */}
-      <GaugeChart />
-          </Box>
+          <br/>
+          <Typography variant="h6" fontWeight="400" textAlign="center" padding-left="100px">
+            Based on BMI
+          </Typography>
+          <Typography variant="h6" fontWeight="400" textAlign="center" padding-left="100px">
+            To lose weight: 1925
+          </Typography>
+          <Typography variant="h6" fontWeight="400" textAlign="center" padding-left="100px">
+            To maintain weight: 2425
+          </Typography>
+          <br/>
+          <Typography variant="p" fontWeight="250" textAlign="center" padding-left="100px">
+            *Calorie consumption threshold = 6000
+          </Typography>
         </Box>
         <Box
           gridColumn={isXlDevices ? "span 3" : "span 3"}
-          gridRow="span 1"
+          gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="15px"
+          p="10px"
         >
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="15px"
-          >
-            <ProgressCircle size="100" />
-          </Box>
+          <Typography variant="h5" fontWeight="550" textAlign="center">
+            Health Score
+          </Typography>
+          <HealthGaugeChart />
+          <div style={{ marginTop: -50, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {legendHealthData.map((item, index) => (
+          <CustomLegendItem key={index} {...item} />
+        ))}
+      </div>
         </Box>
         <Box
           gridColumn={isXlDevices ? "span 3" : "span 3"}
-          gridRow="span 1"
+          gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="15px"
+          p="30px"
         >
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="15px"
-          >
-            <ProgressCircle size="100" />
+          <Typography variant="h5" fontWeight="550" textAlign="center">
+            Health Score (Summary)
+          </Typography>
+          <br/>
+          <Typography variant="h2" fontWeight="550" textAlign="center">
+            60
+          </Typography>
+          <br/>
+          <Typography variant="h6" fontWeight="500" textAlign="center">
+            Score
+          </Typography>
+          <Box display="flex" 
+                justifyContent="center" 
+                alignItems="center" >
+            <Box
+                bgcolor="#66B2FF"
+                p="5px 10px"
+                borderRadius="4px"
+                width="50px"
+                textAlign="center"
+                alignSelf="center"
+              >
+                Fair
+              </Box>
           </Box>
+          
         </Box>
-        <Box
-          gridColumn={isXlDevices ? "span 3" : "span 3"}
-          gridRow="span 1"
-          backgroundColor={colors.primary[400]}
-          p="15px"
-        >
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="15px"
-          >
-            <ProgressCircle size="100" />
-          </Box>
-        </Box>
+        
         {/* Line Chart */}
         <Box
           gridColumn={
@@ -150,6 +190,7 @@ function Dashboard() {
           }
           gridRow="span 2"
           bgcolor={colors.primary[400]}
+          p="5px"
         >
           {/* <Box
             mt="25px"
@@ -174,6 +215,9 @@ function Dashboard() {
               </Typography>
             </Box>
           </Box> */}
+          <Typography variant="h5" fontWeight="550" textAlign="center">
+            Calorie consumed (per week)
+          </Typography>
           <Box height="300px" mt="-20px">
           {/* <select value={dateRange} onChange={(e) => setDateRange(e.target.value)}> */}
             <LineChart isDashboard={true} />
@@ -187,7 +231,7 @@ function Dashboard() {
           backgroundColor={colors.primary[400]}
           p="30px"
         >
-          <Typography variant="h5" fontWeight="600" textAlign="center">
+          <Typography variant="h5" fontWeight="550" textAlign="center">
             Macronutrients Breakdown
           </Typography>
           <PieChart />
