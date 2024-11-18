@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "./styles.css"; // Import custom styles
-import Image from "../../assets/images/user-yellow-circle.png";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Image from "../../assets/images/avatar.png";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AboutPage() {
   const teamMembers = [
