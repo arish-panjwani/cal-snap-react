@@ -17,7 +17,7 @@ const GaugeChart = () => {
         padding={0.3}
         cornerRadius={4}
         maxValue={5000}
-        margin={{bottom: -1925}}
+        margin={{bottom: -60}}
         // colors={['#007BFF', '#28A745','#FFA500','#DC3545']}
         colors={({ value }) => {
           // Color based on value (this can be customized)

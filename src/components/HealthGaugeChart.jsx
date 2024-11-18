@@ -16,7 +16,7 @@ const HealthGaugeChart = () => {
         padding={0.3}
         cornerRadius={4}
         maxValue={100}
-        margin={{bottom: -100}}
+        margin={{bottom: -60}}
         colors={({ value }) => {
           // Color based on value (this can be customized)
           if (value <= 25) return '#F5727D';    // Red

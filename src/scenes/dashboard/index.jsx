@@ -27,6 +27,9 @@ import {
 } from "@mui/icons-material";
 import { tokens } from "../../theme";
 import { mockTransactions, mockDailyCalorie } from "../../data/mockData";
+import { useMutation } from '@tanstack/react-query';
+import { APIRequest } from '../../api/helper';
+import { URLs } from "../../api/apiConstant";
 
 const legendDatas = [
   { id: 'Low', label: '1925 & Under', color: '#66B2FF' },
@@ -64,15 +67,63 @@ function Dashboard() {
     color: item.color,
     label: item.label,
   }));
-  
+
+  const { mutate: getCalorieConsumptionData } = useMutation({
+    mutationFn: async ({ userId, fromDate, toDate }) => {
+        return APIRequest({ urlRequest: URLs.GET_CALORIE_CONSUMPTION, body: { userId, fromDate, toDate } });
+      },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+  // getCalorieConsumptionData("ada","asdad","adad");
+
+  const { mutate: getHealthScoreData } = useMutation({
+    mutationFn: async ({ userId, fromDate, toDate }) => {
+        return APIRequest({ urlRequest: URLs.GET_HEALTH_SCORE, body: { userId, fromDate, toDate } });
+      },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+  // getHealthScoreData("ada","asdad","adad");
+
+  const { mutate: getCalorieConsumptionDataForLineChart } = useMutation({
+    mutationFn: async ({ userId, fromDate, toDate }) => {
+        return APIRequest({ urlRequest: URLs.GET_CALORIE_CONSUMPTION_FOR_LINE_CHART, body: { userId, fromDate, toDate } });
+      },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+  // getCalorieConsumptionDataForLineChart("ada","asdad","adad");
+
+  const { mutate: getMacroNutrientData } = useMutation({
+    mutationFn: async ({ userId, fromDate, toDate }) => {
+        return APIRequest({ urlRequest: URLs.GET_MACRO_NUTRIENT_DATA, body: { userId, fromDate, toDate } });
+      },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+  // getMacroNutrientData("ada","asdad","adad");
+
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
         <Header title="Hello, Sam" subtitle="Let's start eating healthy from now on" />
-        <select justifyContent="right">
-        <option value="Last Week">Last Week</option>
-        <option value="Last Month">Last Month</option>
-      </select>
       </Box>
 
       {/* GRID & CHARTS */}
@@ -94,11 +145,17 @@ function Dashboard() {
           backgroundColor={colors.primary[400]}
           p="10px"
         >
+          <select justifyContent="left">
+        <option value="Last Week">Last Week</option>
+        <option value="Last Month">Last Month</option>
+      </select>
+      <div style={{ marginTop: 5 }}>
           <Typography variant="h5" fontWeight="550" textAlign="center">
             Calorie Consumption
           </Typography>
+          </div>
           <GaugeChart/>
-          <div style={{ marginTop: -50, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div style={{ marginTop: -80, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {legendData.map((item, index) => (
           <CustomLegendItem key={index} {...item} />
         ))}
@@ -139,11 +196,17 @@ function Dashboard() {
           backgroundColor={colors.primary[400]}
           p="10px"
         >
+           <select justifyContent="left">
+        <option value="Last Week">Last Week</option>
+        <option value="Last Month">Last Month</option>
+      </select>
+          <div style={{ marginTop: 5 }}>
           <Typography variant="h5" fontWeight="550" textAlign="center">
             Health Score
           </Typography>
+          </div>
           <HealthGaugeChart />
-          <div style={{ marginTop: -50, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div style={{ marginTop: -80, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {legendHealthData.map((item, index) => (
           <CustomLegendItem key={index} {...item} />
         ))}
@@ -215,6 +278,10 @@ function Dashboard() {
               </Typography>
             </Box>
           </Box> */}
+          <select justifyContent="right">
+        <option value="Last Week">Last Week</option>
+        <option value="Last Month">Last Month</option>
+      </select>
           <Typography variant="h5" fontWeight="550" textAlign="center">
             Calorie consumed (per week)
           </Typography>
@@ -229,8 +296,12 @@ function Dashboard() {
           gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="30px"
+          p="10px"
         >
+          <select justifyContent="left">
+        <option value="Last Week">Last Week</option>
+        <option value="Last Month">Last Month</option>
+      </select>
           <Typography variant="h5" fontWeight="550" textAlign="center">
             Macronutrients Breakdown
           </Typography>

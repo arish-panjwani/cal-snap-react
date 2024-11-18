@@ -38,5 +38,9 @@ export const URLs = {
     GET_ITEM_NUTRIENT_BY_NAME:{
       URL: `${BASE_URL}/getItemNutrients/`,
       METHOD: GET
-    }      
+    },
+    GET_CALORIE_CONSUMPTION:{
+      URL: `${BASE_URL}/getItemNutrients/`,
+      METHOD: POST
+    }        
 };

@@ -37,7 +37,7 @@ const PieChart = () => {
           },
         },
       }}
-      margin={{ top: 30, right: 30, bottom: 30, left: 30 }}
+      margin={{ top: 15, right: 30, bottom: 50, left: 30 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
