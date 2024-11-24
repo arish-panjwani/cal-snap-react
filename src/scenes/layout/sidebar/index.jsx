@@ -1,4 +1,9 @@
-/* eslint-disable react/prop-types */
+/**
+ * eslint-disable react/prop-types
+ *
+ * @format
+ */
+
 import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useContext, useState } from "react";
 import { tokens } from "../../../theme";
@@ -24,7 +29,7 @@ import {
   MedicalServicesOutlined,
   DashboardCustomizeOutlined,
   SportsGymnasticsOutlined,
-  InfoOutlined
+  InfoOutlined,
 } from "@mui/icons-material";
 import avatar from "../../../assets/images/avatar.png";
 import logo from "../../../assets/images/logo.png";
@@ -46,33 +51,28 @@ const SideBar = () => {
       collapsed={collapsed}
       onBackdropClick={() => setToggled(false)}
       toggled={toggled}
-      breakPoint="md"
-    >
+      breakPoint="md">
       <Menu
         menuItemStyles={{
           button: { ":hover": { background: "transparent" } },
-        }}
-      >
+        }}>
         <MenuItem
           rootStyles={{
             margin: "10px 0 20px 0",
             color: colors.gray[100],
-          }}
-        >
+          }}>
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-            }}
-          >
+            }}>
             {!collapsed && (
               <Box
                 display="flex"
                 alignItems="center"
                 gap="12px"
-                sx={{ transition: ".3s ease" }}
-              >
+                sx={{ transition: ".3s ease" }}>
                 <img
                   style={{ width: "30px", height: "30px", borderRadius: "8px" }}
                   src={logo}
@@ -82,8 +82,7 @@ const SideBar = () => {
                   variant="h4"
                   fontWeight="bold"
                   textTransform="capitalize"
-                  color={colors.greenAccent[500]}
-                >
+                  color={colors.greenAccent[500]}>
                   CalSnap
                 </Typography>
               </Box>
@@ -102,8 +101,7 @@ const SideBar = () => {
             alignItems: "center",
             gap: "10px",
             mb: "25px",
-          }}
-        >
+          }}>
           <Avatar
             alt="avatar"
             src={avatar}
@@ -116,9 +114,7 @@ const SideBar = () => {
             <Typography
               variant="h6"
               fontWeight="500"
-              color={colors.greenAccent[500]}
-            >
-            </Typography>
+              color={colors.greenAccent[500]}></Typography>
           </Box>
         </Box>
       )}
@@ -133,8 +129,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Dashboard"
             path="/"
@@ -151,8 +146,7 @@ const SideBar = () => {
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Eat" : " "}
         </Typography>
         <Menu
@@ -164,8 +158,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Search"
             path="/search"
@@ -178,12 +171,17 @@ const SideBar = () => {
             colors={colors}
             icon={<UploadOutlined />}
           />
+          <Item
+            title="Calorie History"
+            path="/calorie-history"
+            colors={colors}
+            icon={<FastfoodOutlined />}
+          />
         </Menu>
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Exercise" : " "}
         </Typography>
         <Menu
@@ -195,8 +193,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Summary"
             path="/exercise-summary"
@@ -205,17 +202,22 @@ const SideBar = () => {
           />
           <Item
             title="Log Exercise"
-            path="/exercise"
+            path="/log-exercise"
             colors={colors}
             icon={<SportsGymnasticsOutlined />}
+          />
+          <Item
+            title="Exercise History"
+            path="/exercise-history"
+            colors={colors}
+            icon={<ReceiptOutlined />}
           />
         </Menu>
 
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Predict" : " "}
         </Typography>
         <Menu
@@ -227,17 +229,10 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
-          <Item
-            title="Calorie Record"
-            path="/exercise-dashboard"
-            colors={colors}
-            icon={<FastfoodOutlined />}
-          />
+          }}>
           <Item
             title="Disease"
-            path="/exercise"
+            path="/disease-prediction"
             colors={colors}
             icon={<MedicalServicesOutlined />}
           />
@@ -245,8 +240,7 @@ const SideBar = () => {
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Info" : " "}
         </Typography>
         <Menu
@@ -258,8 +252,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Profile"
             path="/profile"
@@ -267,8 +260,8 @@ const SideBar = () => {
             icon={<ContactsOutlined />}
           />
           <Item
-            title="Health Info"
-            path="/health"
+            title="Health Profile"
+            path="/health-profile"
             colors={colors}
             icon={<MedicalInformationOutlined />}
           />

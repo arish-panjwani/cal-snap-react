@@ -1,5 +1,12 @@
+/** @format */
+
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import App from "./App";
 import {
   Dashboard,
@@ -19,6 +26,7 @@ import {
   Geography,
   Calendar,
   Stream,
+  UnderConstruction,
 } from "./scenes";
 import { useAuth } from "./api/AuthContext";
 
@@ -35,10 +43,40 @@ const AppRouter = () => {
         <Route path="/" element={<App />}>
           <Route path="/" element={<PrivateRoute element={Dashboard} />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/exercise" element={<PrivateRoute element={Exercise} />} />
+          <Route
+            path="/log-exercise"
+            element={<PrivateRoute element={Exercise} />}
+          />
           <Route path="/upload" element={<PrivateRoute element={Upload} />} />
           <Route path="/about" element={<PrivateRoute element={AboutUs} />} />
-          <Route path="/exercise-summary" element={<PrivateRoute element={ExerciseSummary} />} />
+          <Route
+            path="/exercise-summary"
+            element={<PrivateRoute element={ExerciseSummary} />}
+          />
+          <Route
+            path="/search"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/calorie-history"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/exercise-history"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/disease-prediction"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/profile"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/health-profile"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
           <Route path="/signup" element={<Signup />} />
           {/* <Route path="/team" element={<Team />} />
           <Route path="/contacts" element={<Contacts />} />

@@ -1,3 +1,5 @@
+/** @format */
+
 import Navbar from "./layout/navbar";
 import SideBar from "./layout/sidebar";
 import Dashboard from "./dashboard";
@@ -18,6 +20,7 @@ import Upload from "./upload";
 import AboutUs from "./about";
 import ExerciseSummary from "./exercise-summary";
 import Signup from "./signup";
+import UnderConstruction from "./under_construction";
 
 export {
   Navbar,
@@ -35,9 +38,10 @@ export {
   FAQ,
   Geography,
   Login,
-  Exercise, 
+  Exercise,
   Upload,
   AboutUs,
   ExerciseSummary,
-  Signup
+  Signup,
+  UnderConstruction,
 };
