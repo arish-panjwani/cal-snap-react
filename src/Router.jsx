@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import App from "./App";
+import Profile from './scenes/profilesetup/index.jsx';
+
 import {
   Dashboard,
   Login,
@@ -32,6 +34,9 @@ const AppRouter = () => {
   return (
     <Router>
       <Routes>
+
+        <Route path="/profilesetup" element={<Profile />} />
+
         <Route path="/" element={<App />}>
           <Route path="/" element={<PrivateRoute element={Dashboard} />} />
           <Route path="/login" element={<Login />} />
