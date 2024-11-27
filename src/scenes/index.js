@@ -18,6 +18,7 @@ import Upload from "./upload";
 import AboutUs from "./about";
 import ExerciseSummary from "./exercise-summary";
 import Signup from "./signup";
+import Profile from "./profilesetup";
 
 export {
   Navbar,
@@ -39,5 +40,6 @@ export {
   Upload,
   AboutUs,
   ExerciseSummary,
-  Signup
+  Signup,
+  Profile
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import App from "./App";
-import Profile from './scenes/profilesetup/index.jsx';
+
 
 import {
   Dashboard,
@@ -21,6 +21,7 @@ import {
   Geography,
   Calendar,
   Stream,
+  Profile
 } from "./scenes";
 import { useAuth } from "./api/AuthContext";
 
