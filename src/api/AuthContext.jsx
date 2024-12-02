@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { APIRequest } from './helper';
 import { URLs } from "./apiConstant";
+import useApiMutation  from './useApiMutation';
 
 const AuthContext = createContext();
 
@@ -22,20 +23,20 @@ export const AuthProvider = ({ children }) => {
 
     
     //  Function to handle login, where you update the state with mock or actual user data
-     const login = (userData) => {
-        setUser(userData); // This will set the mock or actual user data in the state
-        queryClient.invalidateQueries(['authUser']); // Invalidate user query (optional)
-    };
+    //  const login = (userData) => {
+    //     setUser(userData); // This will set the mock or actual user data in the state
+    //     queryClient.invalidateQueries(['authUser']); // Invalidate user query (optional)
+    // };
 
     // Mutation to handle login
     // const { mutate: login, isLoading: isLoggingIn, error: loginError } = useMutation({
-    //     mutationFn: async ({ username, password }) => {
-    //         // const urlRequest = { URL: '/login', METHOD: 'POST' };
-    //         return APIRequest({ urlRequest: URLs.USER_LOGIN, body: { username, password } });
+    //     mutationFn: ({ username, password }) => {
+    //       const urlRequest = { URL: URLs.USER_LOGIN, METHOD: 'POST' }; // Dynamic URL and method
+    //       return APIRequest({ urlRequest, body: { username, password } });
     //         // return APIRequest({ urlRequest: URLs.GET_USERS });
     //       },
     //     onSuccess: (data) => {
-    //       console.log(data);
+    //       console.log("Login successful:", data);
     //     //   if (data && data.user) {
     //     //     setUser(data.user); // Set the logged-in user
     //     //     queryClient.invalidateQueries(['authUser']); // Invalidate user query
@@ -43,18 +44,27 @@ export const AuthProvider = ({ children }) => {
     //     //   } else {
     //     //     alert("Invalid user!");
     //     //   }
-    //     if (data){
-    //                 navigate("/dashboard");  
-    //               }
-    //               else {
-    //                 alert("Invalid user!")
-    //               }
+    //     // if (data){
+    //     //             navigate("/dashboard");  
+    //     //           }
+    //     //           else {
+    //     //             alert("Invalid user!")
+    //     //           }
     //     },
     //     onError: (error) => {
     //       console.error(error); // Handle login errors
     //       alert("Login failed! Please try again.");
     //     }
     //   });
+
+      const { mutate: login, isLoading, isError, data, error } = useApiMutation(URLs.USER_LOGIN.URL, 'POST', {
+        onSuccess: (data) => {
+          console.log('Mutation successful:', data);
+        },
+        onError: (error) => {
+          console.error('Mutation failed:', error.message);
+        },
+      });
 
     // Function to handle logout
     const { mutate: logout, isLoading: isLoggingOut, error: logoutError } = useMutation({

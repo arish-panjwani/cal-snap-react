@@ -24,9 +24,10 @@ const handleLogin = async () => {
     const body = { username: email, password };
     console.log(email + " " + password)
     try {
-      login(mockUserData);
-      navigate("/");
+      // login(mockUserData);
+      // navigate("/");
       // await login({ username: email, password }); // Call the login function
+      
       console.log("Logged in successfully");
     } catch (error) {
       console.error("Login failed: ", error);

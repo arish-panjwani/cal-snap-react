@@ -7,9 +7,9 @@ export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const URLs = {
     USER_LOGIN: {
-      URL: `${BASE_URL}/login`,
+      URL: `${BASE_URL}.api.mockbin.io/`,
       // URL: `/login`,
-      METHOD: POST
+      METHOD: GET
     },
     GET_USERS:{
       URL: `${BASE_URL}/getUsers`,
@@ -42,5 +42,17 @@ export const URLs = {
     GET_CALORIE_CONSUMPTION:{
       URL: `${BASE_URL}/getItemNutrients/`,
       METHOD: POST
-    }        
+    },
+    GET_HEALTH_SCORE:{
+      URL: `${BASE_URL}/getItemNutrients/`,
+      METHOD: POST
+    },
+    GET_CALORIE_CONSUMPTION_FOR_LINE_CHART:{
+      URL: `${BASE_URL}/getItemNutrients/`,
+      METHOD: POST
+    },
+    GET_MACRO_NUTRIENT_DATA:{
+      URL: `${BASE_URL}/getItemNutrients/`,
+      METHOD: POST
+    }          
 };
