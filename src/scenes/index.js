@@ -26,6 +26,7 @@ import Pie from "./pie";
 import PreviewCapture from "./preview_capture";
 import SettingsPage from "./settings";
 import Signup from "./signup";
+import Profile from "./profilesetup";
 import SnapUpload from "./snap_or_upload";
 import Stream from "./stream";
 import Team from "./team";
@@ -61,6 +62,15 @@ export {
   Signup,
   SnapUpload,
   Stream,
+  FAQ,
+  Geography,
+  Login,
+  Exercise, 
+  Upload,
+  AboutUs,
+  ExerciseSummary,
+  Signup,
+  Profile
   Team,
   UnderConstruction,
   UserProfile,

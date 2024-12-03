@@ -8,7 +8,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import App from "./App";
-import Profile from "./scenes/profilesetup/index.jsx";
 
 import {
   Dashboard,
@@ -28,6 +27,7 @@ import {
   Geography,
   Calendar,
   Stream,
+  Profile,
   UnderConstruction,
   CalorieHistory,
   UserProfile,

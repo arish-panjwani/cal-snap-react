@@ -1,87 +1,16 @@
-// import React from 'react';
-// import './style.css'; // Adjust if using a different style format
-
-// const Profile = () => {
-//     return (
-//         <div className="profile-container">
-//             <h1>User Profile</h1>
-//             {/* Add form or display user data */}
-//         </div>
-//     );
-// };
-
-// export default Profile;
-
-
-
-// import React, { useState } from 'react';
-// import { Stepper, Step, StepLabel, Button, Typography, Box } from '@mui/material';
-
-// const steps = ['Personal Details', 'Preferences', 'Review & Submit'];
-
-// const Profile = () => {
-//     const [activeStep, setActiveStep] = useState(0);
-
-//     const handleNext = () => {
-//         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-//     };
-
-//     const handleBack = () => {
-//         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-//     };
-
-//     const handleReset = () => {
-//         setActiveStep(0);
-//     };
-
-//     return (
-//         <Box sx={{ width: '100%', margin: 'auto', maxWidth: 600 }}>
-//             <Stepper activeStep={activeStep} alternativeLabel>
-//                 {steps.map((label) => (
-//                     <Step key={label}>
-//                         <StepLabel>{label}</StepLabel>
-//                     </Step>
-//                 ))}
-//             </Stepper>
-//             <Box sx={{ mt: 2, mb: 1 }}>
-//                 {activeStep === steps.length ? (
-//                     <Typography>All steps completed - your profile is ready!</Typography>
-//                 ) : (
-//                     <Typography>Step {activeStep + 1}: {steps[activeStep]}</Typography>
-//                 )}
-//             </Box>
-//             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-//                 <Button
-//                     color="inherit"
-//                     disabled={activeStep === 0}
-//                     onClick={handleBack}
-//                     sx={{ mr: 1 }}
-//                 >
-//                     Back
-//                 </Button>
-//                 <Box sx={{ flex: '1 1 auto' }} />
-//                 {activeStep === steps.length ? (
-//                     <Button onClick={handleReset}>Reset</Button>
-//                 ) : (
-//                     <Button onClick={handleNext}>
-//                         {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-//                     </Button>
-//                 )}
-//             </Box>
-//         </Box>
-//     );
-// };
-
-// export default Profile;
-
-
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepLabel, Button, Box, TextField, Checkbox, FormControlLabel, MenuItem } from '@mui/material';
 
 const steps = ['Basic Info', 'Lifestyle Info', 'Family History'];
 
 const Profile = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Retrieve user data from Signup page via useLocation
+    const { name, email, dob } = location.state || {};  // Destructure the passed data
+    
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
         weight: '',
@@ -89,23 +18,11 @@ const Profile = () => {
         bmi: '',
         waistCircumference: '',
         hipCircumference: '',
-        gender: '',
-        maritalStatus: '',
-        familySize: '',
-        familyIncome: '',
         alcoholConsumption: '',
         monthlyEatingOutSpending: '',
-        minutesWalkBicycle: '',
-        minutesRecreationalActivities: '',
-        sleepHoursWeekdays: '',
-        sleepHoursWeekend: '',
-        cigarettesPerDay: '',
         familyHistory: {
             hasDiabetes: false,
             hasBP: false,
-            hasHeartDisease: false,
-            hasCancer: false,
-            anyOther: '',
         },
     });
 
@@ -118,19 +35,45 @@ const Profile = () => {
     };
 
     const handleFamilyHistoryChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        const { name, checked } = e.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
             familyHistory: {
                 ...prevFormData.familyHistory,
-                [name]: type === 'checkbox' ? checked : value,
+                [name]: checked,
             },
         }));
     };
 
+    const validateStep = (step) => {
+        switch (step) {
+            case 0: // Basic Info
+                return (
+                    formData.weight &&
+                    formData.height &&
+                    formData.bmi &&
+                    formData.waistCircumference &&
+                    formData.hipCircumference
+                );
+            case 1: // Lifestyle Info
+                return (
+                    formData.alcoholConsumption &&
+                    formData.monthlyEatingOutSpending
+                );
+            case 2: // Family History
+                return true; // No required fields for this step
+            default:
+                return false;
+        }
+    };
+
     const handleNext = () => setActiveStep((prevStep) => prevStep + 1);
     const handleBack = () => setActiveStep((prevStep) => prevStep - 1);
-    const handleSubmit = () => console.log('Form Data:', formData);
+    const handleSubmit = () => {
+        console.log('Form Data:', formData);
+        // Optionally navigate to another page after form submission
+        navigate('/');
+    };
 
     const renderStepContent = (step) => {
         switch (step) {
@@ -237,6 +180,9 @@ const Profile = () => {
 
     return (
         <Box sx={{ width: '100%', margin: 'auto', maxWidth: 600 }}>
+            <h3>Welcome {name}!</h3>
+            <p>Email: {email}</p>
+            <p>Date of Birth: {dob}</p>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
                     <Step key={label}>
@@ -258,7 +204,12 @@ const Profile = () => {
                 {activeStep === steps.length - 1 ? (
                     <Button onClick={handleSubmit}>Submit</Button>
                 ) : (
-                    <Button onClick={handleNext}>Next</Button>
+                    <Button
+                        onClick={handleNext}
+                        disabled={!validateStep(activeStep)}
+                    >
+                        Next
+                    </Button>
                 )}
             </Box>
         </Box>
@@ -266,4 +217,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
 
