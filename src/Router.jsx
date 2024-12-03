@@ -2,44 +2,34 @@
 
 import React from "react";
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
   Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
 } from "react-router-dom";
 import App from "./App";
 
-import {
-  Dashboard,
-  Login,
-  Exercise,
-  SnapUpload,
-  AboutUs,
-  ExerciseSummary,
-  Signup,
-  Invoices,
-  Contacts,
-  Form,
-  Bar,
-  Line,
-  Pie,
-  FAQ,
-  Geography,
-  Calendar,
-  Stream,
-  Profile,
-  UnderConstruction,
-  CalorieHistory,
-  UserProfile,
-  MedicalProfile,
-  ExerciseHistory,
-  SettingsPage as Settings,
-  ForgotChangePassword,
-  ChangeCaloriePreferences,
-  CalorieInfo,
-  PreviewCapture,
-} from "./scenes";
 import { useAuth } from "./api/AuthContext";
+import {
+  AboutUs,
+  CalorieHistory,
+  CalorieInfo,
+  ChangeCaloriePreferences,
+  Dashboard,
+  Exercise,
+  ExerciseHistory,
+  ExerciseSummary,
+  ForgotChangePassword,
+  Login,
+  MedicalProfile,
+  PreviewCapture,
+  Profile,
+  SettingsPage as Settings,
+  Signup,
+  SnapUpload,
+  UnderConstruction,
+  UserProfile,
+} from "./scenes";
 
 const PrivateRoute = ({ element: Component, ...rest }) => {
   const { user } = useAuth(); // Get user state from AuthContext
