@@ -1,214 +1,443 @@
-import React, { useState } from "react";
-import { FaRunning, FaBicycle, FaSwimmer, FaDumbbell, FaYinYang } from "react-icons/fa"; // Importing specific icons
-import './styles.css';  // Import your CSS file
-import { Box, Typography, useMediaQuery, useTheme, Button, TextField, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
+/** @format */
+
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  FormControl,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { Formik } from "formik";
+import React, { useEffect, useState } from "react";
+import {
+  FaBicycle,
+  FaDumbbell,
+  FaRunning,
+  FaSwimmer,
+  FaYinYang,
+} from "react-icons/fa";
+import {
+  EXERCISE_CALORIE_API_KEY_1,
+  EXERCISE_CALORIE_URL,
+} from "../../api/apiConstant";
 import { Header } from "../../components";
 import { tokens } from "../../theme";
-import { Formik } from "formik";
+import {
+  cyclingArr,
+  runningArr,
+  swimmingArr,
+  walkingArr,
+  weightLiftingArr,
+  yogaArr,
+} from "./exerciseList";
+import "./styles.css";
+import Loader from "../../components/Loader";
 
 const initialValues = {
   exerciseType: "",
+  exerciseSubType: "",
   weight: "",
   duration: "",
-  calories: "",
   date: "",
 };
 
 const Exercise = () => {
+  const [calorieData, setCalorieData] = useState([]);
+  const [selectedExercise, setExercise] = useState("");
+  const [selectedSubExercise, setSubExercise] = useState("");
+  const [subExerciseArr, setSubExerciseArr] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const handleSubmit = (values, actions) => {
-    console.log(values);
-    actions.resetForm({
-      values: initialValues,
-    });
-  };
 
-  const exercises = [
+  const exerciseArr = [
     { name: "Running", icon: <FaRunning /> },
     { name: "Walking", icon: <FaYinYang /> },
     { name: "Cycling", icon: <FaBicycle /> },
     { name: "Swimming", icon: <FaSwimmer /> },
     { name: "Yoga", icon: <FaYinYang /> },
     { name: "Weight Lifting", icon: <FaDumbbell /> },
-    { name: "HIIT", icon: <FaRunning /> },
-    { name: "Dancing", icon: <FaYinYang /> },
-    { name: "Pilates", icon: <FaYinYang /> },
-    { name: "Jump Rope", icon: <FaRunning /> },
   ];
 
-  const [exerciseType, setExerciseType] = useState("");
-  const [weight, setWeight] = useState("");
-  const [duration, setDuration] = useState("");
-  const [calories, setCalories] = useState("");
-  const [error, setError] = useState("");
+  const getCalorieData = (exercise) => {
+    let finalItem = "";
+    exercise &&
+      exercise.forEach((item, index) => {
+        if (item.name.includes(selectedSubExercise)) {
+          finalItem = item;
+        }
+      });
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // Validate inputs
-  //   if (isNaN(duration) || isNaN(calories) || isNaN(weight)) {
-  //     setError("Please enter valid numbers for Duration, Calories, and Weight.");
-  //     return;
-  //   }
-  //   setError("");
+    return finalItem;
+  };
 
-  //   // Log the data for now
-  //   console.log(`Exercise: ${exerciseType}, Weight: ${weight}, Duration: ${duration}, Calories: ${calories}`);
-  //   // Reset the form
-  //   setExerciseType("");
-  //   setWeight("");
-  //   setDuration("");
-  //   setCalories("");
-  // };
+  const onClearForm = (actions) => {
+    actions.resetForm({ values: initialValues });
+    setExercise("");
+    setSubExercise("");
+    setSubExerciseArr([]);
+    setCalorieData([]);
+  };
+
+  const getSummaryFonts = () => {
+    if (isNonMobile) {
+      return {
+        titleFont: "h3",
+        bodyFont: "h5",
+        footerFont: "h4",
+      };
+    } else {
+      return {
+        titleFont: "h5",
+        bodyFont: "body1",
+        footerFont: "h6",
+      };
+    }
+  };
+
+  const renderExerciseSummary = () => {
+    const { total_calories, duration_minutes } = calorieData || {};
+    const { titleFont, bodyFont, footerFont } = getSummaryFonts();
+
+    return (
+      <Card
+        sx={{
+          maxWidth: 400,
+          margin: "20px auto",
+          borderRadius: 2,
+          backgroundColor: colors.primary[400],
+          boxShadow: `0px 4px 6px ${colors.gray[700]}`,
+          color: colors.primary.white,
+        }}>
+        <CardContent>
+          {/* Header */}
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={1}
+            sx={{ paddingBottom: 0 }}>
+            <Avatar
+              sx={{
+                bgcolor: colors.greenAccent[500],
+                width: 56,
+                height: 56,
+              }}>
+              <FitnessCenterIcon
+                fontSize="large"
+                style={{ color: colors.primary.black }}
+              />
+            </Avatar>
+            <Typography
+              variant={titleFont}
+              fontWeight="bold"
+              gutterBottom
+              sx={{
+                color: colors.primary.white,
+              }}>
+              Exercise Summary
+            </Typography>
+          </Box>
+          <Divider
+            sx={{
+              marginBottom: 2,
+              backgroundColor: colors.gray[200],
+            }}
+          />
+
+          {/* Details */}
+          <Box
+            display="flex"
+            flexDirection="column"
+            gap={1}
+            sx={{ marginBottom: 2 }}>
+            <Typography
+              variant={bodyFont}
+              textAlign="center"
+              sx={{
+                color: colors.primary.white, // Ensure text color adapts
+              }}>
+              <strong>Workout Name:</strong> {selectedExercise || "N/A"}
+            </Typography>
+            <Typography
+              variant={bodyFont}
+              textAlign="center"
+              sx={{
+                color: colors.primary.white,
+              }}>
+              <strong>Variation:</strong> {selectedSubExercise || "N/A"}
+            </Typography>
+            <Typography
+              variant={bodyFont}
+              textAlign="center"
+              sx={{
+                color: colors.primary.white,
+              }}>
+              <strong>Workout Duration:</strong> {duration_minutes || 0} minutes
+            </Typography>
+            <Typography
+              variant={footerFont}
+              textAlign="center"
+              fontWeight="bold"
+              color={"teal"}
+              sx={{
+                mt: 1,
+                color: colors.greenAccent[500], // Accent color for emphasis
+              }}>
+              <strong>Total Calories Burnt:</strong> {total_calories || 0} kcal
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
+    );
+  };
+
+  const renderExerciseEntryForm = (
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit
+  ) => {
+    return (
+      <form onSubmit={handleSubmit}>
+        <Box display="flex" flexDirection="column" gap="16px">
+          <FormControl fullWidth>
+            <InputLabel>Exercise Type</InputLabel>
+            <Select
+              value={values.exerciseType}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="exerciseType"
+              label="Exercise Type"
+              error={touched.exerciseType && Boolean(errors.exerciseType)}>
+              {exerciseArr.map((exercise, index) => {
+                setExercise(values.exerciseType);
+                return (
+                  <MenuItem key={index} value={exercise.name}>
+                    {exercise.name} {exercise.icon}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+
+          {subExerciseArr?.length > 0 && (
+            <FormControl fullWidth>
+              <InputLabel>Variation</InputLabel>
+              <Select
+                value={values.exerciseSubType}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="exerciseSubType"
+                label="Exercise Sub Type"
+                error={touched.exerciseType && Boolean(errors.exerciseType)}>
+                {subExerciseArr.map((item, index) => {
+                  setSubExercise(values.exerciseSubType);
+                  return (
+                    <MenuItem key={index} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          )}
+
+          <TextField
+            fullWidth
+            variant="filled"
+            type="number"
+            label="Weight (lbs)"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.weight}
+            name="weight"
+            error={touched.weight && Boolean(errors.weight)}
+            helperText={touched.weight && errors.weight}
+          />
+
+          <TextField
+            fullWidth
+            variant="filled"
+            type="number"
+            label="Duration"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.duration}
+            name="duration"
+            error={touched.duration && Boolean(errors.duration)}
+            helperText={touched.duration && errors.duration}
+          />
+
+          <TextField
+            fullWidth
+            variant="filled"
+            type="date"
+            label="Date"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.date}
+            name="date"
+            error={touched.date && Boolean(errors.date)}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Box>
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Button type="submit" color="secondary" variant="contained">
+            Log Exercise
+          </Button>
+        </Box>
+      </form>
+    );
+  };
+
+  const renderAddEntryBtn = (handleSubmit) => {
+    return (
+      <>
+        <form onSubmit={handleSubmit}>
+          <Box display="flex" justifyContent="center" mt={4}>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                color: colors.gray[900], // White text for contrast
+                backgroundColor: colors.primary["white"], // Green accent for visibility
+                // color: colors.primary["white"], // Ensure text visibility
+                "&:hover": {
+                  backgroundColor: colors.greenAccent[500], // Slightly darker shade on hover
+                },
+                textTransform: "none",
+                boxShadow: `0px 4px 6px ${colors.gray[700]}`, // Shadow for better contrast
+              }}>
+              ADD ANOTHER ENTRY
+            </Button>
+          </Box>
+        </form>
+      </>
+    );
+  };
+
+  const handleSubmit = async (values, actions) => {
+    if (Object.keys(calorieData)?.length == 0) {
+      try {
+        setLoading(true);
+        const params = new URLSearchParams();
+        params.append("activity", values.exerciseType);
+        if (values.weight) params.append("weight", values.weight);
+        if (values.duration) params.append("duration", values.duration);
+
+        const generated_url = `${EXERCISE_CALORIE_URL}caloriesburned?${params.toString()}`;
+        const response = await fetch(generated_url, {
+          headers: {
+            "X-Api-Key": EXERCISE_CALORIE_API_KEY_1,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json(); // Parse the JSON response
+        const finalExerciseData = await getCalorieData(data);
+        const timer = setTimeout(() => {
+          setCalorieData(finalExerciseData); // Save the parsed data into the state
+          setLoading(false);
+        }, 3000);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setLoading(false);
+      }
+    } else if (Object.keys(calorieData)?.length > 0) {
+      onClearForm(actions);
+    }
+  };
+
+  // select Array of sub-exercises
+  useEffect(() => {
+    switch (selectedExercise) {
+      case "Running":
+        setSubExerciseArr(runningArr);
+        break;
+      case "Walking":
+        setSubExerciseArr(walkingArr);
+        break;
+      case "Cycling":
+        setSubExerciseArr(cyclingArr);
+        break;
+      case "Swimming":
+        setSubExerciseArr(swimmingArr);
+        break;
+      case "Yoga":
+        setSubExerciseArr(yogaArr);
+        break;
+      case "Weight Lifting":
+        setSubExerciseArr(weightLiftingArr);
+        break;
+
+      default:
+        break;
+    }
+  }, [selectedExercise]);
 
   return (
-    <Box m="20px"
-    display="flex"
-    flexDirection="column"
-    >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start"
-        }}
-      >
-        <Header title="LOG EXERCISE" subtitle="Track your exercise activity" />
-      </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: "600px",
-          padding: "20px",
-          borderRadius: "8px"
-        }}
-      >
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={initialValues}
-        // validationSchema={checkoutSchema}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleBlur,
-          handleChange,
-          handleSubmit,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <Box
-                display="flex"
-                flexDirection="column" // Stack fields vertically
-                gap="16px"  // Reduce space between fields
-              >
-              <FormControl fullWidth sx={{ gridColumn: "span 1" }}>
-                <InputLabel>Exercise Type</InputLabel>
-                <Select
-                  value={values.exerciseType}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="exerciseType"
-                  label="Exercise Type"
-                  error={touched.exerciseType && Boolean(errors.exerciseType)}
-                >
-                  {exercises.map((exercise, index) => (
-                    <MenuItem key={index} value={exercise.name}>
-                      {exercise.icon} {exercise.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+    <>
+      {isLoading && <Loader color="secondary" type="linear" />}
+      <Box m="20px" display="flex" flexDirection="column">
+        <Box display="flex" alignItems="center" justifyContent="flex-start">
+          <Header
+            title="LOG EXERCISE"
+            subtitle="Track your exercise activity"
+          />
+        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Box sx={{ width: "100%", maxWidth: "600px", p: 2, borderRadius: 2 }}>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+              {({
+                values,
+                errors,
+                touched,
+                handleBlur,
+                handleChange,
+                handleSubmit,
+              }) => (
+                <>
+                  {Object.keys(calorieData)?.length > 0 &&
+                    renderExerciseSummary()}
 
-              <TextField
-                fullWidth
-                variant="filled"
-                type="number"
-                label="Weight (kg)"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.weight}
-                name="weight"
-                error={touched.weight && Boolean(errors.weight)}
-                helperText={touched.weight && errors.weight}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="number"
-                label="Calories Burnt"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.calories}
-                name="calories"
-                error={touched.calories && Boolean(errors.calories)}
-                helperText={touched.calories && errors.calories}
-                sx={{ gridColumn: "span 1" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="date"
-                label="Date"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.date}
-                name="date"
-                error={touched.date && Boolean(errors.date)}
-                helperText={touched.date && errors.date}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="time"
-                label="Start Time"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.startTime}
-                name="startTime"
-                error={touched.startTime && Boolean(errors.startTime)}
-                helperText={touched.startTime && errors.startTime}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="time"
-                label="End Time"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.endTime}
-                name="endTime"
-                error={touched.endTime && Boolean(errors.endTime)}
-                helperText={touched.endTime && errors.endTime}
-                sx={{ gridColumn: "span 2" }}
-              />
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="end"
-              mt="20px"
-            >
-              <Button type="submit" color="secondary" variant="contained">
-                Log Exercise
-              </Button>
-            </Box>
-          </form>
-        )}
-      </Formik>
+                  {Object.keys(calorieData)?.length === 0 &&
+                    renderExerciseEntryForm(
+                      values,
+                      errors,
+                      touched,
+                      handleBlur,
+                      handleChange,
+                      handleSubmit
+                    )}
+
+                  {/* Add Another Entry Button */}
+                  {Object.keys(calorieData)?.length > 0 &&
+                    renderAddEntryBtn(handleSubmit)}
+                </>
+              )}
+            </Formik>
+          </Box>
+        </Box>
       </Box>
-      </Box>
-    </Box> 
+    </>
   );
 };
 

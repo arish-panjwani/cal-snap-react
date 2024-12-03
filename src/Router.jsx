@@ -1,13 +1,19 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import App from "./App";
+/** @format */
 
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import App from "./App";
 
 import {
   Dashboard,
   Login,
   Exercise,
-  Upload,
+  SnapUpload,
   AboutUs,
   ExerciseSummary,
   Signup,
@@ -21,7 +27,17 @@ import {
   Geography,
   Calendar,
   Stream,
-  Profile
+  Profile,
+  UnderConstruction,
+  CalorieHistory,
+  UserProfile,
+  MedicalProfile,
+  ExerciseHistory,
+  SettingsPage as Settings,
+  ForgotChangePassword,
+  ChangeCaloriePreferences,
+  CalorieInfo,
+  PreviewCapture,
 } from "./scenes";
 import { useAuth } from "./api/AuthContext";
 
@@ -35,17 +51,64 @@ const AppRouter = () => {
   return (
     <Router>
       <Routes>
-
         <Route path="/profilesetup" element={<Profile />} />
 
         <Route path="/" element={<App />}>
           <Route path="/" element={<PrivateRoute element={Dashboard} />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/exercise" element={<PrivateRoute element={Exercise} />} />
-          <Route path="/upload" element={<PrivateRoute element={Upload} />} />
+          <Route
+            path="/log-exercise"
+            element={<PrivateRoute element={Exercise} />}
+          />
+          <Route
+            path="/snap-upload"
+            element={<PrivateRoute element={SnapUpload} />}
+          />
+          <Route
+            path="/calorie-info"
+            element={<PrivateRoute element={CalorieInfo} />}
+          />
+          <Route
+            path="/preview-capture"
+            element={<PrivateRoute element={PreviewCapture} />}
+          />
           <Route path="/about" element={<PrivateRoute element={AboutUs} />} />
-          <Route path="/exercise-summary" element={<PrivateRoute element={ExerciseSummary} />} />
+          <Route
+            path="/exercise-summary"
+            element={<PrivateRoute element={ExerciseSummary} />}
+          />
+          <Route
+            path="/search"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/calorie-history"
+            element={<PrivateRoute element={CalorieHistory} />}
+          />
+          <Route
+            path="/exercise-history"
+            element={<PrivateRoute element={ExerciseHistory} />}
+          />
+          <Route
+            path="/disease-prediction"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/profile"
+            element={<PrivateRoute element={UserProfile} />}
+          />
+          <Route
+            path="/health-profile"
+            element={<PrivateRoute element={MedicalProfile} />}
+          />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/change-password" element={<ForgotChangePassword />} />
+          <Route path="/forgot-password" element={<ForgotChangePassword />} />
+          <Route
+            path="/change-calorie-preferences"
+            element={<ChangeCaloriePreferences />}
+          />
           {/* <Route path="/team" element={<Team />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/invoices" element={<Invoices />} />

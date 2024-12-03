@@ -1,5 +1,17 @@
-/* eslint-disable react/prop-types */
-import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
+/**
+ * eslint-disable react/prop-types
+ *
+ * @format
+ */
+
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useContext, useState } from "react";
 import { tokens } from "../../../theme";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
@@ -24,20 +36,33 @@ import {
   MedicalServicesOutlined,
   DashboardCustomizeOutlined,
   SportsGymnasticsOutlined,
-  InfoOutlined
+  InfoOutlined,
+  PhotoCamera,
+  LogoutOutlined,
 } from "@mui/icons-material";
 import avatar from "../../../assets/images/avatar.png";
 import logo from "../../../assets/images/logo.png";
 import Item from "./Item";
 import { ToggledContext } from "../../../App";
+import { FaSnapchat } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { toggled, setToggled } = useContext(ToggledContext);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const onClickTopLogo = () => {
+    setCollapsed(!collapsed);
+    // navigate("/");
+  };
+
   return (
     <Sidebar
+      width={!isNonMobile ? "52%" : undefined}
       backgroundColor={colors.primary[400]}
       rootStyles={{
         border: 0,
@@ -46,33 +71,29 @@ const SideBar = () => {
       collapsed={collapsed}
       onBackdropClick={() => setToggled(false)}
       toggled={toggled}
-      breakPoint="md"
-    >
+      breakPoint="md">
       <Menu
         menuItemStyles={{
           button: { ":hover": { background: "transparent" } },
-        }}
-      >
+        }}>
         <MenuItem
           rootStyles={{
             margin: "10px 0 20px 0",
             color: colors.gray[100],
-          }}
-        >
+          }}>
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-            }}
-          >
+            }}>
             {!collapsed && (
               <Box
+                onClick={onClickTopLogo}
                 display="flex"
                 alignItems="center"
                 gap="12px"
-                sx={{ transition: ".3s ease" }}
-              >
+                sx={{ transition: ".3s ease" }}>
                 <img
                   style={{ width: "30px", height: "30px", borderRadius: "8px" }}
                   src={logo}
@@ -82,8 +103,7 @@ const SideBar = () => {
                   variant="h4"
                   fontWeight="bold"
                   textTransform="capitalize"
-                  color={colors.greenAccent[500]}
-                >
+                  color={colors.greenAccent[500]}>
                   CalSnap
                 </Typography>
               </Box>
@@ -102,8 +122,7 @@ const SideBar = () => {
             alignItems: "center",
             gap: "10px",
             mb: "25px",
-          }}
-        >
+          }}>
           <Avatar
             alt="avatar"
             src={avatar}
@@ -116,9 +135,7 @@ const SideBar = () => {
             <Typography
               variant="h6"
               fontWeight="500"
-              color={colors.greenAccent[500]}
-            >
-            </Typography>
+              color={colors.greenAccent[500]}></Typography>
           </Box>
         </Box>
       )}
@@ -133,8 +150,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Dashboard"
             path="/"
@@ -151,8 +167,7 @@ const SideBar = () => {
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Eat" : " "}
         </Typography>
         <Menu
@@ -164,26 +179,30 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
-          <Item
+          }}>
+          {/* <Item
             title="Search"
             path="/search"
             colors={colors}
             icon={<SearchOutlined />}
+          /> */}
+          <Item
+            title="Snap / Upload"
+            path="/snap-upload"
+            colors={colors}
+            icon={<PhotoCamera />}
           />
           <Item
-            title="Upload"
-            path="/upload"
+            title="Calorie History"
+            path="/calorie-history"
             colors={colors}
-            icon={<UploadOutlined />}
+            icon={<FastfoodOutlined />}
           />
         </Menu>
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Exercise" : " "}
         </Typography>
         <Menu
@@ -195,8 +214,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Summary"
             path="/exercise-summary"
@@ -205,17 +223,22 @@ const SideBar = () => {
           />
           <Item
             title="Log Exercise"
-            path="/exercise"
+            path="/log-exercise"
             colors={colors}
             icon={<SportsGymnasticsOutlined />}
+          />
+          <Item
+            title="Exercise History"
+            path="/exercise-history"
+            colors={colors}
+            icon={<ReceiptOutlined />}
           />
         </Menu>
 
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Predict" : " "}
         </Typography>
         <Menu
@@ -227,17 +250,10 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
-            title="Calorie Record"
-            path="/exercise-dashboard"
-            colors={colors}
-            icon={<FastfoodOutlined />}
-          />
-          <Item
-            title="Disease"
-            path="/exercise"
+            title="Health Score"
+            path="/disease-prediction"
             colors={colors}
             icon={<MedicalServicesOutlined />}
           />
@@ -245,8 +261,7 @@ const SideBar = () => {
         <Typography
           variant="h6"
           color={colors.gray[300]}
-          sx={{ m: "15px 0 5px 20px" }}
-        >
+          sx={{ m: "15px 0 5px 20px" }}>
           {!collapsed ? "Info" : " "}
         </Typography>
         <Menu
@@ -258,8 +273,7 @@ const SideBar = () => {
                 transition: ".4s ease",
               },
             },
-          }}
-        >
+          }}>
           <Item
             title="Profile"
             path="/profile"
@@ -267,8 +281,8 @@ const SideBar = () => {
             icon={<ContactsOutlined />}
           />
           <Item
-            title="Health Info"
-            path="/health"
+            title="Health Profile"
+            path="/health-profile"
             colors={colors}
             icon={<MedicalInformationOutlined />}
           />
@@ -280,6 +294,16 @@ const SideBar = () => {
           />
         </Menu>
       </Box>
+      <Typography
+        variant="subtitle2"
+        align="center"
+        sx={{
+          color: colors.primary["disabled"],
+          marginBottom: "10px",
+          // marginRight: "20px",
+        }}>
+        Version 1.1
+      </Typography>
     </Sidebar>
   );
 };

@@ -1,0 +1,57 @@
+.calorie-consumed-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* .meal-image-container {
+    width: 50%;
+    max-width: 400px;
+    align-self: center;
+    /* margin-bottom: 20px; */
+  } */
+  
+  .meal-image {
+    width: 50%;
+    border-radius: 8px;
+    align-self: center;
+  }
+  
+  .nutrition-info {
+    text-align: center;
+    color: white;
+  }
+  
+  /* .nutrition-info {
+    margin-bottom: 10px;
+  } */
+
+  h1 {
+    font-size: 2.8em;
+    color: #add8e6;
+  }
+
+  h2 {
+    font-size: 2.2em;
+    color: #add8e6;
+    margin: 0%;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.15em;
+    color: #add8e6;
+    margin: 0%;
+  }
+  
+  .nutrition-info {
+    /* margin: 5px 0; */
+    font-size: 1.1em;
+  }
+  
+  .apple-link {
+    color: #add8e6;
+    text-decoration: underline;
+  }
+  

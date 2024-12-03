@@ -1,3 +1,5 @@
+/** @format */
+
 import { createTheme } from "@mui/material";
 import { useMemo } from "react";
 import { useState } from "react";
@@ -28,6 +30,9 @@ export const tokens = (mode) => ({
           700: "#0c101b",
           800: "#080b12",
           900: "#040509",
+          white: "#ffffff",
+          black: "#000000",
+          disabled: "#a1a4ab",
         },
         greenAccent: {
           100: "#dbf5ee",
@@ -85,6 +90,9 @@ export const tokens = (mode) => ({
           700: "#727681",
           800: "#a1a4ab",
           900: "#d0d1d5",
+          white: "##000000",
+          black: "#ffffff",
+          disabled: "#a1a4ab",
         },
         greenAccent: {
           100: "#0f2922",
