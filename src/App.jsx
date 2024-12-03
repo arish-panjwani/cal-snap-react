@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { createContext, useState } from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -10,9 +12,12 @@ function App() {
   const [theme, colorMode] = useMode();
   const [toggled, setToggled] = useState(false);
   const values = { toggled, setToggled };
-  
-  const location = useLocation()
-  const isLoginPage = location.pathname === "/login" || location.pathname === "/signup";
+
+  const location = useLocation();
+  const isLoginPage =
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/forgot-password";
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -28,8 +33,7 @@ function App() {
                 flexDirection: "column",
                 height: "100%",
                 maxWidth: "100%",
-              }}
-            >
+              }}>
               {!isLoginPage && <Navbar />}
               <Box sx={{ overflowY: "auto", flex: 1, maxWidth: "100%" }}>
                 <Outlet />

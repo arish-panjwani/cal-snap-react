@@ -1,11 +1,14 @@
 /** @format */
 
 import React from "react";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import RobotImage from "../../assets/images/construction-robot.jpg"; // Import the image
+import { tokens } from "../../theme";
 
 const UnderConstruction = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const getFonts = () => {
     if (isNonMobile) {
@@ -13,17 +16,21 @@ const UnderConstruction = () => {
         titleFont: "h3",
         bodyFont: "h5",
         imageSize: "350px",
+        titleColor: colors.primary[100],
+        bodyColor: colors.primary[300],
       };
     } else {
       return {
         titleFont: "h5",
         bodyFont: "body1",
         imageSize: "200px",
+        titleColor: colors.primary[100],
+        bodyColor: colors.primary[300],
       };
     }
   };
 
-  const { titleFont, bodyFont, imageSize } = getFonts();
+  const { titleFont, bodyFont, imageSize, titleColor, bodyColor } = getFonts();
 
   return (
     <Box
@@ -34,7 +41,7 @@ const UnderConstruction = () => {
         // justifyContent: "center",
         height: "100vh",
         textAlign: "center",
-        bgcolor: "#f5f5f5",
+        bgcolor: "transparent",
         padding: 2,
       }}>
       {/* Image Section */}
@@ -54,18 +61,18 @@ const UnderConstruction = () => {
       <Typography
         fontWeight="bold"
         variant={titleFont}
-        sx={{ mb: 3, color: "#333" }}>
+        sx={{ mb: 3, color: titleColor }}>
         Our Website is Under Construction!
       </Typography>
       <Typography
         variant={bodyFont}
-        sx={{ mb: 2, color: "#555", maxWidth: "500px" }}>
+        sx={{ mb: 2, color: bodyColor, maxWidth: "500px" }}>
         We're using the latest futuristic technologies to bring you something
         extraordinary...
       </Typography>
       <Typography
         variant={bodyFont}
-        sx={{ mb: 0, color: "#555", maxWidth: "500px" }}>
+        sx={{ mb: 0, color: bodyColor, maxWidth: "500px" }}>
         Stay Tuned for updates!
       </Typography>
     </Box>

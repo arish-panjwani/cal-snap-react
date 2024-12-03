@@ -1,3 +1,5 @@
+/** @format */
+
 import { tokens } from "../theme";
 
 export const mockDataTeam = [
@@ -337,7 +339,7 @@ export const mockTransactions = [
     user: "aberdohnny",
     date: "25%",
     cost: "11.2 g",
-  }
+  },
 ];
 
 export const mockDailyCalorie = [
@@ -355,7 +357,7 @@ export const mockDailyCalorie = [
     type: "Dinner",
     name: "Caesar salad",
     intake: "300 Kcal",
-  }
+  },
 ];
 
 export const mockBarData = [
@@ -573,8 +575,8 @@ export const mockLineData = [
       },
       {
         x: "Day 6",
-        y:-85,
-      }
+        y: -85,
+      },
     ],
   },
   // {
@@ -1371,5 +1373,55 @@ export const mockGeographyData = [
   {
     id: "KOR",
     value: 171135,
+  },
+];
+
+export const mockFoodConsumedList = [
+  {
+    id: 0,
+    itemName: "Egg",
+    calorieIntake: "134",
+    details: { carb: 20, protein: 5 },
+  },
+  {
+    id: 1,
+    itemName: "Chicken",
+    calorieIntake: "250",
+    details: { carb: 20, protein: 5 },
+  },
+  {
+    id: 2,
+    itemName: "Chicken",
+    calorieIntake: "250",
+    details: { carb: 20, protein: 5 },
+  },
+  {
+    id: 3,
+    itemName: "Chicken",
+    calorieIntake: "250",
+    details: { carb: 20, protein: 5 },
+  },
+  {
+    id: 4,
+    itemName: "Chicken",
+    calorieIntake: "250",
+    details: { carb: 20, protein: 5 },
+  },
+];
+
+export const mockExerciseRespList = [
+  {
+    id: 0,
+    workout_name: "Running",
+    workout_variation: "5 mph (12 minute mile)",
+    total_calories: "308",
+    duration_minutes: "30 minutes",
+  },
+  {
+    id: 2,
+    workout_name: "Walking",
+    workout_variation: "5.2 mph (11.5 minute mile)",
+    total_calories: "347",
+    duration_minutes: "30 minutes",
   },
 ];

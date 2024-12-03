@@ -4,7 +4,14 @@
  * @format
  */
 
-import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useContext, useState } from "react";
 import { tokens } from "../../../theme";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
@@ -30,19 +37,32 @@ import {
   DashboardCustomizeOutlined,
   SportsGymnasticsOutlined,
   InfoOutlined,
+  PhotoCamera,
+  LogoutOutlined,
 } from "@mui/icons-material";
 import avatar from "../../../assets/images/avatar.png";
 import logo from "../../../assets/images/logo.png";
 import Item from "./Item";
 import { ToggledContext } from "../../../App";
+import { FaSnapchat } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { toggled, setToggled } = useContext(ToggledContext);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const onClickTopLogo = () => {
+    setCollapsed(!collapsed);
+    // navigate("/");
+  };
+
   return (
     <Sidebar
+      width={!isNonMobile ? "52%" : undefined}
       backgroundColor={colors.primary[400]}
       rootStyles={{
         border: 0,
@@ -69,6 +89,7 @@ const SideBar = () => {
             }}>
             {!collapsed && (
               <Box
+                onClick={onClickTopLogo}
                 display="flex"
                 alignItems="center"
                 gap="12px"
@@ -159,17 +180,17 @@ const SideBar = () => {
               },
             },
           }}>
-          <Item
+          {/* <Item
             title="Search"
             path="/search"
             colors={colors}
             icon={<SearchOutlined />}
-          />
+          /> */}
           <Item
-            title="Upload"
-            path="/upload"
+            title="Snap / Upload"
+            path="/snap-upload"
             colors={colors}
-            icon={<UploadOutlined />}
+            icon={<PhotoCamera />}
           />
           <Item
             title="Calorie History"
@@ -231,7 +252,7 @@ const SideBar = () => {
             },
           }}>
           <Item
-            title="Disease"
+            title="Health Score"
             path="/disease-prediction"
             colors={colors}
             icon={<MedicalServicesOutlined />}
@@ -273,6 +294,16 @@ const SideBar = () => {
           />
         </Menu>
       </Box>
+      <Typography
+        variant="subtitle2"
+        align="center"
+        sx={{
+          color: colors.primary["disabled"],
+          marginBottom: "10px",
+          // marginRight: "20px",
+        }}>
+        Version 1.1
+      </Typography>
     </Sidebar>
   );
 };

@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   Box,
   IconButton,
@@ -17,6 +19,8 @@ import {
   SettingsOutlined,
 } from "@mui/icons-material";
 import { ToggledContext } from "../../../App";
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
@@ -24,18 +28,22 @@ const Navbar = () => {
   const isMdDevices = useMediaQuery("(max-width:768px)");
   const isXsDevices = useMediaQuery("(max-width:466px)");
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
+
+  const onClickSetting = () => {
+    navigate("/settings");
+  };
+
   return (
     <Box
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      p={2}
-    >
+      p={2}>
       <Box display="flex" alignItems="center" gap={2}>
         <IconButton
           sx={{ display: `${isMdDevices ? "flex" : "none"}` }}
-          onClick={() => setToggled(!toggled)}
-        >
+          onClick={() => setToggled(!toggled)}>
           <MenuOutlined />
         </IconButton>
         {/* <Box
@@ -63,12 +71,12 @@ const Navbar = () => {
         {/* <IconButton>
           <NotificationsOutlined />
         </IconButton> */}
-        <IconButton>
+        <IconButton onClick={onClickSetting}>
           <SettingsOutlined />
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <PersonOutlined />
-        </IconButton>
+        </IconButton> */}
       </Box>
     </Box>
   );
