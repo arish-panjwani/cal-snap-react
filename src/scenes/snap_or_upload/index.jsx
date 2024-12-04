@@ -14,6 +14,8 @@ import { tokens } from "../../theme";
 import { Header } from "../../components";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
+import { APIRequest } from '../../api/helper';
+import { URLs } from "../../api/apiConstant";
 
 function SnapUpload() {
   const theme = useTheme();
@@ -27,14 +29,14 @@ function SnapUpload() {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const foodDetails = {
-    calories: 300,
-    protein: 15,
-    fat: 10,
-    carbs: 50,
-    fiber: 5,
-    sugar: 20,
-  };
+  // const foodDetails = {
+  //   calories: 300,
+  //   protein: 15,
+  //   fat: 10,
+  //   carbs: 50,
+  //   fiber: 5,
+  //   sugar: 20,
+  // };
 
   // Handle camera permission and capture image
   const handleSnapClick = () => {
@@ -79,8 +81,10 @@ function SnapUpload() {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         setSelectedFile(reader.result); // Save image URL
+        var response = await APIRequest(URLs.GET_ITEM_NUTRIENT_BY_NAME.URL + 'apple', URLs.GET_ITEM_NUTRIENT_BY_NAME.METHOD);
+        const foodDetails = response.data[0];
         navigate("/calorie-info", {
           state: { image: reader.result, foodDetails },
         }); // Navigate to calorie info page

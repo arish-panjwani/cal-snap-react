@@ -24,29 +24,29 @@ export const AuthProvider = ({ children }) => {
 
     
     //  Function to handle login, where you update the state with mock or actual user data
-    //  const login = (userData) => {
-    //     setUser(userData); // This will set the mock or actual user data in the state
-    //     queryClient.invalidateQueries(['authUser']); // Invalidate user query (optional)
-    // };
-
-    const login = async (credentials) => {
-      setIsLoggingIn(true);
-      setLoginError(null);
-      try {
-        const data = await APIRequest(URLs.USER_LOGIN.URL, 'POST', credentials);
-        if (data.statusCode == '200'){
-          const userData = await APIRequest(URLs.GET_USER_BY_ID.URL + '1', 'GET');
-          setUser(userData); // Update user state upon successful login
-          console.log('User logged in:', userData);
-        }
-      } catch (error) {
-        setLoginError(error.message);
-        console.error('Login failed:', error.message);
-        throw error;
-      } finally {
-        setIsLoggingIn(false);
-      }
+     const login = (userData) => {
+        setUser(userData); // This will set the mock or actual user data in the state
+        queryClient.invalidateQueries(['authUser']); // Invalidate user query (optional)
     };
+
+    // const login = async (credentials) => {
+    //   setIsLoggingIn(true);
+    //   setLoginError(null);
+    //   try {
+    //     const data = await APIRequest(URLs.USER_LOGIN.URL, 'POST', credentials);
+    //     if (data.statusCode == '200'){
+    //       const userData = await APIRequest(URLs.GET_USER_BY_ID.URL + '1', 'GET');
+    //       setUser(userData); // Update user state upon successful login
+    //       console.log('User logged in:', userData);
+    //     }
+    //   } catch (error) {
+    //     setLoginError(error.message);
+    //     console.error('Login failed:', error.message);
+    //     throw error;
+    //   } finally {
+    //     setIsLoggingIn(false);
+    //   }
+    // };
 
     // Function to handle logout
     // const { mutate: logout, isLoading: isLoggingOut, error: logoutError } = useMutation({

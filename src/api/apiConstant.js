@@ -43,7 +43,7 @@ export const URLs = {
       METHOD: GET
     },
     GET_ITEM_NUTRIENT_BY_NAME:{
-      URL: `${BASE_URL}/getItemNutrients/`,
+      URL: `${BASE_URL}/itemsNutrients/Name?name=`,
       METHOD: GET
     },
     GET_CALORIE_CONSUMPTION:{
@@ -61,5 +61,5 @@ export const URLs = {
     GET_MACRO_NUTRIENT_DATA:{
       URL: `${BASE_URL}/getItemNutrients/`,
       METHOD: POST
-    }          
+    }         
 };
