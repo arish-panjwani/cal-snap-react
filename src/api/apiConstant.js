@@ -7,7 +7,7 @@ export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const URLs = {
     USER_LOGIN: {
-      URL: `${BASE_URL}.api.mockbin.io/`,
+      URL: `${BASE_URL}/login`,
       // URL: `/login`,
       METHOD: GET
     },
@@ -24,7 +24,7 @@ export const URLs = {
       METHOD: PUT
     },
     GET_USER_BY_ID:{
-      URL: `${BASE_URL}/getUser/`,
+      URL: `${BASE_URL}/users/`,
       METHOD: GET
     },
     DELETE_USER_BY_ID:{

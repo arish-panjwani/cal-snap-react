@@ -20,18 +20,18 @@ const mockUserData = {
   token: "mock-jwt-token",
 };
 
-const handleLogin = async () => {
-    const body = { username: email, password };
-    console.log(email + " " + password)
-    try {
-      // login(mockUserData);
-      // navigate("/");
-      // await login({ username: email, password }); // Call the login function
-      
-      console.log("Logged in successfully");
-    } catch (error) {
-      console.error("Login failed: ", error);
-    }
+const handleLogin = async (event) => {
+  event.preventDefault();
+  const body = { username: email, password };
+  console.log(email + " " + password)
+  try {
+    var data = await login(body);
+    console.log(data);
+    console.log("Logged in successfully");
+  } catch (error) {
+    console.error("Login failed: ", error);
+    alert("Login failed !!!");
+  }
 };
   
     return (

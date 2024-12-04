@@ -1,23 +1,18 @@
-export const APIRequest = async ({ urlRequest, body }) => {
-    const { URL, METHOD = 'GET' } = urlRequest;
-
+export const APIRequest = async (url, method, data = null) => {
     try {
-        const response = await fetch(URL.URL, {
-            method: METHOD,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: body ? JSON.stringify(body) : null,
-        });
-
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            throw new Error(errorMessage || "Error occurred");
-        }
-
-        return await response.json();
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: data ? JSON.stringify(data) : null,
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Something went wrong');
+      }
+      return await response.json();
     } catch (error) {
-        console.error("APIRequest error:", error);
-        throw error;
+      console.error('API Call Error:', error.message);
+      throw error;
     }
-};
+  };
+  
