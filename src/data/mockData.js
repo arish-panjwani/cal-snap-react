@@ -517,35 +517,23 @@ export const mockStreamData = [
 
 export const mockPieData = [
   {
-    id: "hack",
-    label: "hack",
+    id: "protein",
+    label: "protein",
     value: 239,
     color: "hsl(104, 70%, 50%)",
   },
   {
-    id: "make",
-    label: "make",
+    id: "fat",
+    label: "fat",
     value: 170,
     color: "hsl(162, 70%, 50%)",
   },
   {
-    id: "go",
-    label: "go",
+    id: "carb",
+    label: "carb",
     value: 322,
     color: "hsl(291, 70%, 50%)",
-  },
-  {
-    id: "lisp",
-    label: "lisp",
-    value: 503,
-    color: "hsl(229, 70%, 50%)",
-  },
-  {
-    id: "scala",
-    label: "scala",
-    value: 584,
-    color: "hsl(344, 70%, 50%)",
-  },
+  }
 ];
 
 export const mockLineData = [
@@ -555,28 +543,28 @@ export const mockLineData = [
     data: [
       {
         x: "Day 1",
-        y: 40,
+        y: 2200,
       },
       {
         x: "Day 2",
-        y: -80,
+        y: 1900,
       },
       {
         x: "Day 3",
-        y: 80,
+        y: 2500,
       },
       {
         x: "Day 4",
-        y: 30,
+        y: 2300,
       },
       {
         x: "Day 5",
-        y: 85,
+        y: 2050,
       },
       {
         x: "Day 6",
-        y: -85,
-      },
+        y:2000,
+      }
     ],
   },
   // {
@@ -1373,6 +1361,48 @@ export const mockGeographyData = [
   {
     id: "KOR",
     value: 171135,
+  },
+];
+
+export const mockGaugeData = [
+  {
+    id: "Gauge",
+    data: [
+      {
+        x: "Calorie",
+        y: 2000,
+        color: "#ee6055",
+        tip: "Calorie Consumed",
+      },
+
+      // {
+      //   x: "green",
+      //   y:500,
+      //   color: "#008000",
+      //   tip: "Calorie Goal",
+      // },
+    ],
+  },
+];
+
+export const mockHealthGaugeData = [
+  {
+    id: "Gauge",
+    data: [
+      {
+        x: "score",
+        y: 60,
+        color: "#ee6055",
+        tip: "Health Score",
+      },
+
+      // {
+      //   x: "green",
+      //   y:10,
+      //   color: "#aaf683",
+      //   tip: "Calorie Goal",
+      // },
+    ],
   },
 ];
 

@@ -37,7 +37,7 @@ const PieChart = () => {
           },
         },
       }}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      margin={{ top: 15, right: 30, bottom: 50, left: 30 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
@@ -50,12 +50,12 @@ const PieChart = () => {
       arcLinkLabelsTextColor={colors.gray[100]}
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: "color" }}
-      enableArcLabels={false}
-      arcLabelsRadiusOffset={0.4}
+      enableArcLabels={true}
+      arcLabelsRadiusOffset={0.5}
       arcLabelsSkipAngle={7}
       arcLabelsTextColor={{
         from: "color",
-        modifiers: [["darker", 2]],
+        modifiers: [["darker", 3]],
       }}
       defs={[
         {
@@ -77,31 +77,31 @@ const PieChart = () => {
           spacing: 10,
         },
       ]}
-      legends={[
-        {
-          anchor: "bottom",
-          direction: "row",
-          justify: false,
-          translateX: 0,
-          translateY: 56,
-          itemsSpacing: 0,
-          itemWidth: 100,
-          itemHeight: 18,
-          itemTextColor: "#999",
-          itemDirection: "left-to-right",
-          itemOpacity: 1,
-          symbolSize: 18,
-          symbolShape: "circle",
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemTextColor: "#000",
-              },
-            },
-          ],
-        },
-      ]}
+      // legends={[
+      //   {
+      //     anchor: "bottom",
+      //     direction: "row",
+      //     justify: false,
+      //     translateX: 0,
+      //     translateY: 56,
+      //     itemsSpacing: 0,
+      //     itemWidth: 100,
+      //     itemHeight: 18,
+      //     itemTextColor: "#999",
+      //     itemDirection: "left-to-right",
+      //     itemOpacity: 1,
+      //     symbolSize: 18,
+      //     symbolShape: "circle",
+      //     effects: [
+      //       {
+      //         on: "hover",
+      //         style: {
+      //           itemTextColor: "#000",
+      //         },
+      //       },
+      //     ],
+      //   },
+      // ]}
     />
   );
 };

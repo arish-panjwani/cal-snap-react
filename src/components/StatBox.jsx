@@ -2,6 +2,30 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import ProgressCircle from "./ProgressCircle";
+import {
+  BarChartOutlined,
+  CalendarTodayOutlined,
+  ContactsOutlined,
+  DashboardOutlined,
+  DonutLargeOutlined,
+  HelpOutlineOutlined,
+  MapOutlined,
+  MenuOutlined,
+  PeopleAltOutlined,
+  PersonOutlined,
+  ReceiptOutlined,
+  TimelineOutlined,
+  WavesOutlined,
+  UploadOutlined,
+  SearchOutlined,
+  MedicalInformationOutlined,
+  FastfoodOutlined,
+  MedicalServicesOutlined,
+  DashboardCustomizeOutlined,
+  SportsGymnasticsOutlined,
+  InfoOutlined,
+  MonitorHeartOutlined
+} from "@mui/icons-material";
 
 const StatBox = ({ title, subtitle, icon, progress, increase }) => {
   const theme = useTheme();
@@ -16,7 +40,8 @@ const StatBox = ({ title, subtitle, icon, progress, increase }) => {
           </Typography>
         </Box>
         <Box>
-          <ProgressCircle progress={progress} />
+          {/* <ProgressCircle progress={progress} /> */}
+          <MonitorHeartOutlined/>
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-between" mt="2px">
