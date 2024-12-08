@@ -59,6 +59,7 @@ function CalorieInfo() {
             Nutrition Details:
           </Typography>
           <ul>
+            <li>Name: {foodDetails.itemName} </li>
             <li>Calories: {foodDetails.calories} kcal</li>
             <li>Protein: {foodDetails.protein} g</li>
             <li>Fat: {foodDetails.fat} g</li>

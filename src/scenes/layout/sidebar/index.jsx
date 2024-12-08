@@ -130,7 +130,7 @@ const SideBar = () => {
           />
           <Box sx={{ textAlign: "center" }}>
             <Typography variant="h3" fontWeight="bold" color={colors.gray[100]}>
-              Test User
+              Sam Fox
             </Typography>
             <Typography
               variant="h6"

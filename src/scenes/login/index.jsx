@@ -21,27 +21,30 @@ function Login() {
     token: "mock-jwt-token",
   };
 
-  const handleLogin = async () => {
-    const body = { username: email, password };
-    console.log(email + " " + password);
-    try {
-      login(mockUserData);
-      navigate("/");
-      // await login({ username: email, password }); // Call the login function
-      console.log("Logged in successfully");
-    } catch (error) {
-      console.error("Login failed: ", error);
-    }
-  };
-
-  return (
-    <div className="login-container">
-      <div className="login-box">
-        <div className="login-image">
-          <img src={login_page_img} alt="Calorie Tracking App" />
-        </div>
-        <div className="login-form-box">
-          <div className="form-container">
+const handleLogin = async (event) => {
+  event.preventDefault();
+  const body = { username: email, password };
+  console.log(email + " " + password)
+  try {
+    // var data = await login(body);
+    // console.log(data);
+    login(mockUserData);
+    navigate("/");
+    console.log("Logged in successfully");
+  } catch (error) {
+    console.error("Login failed: ", error);
+    alert("Login failed !!!");
+  }
+};
+  
+    return (
+        <div className="login-container">
+        <div className="login-box">
+          <div className="login-image">
+            <img src={login_page_img} alt="Calorie Tracking App"/>
+          </div>
+          <div className="login-form-box">
+            <div className="form-container">
             <div className="logo-container">
               <img src={logo_img} alt="Calsnap Logo" className="logo" />
             </div>

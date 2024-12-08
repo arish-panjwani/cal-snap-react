@@ -7,6 +7,8 @@ import StreamChart from "./StreamChart";
 import GeographyChart from "./GeographyChart";
 import ProgressCircle from "./ProgressCircle";
 import StatBox from "./StatBox";
+import GaugeChart from "./GaugeChart"
+import HealthGaugeChart from "./HealthGaugeChart";
 
 export {
   Header,
@@ -18,4 +20,6 @@ export {
   GeographyChart,
   ProgressCircle,
   StatBox,
+  GaugeChart,
+  HealthGaugeChart
 };
