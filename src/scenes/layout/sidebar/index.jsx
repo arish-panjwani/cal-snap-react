@@ -253,7 +253,7 @@ const SideBar = () => {
           }}>
           <Item
             title="Health Score"
-            path="/disease-prediction"
+            path="/health-score"
             colors={colors}
             icon={<MedicalServicesOutlined />}
           />
