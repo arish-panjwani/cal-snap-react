@@ -30,11 +30,13 @@ import {
 import {
   EXERCISE_CALORIE_API_KEY_1,
   EXERCISE_CALORIE_URL,
+  URLs,
 } from "../../api/apiConstant";
 import { Header } from "../../components";
 import { tokens } from "../../theme";
 import {
   cyclingArr,
+  durationArr,
   runningArr,
   swimmingArr,
   walkingArr,
@@ -43,11 +45,12 @@ import {
 } from "./exerciseList";
 import "./styles.css";
 import Loader from "../../components/Loader";
+import { APIRequest, getAnyCookie } from "../../api/helper";
+import { send } from "vite";
 
 const initialValues = {
   exerciseType: "",
   exerciseSubType: "",
-  weight: "",
   duration: "",
   date: "",
 };
@@ -62,6 +65,8 @@ const Exercise = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const weight = getAnyCookie("weight");
 
   const exerciseArr = [
     { name: "Running", icon: <FaRunning /> },
@@ -244,7 +249,7 @@ const Exercise = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="exerciseSubType"
-                label="Exercise Sub Type"
+                label="Variation"
                 error={touched.exerciseType && Boolean(errors.exerciseType)}>
                 {subExerciseArr.map((item, index) => {
                   setSubExercise(values.exerciseSubType);
@@ -258,31 +263,25 @@ const Exercise = () => {
             </FormControl>
           )}
 
-          <TextField
-            fullWidth
-            variant="filled"
-            type="number"
-            label="Weight (lbs)"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.weight}
-            name="weight"
-            error={touched.weight && Boolean(errors.weight)}
-            helperText={touched.weight && errors.weight}
-          />
-
-          <TextField
-            fullWidth
-            variant="filled"
-            type="number"
-            label="Duration"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.duration}
-            name="duration"
-            error={touched.duration && Boolean(errors.duration)}
-            helperText={touched.duration && errors.duration}
-          />
+          <FormControl fullWidth>
+            <InputLabel>Duration (in mins)</InputLabel>
+            <Select
+              value={values.duration}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="duration"
+              label="Duration (in mins)"
+              error={touched.duration && Boolean(errors.duration)}
+              helperText={touched.duration && errors.duration}>
+              {durationArr.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item}>
+                    {item}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
 
           <TextField
             fullWidth
@@ -332,15 +331,30 @@ const Exercise = () => {
     );
   };
 
+  const sendCalorieData = async (data) => {
+    //TODO: Check when server is up
+    console.info("Data to be sent:", data);
+    resp = await APIRequest(
+      URLs.SEND_EXERCISE_ENTRY.URL,
+      SEND_EXERCISE_ENTRY.METHOD,
+      data
+    );
+    if (data.statusCode == "200") {
+      // Navigate to Exercise Summary from here
+      console.log("Data sent successfully");
+    } else {
+      console.error("Failed to send data");
+    }
+  };
+
   const handleSubmit = async (values, actions) => {
     if (Object.keys(calorieData)?.length == 0) {
       try {
         setLoading(true);
         const params = new URLSearchParams();
         params.append("activity", values.exerciseType);
-        if (values.weight) params.append("weight", values.weight);
         if (values.duration) params.append("duration", values.duration);
-
+        params.append("weight", weight);
         const generated_url = `${EXERCISE_CALORIE_URL}caloriesburned?${params.toString()}`;
         const response = await fetch(generated_url, {
           headers: {
@@ -355,6 +369,7 @@ const Exercise = () => {
         const finalExerciseData = await getCalorieData(data);
         const timer = setTimeout(() => {
           setCalorieData(finalExerciseData); // Save the parsed data into the state
+          sendCalorieData(finalExerciseData);
           setLoading(false);
         }, 3000);
       } catch (err) {

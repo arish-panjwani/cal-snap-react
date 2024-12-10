@@ -14,7 +14,7 @@ import { tokens } from "../../theme";
 import { Header } from "../../components";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
-import { APIRequest } from '../../api/helper';
+import { APIRequest } from "../../api/helper";
 import { URLs } from "../../api/apiConstant";
 
 function SnapUpload() {
@@ -29,6 +29,7 @@ function SnapUpload() {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const foodName = "apple";
   // const foodDetails = {
   //   calories: 300,
   //   protein: 15,
@@ -83,7 +84,10 @@ function SnapUpload() {
       const reader = new FileReader();
       reader.onloadend = async () => {
         setSelectedFile(reader.result); // Save image URL
-        var response = await APIRequest(URLs.GET_ITEM_NUTRIENT_BY_NAME.URL + 'apple', URLs.GET_ITEM_NUTRIENT_BY_NAME.METHOD);
+        var response = await APIRequest(
+          URLs.GET_ITEM_NUTRIENT_BY_NAME.URL + foodName,
+          URLs.GET_ITEM_NUTRIENT_BY_NAME.METHOD
+        );
         const foodDetails = response.data[0];
         navigate("/calorie-info", {
           state: { image: reader.result, foodDetails },

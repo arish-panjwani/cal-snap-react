@@ -46,6 +46,7 @@ import Item from "./Item";
 import { ToggledContext } from "../../../App";
 import { FaSnapchat } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { getAnyCookie } from "../../../api/helper";
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -130,7 +131,7 @@ const SideBar = () => {
           />
           <Box sx={{ textAlign: "center" }}>
             <Typography variant="h3" fontWeight="bold" color={colors.gray[100]}>
-              Sam Fox
+              {getAnyCookie("first_name")}
             </Typography>
             <Typography
               variant="h6"
@@ -153,7 +154,7 @@ const SideBar = () => {
           }}>
           <Item
             title="Dashboard"
-            path="/"
+            path="/dashboard"
             colors={colors}
             icon={<DashboardOutlined />}
           />

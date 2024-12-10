@@ -5,6 +5,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { LogoutOutlined } from "@mui/icons-material";
+import { handleLogout } from "../../api/helper";
 
 const SettingsPage = () => {
   const theme = useTheme();
@@ -19,7 +20,8 @@ const SettingsPage = () => {
     navigate("/change-password");
   };
 
-  const handleLogout = () => {
+  const handleLogoutFunc = () => {
+    handleLogout();
     navigate("/login");
   };
 
@@ -113,7 +115,7 @@ const SettingsPage = () => {
                 color: colors.primary[100],
               },
             }}
-            onClick={handleLogout}>
+            onClick={handleLogoutFunc}>
             <Typography variant="button" sx={{ fontWeight: "bold" }}>
               Logout
             </Typography>

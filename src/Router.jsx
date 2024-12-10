@@ -10,6 +10,7 @@ import {
 import App from "./App";
 
 import { useAuth } from "./api/AuthContext";
+import { getAnyCookie } from "./api/helper";
 import {
   AboutUs,
   CalorieHistory,
@@ -30,11 +31,17 @@ import {
   UnderConstruction,
   UserProfile,
 } from "./scenes";
+import { debuggingMode } from "./utils/helper";
 
 const PrivateRoute = ({ element: Component, ...rest }) => {
   const { user } = useAuth(); // Get user state from AuthContext
-
-  return user ? <Component {...rest} /> : <Navigate to="/login" />; // Redirect to login if not authenticated
+  debuggingMode &&
+    console.info("PrivateRoute user: ", user, getAnyCookie("userId"));
+  return user || getAnyCookie("userId") ? (
+    <Component {...rest} />
+  ) : (
+    <Navigate to="/login" />
+  ); // Redirect to login if not authenticated
 };
 
 const AppRouter = () => {
@@ -42,9 +49,11 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/profilesetup" element={<Profile />} />
-
         <Route path="/" element={<App />}>
-          <Route path="/" element={<PrivateRoute element={Dashboard} />} />
+          <Route
+            path="/dashboard"
+            element={<PrivateRoute element={Dashboard} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route
             path="/log-exercise"

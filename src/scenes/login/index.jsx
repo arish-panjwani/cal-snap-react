@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import "../../scenes/login/styles.css";
 import { useAuth } from "../../api/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { getAnyCookie, setAnyCookie } from "../../api/helper";
+import { debuggingMode } from "../../utils/helper";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -21,30 +23,44 @@ function Login() {
     token: "mock-jwt-token",
   };
 
-const handleLogin = async (event) => {
-  event.preventDefault();
-  const body = { username: email, password };
-  console.log(email + " " + password)
-  try {
-    // var data = await login(body);
-    // console.log(data);
-    login(mockUserData);
-    navigate("/");
-    console.log("Logged in successfully");
-  } catch (error) {
-    console.error("Login failed: ", error);
-    alert("Login failed !!!");
-  }
-};
-  
-    return (
-        <div className="login-container">
-        <div className="login-box">
-          <div className="login-image">
-            <img src={login_page_img} alt="Calorie Tracking App"/>
-          </div>
-          <div className="login-form-box">
-            <div className="form-container">
+  const handleLogin = async (event) => {
+    console.info("handleLogin called");
+    event.preventDefault();
+    const body = {
+      username: email,
+      password: password, //TODO: remove later
+    };
+    debuggingMode &&
+      console.log("Credentials sending... ", email + " " + password);
+    try {
+      var response = await login(body);
+      if (response.statusCode == "200") {
+        debuggingMode && console.log("Login successful");
+        setAnyCookie("first_name", response.data.first_name);
+        setAnyCookie("email", response.data.email);
+        setAnyCookie("bmi", response.data.bmi);
+        setAnyCookie("weight", response.data.weight);
+        navigate("/dashboard");
+      } else {
+        debuggingMode && console.log("Login failed");
+      }
+      // login(mockUserData);
+      // navigate("/");
+      // console.log("Logged in successfully");
+    } catch (error) {
+      console.error("Login failed: ", error);
+      alert("Login failed !!!");
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <div className="login-box">
+        <div className="login-image">
+          <img src={login_page_img} alt="Calorie Tracking App" />
+        </div>
+        <div className="login-form-box">
+          <div className="form-container">
             <div className="logo-container">
               <img src={logo_img} alt="Calsnap Logo" className="logo" />
             </div>

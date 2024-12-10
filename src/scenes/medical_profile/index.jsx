@@ -97,7 +97,7 @@ function MedicalProfile() {
             />
           </label>
           <label>
-            <span>Waist Circumference (cm):</span>
+            <span>Waist Circumference (inches):</span>
             <input
               type="number"
               name="waistCircumference"
