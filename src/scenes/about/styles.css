@@ -14,8 +14,10 @@
 }
 
 .product-description p {
-  font-size: 1.2rem;
-  color: #555;
+  width: 70%;
+  margin: 0 auto; 
+  text-align: center;
+  padding: 20px;
 }
 
 .team-members {

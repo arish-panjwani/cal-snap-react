@@ -39,6 +39,6 @@
   .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px 1% ; /* 10px for vertical gap, 2% for horizontal gap */
-    justify-items: center; /* Ensures cards are centered */
+    gap: 20px 0.75% ;
+    justify-items: center;
   }
