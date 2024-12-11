@@ -15,6 +15,8 @@ import { URLs } from "../../api/apiConstant";
 import { getAnyCookie, UpdatedAPIRequest } from "../../api/helper";
 import { Header } from "../../components";
 import { tokens } from "../../theme";
+import Loader from "../../components/Loader";
+import { formatDate } from "../../utils/helper";
 
 const ExerciseHistory = () => {
   const theme = useTheme();
@@ -22,10 +24,12 @@ const ExerciseHistory = () => {
 
   const [exerciseData, setExerciseData] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   // const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchExerciseData = async () => {
+      setLoading(true);
       const userId = getAnyCookie("userId");
       if (!userId) {
         setError("User ID not found in cookies.");
@@ -50,6 +54,8 @@ const ExerciseHistory = () => {
       } catch (apiError) {
         console.error("Error fetching data:", apiError.message);
         setError("Failed to fetch exercise data. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -163,7 +169,7 @@ const ExerciseHistory = () => {
             color={colors.primary[100]}
             variant="h6"
             marginBottom="10px">
-            {date}
+            {formatDate(date)}
           </Typography>
           {items.map((item) => renderExerciseListItem(item))}
         </Box>
@@ -179,7 +185,7 @@ const ExerciseHistory = () => {
     );
   }
 
-  if (!exerciseData.length) {
+  if (!isLoading && !exerciseData.length) {
     return (
       <Typography color={colors.primary[200]} variant="h5" textAlign="center">
         No exercise data available.
@@ -188,9 +194,12 @@ const ExerciseHistory = () => {
   }
 
   return (
-    <div style={{ marginTop: "10px" }} className="exercise-history">
-      {renderExerciseList()}
-    </div>
+    <>
+      {isLoading && <Loader color="secondary" type="linear" />}
+      <div style={{ marginTop: "10px" }} className="exercise-history">
+        {renderExerciseList()}
+      </div>
+    </>
   );
 };
 

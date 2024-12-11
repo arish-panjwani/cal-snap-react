@@ -299,6 +299,32 @@ const Exercise = () => {
     );
   };
 
+  const renderAddEntryBtn = (handleSubmit) => {
+    return (
+      <>
+        <form onSubmit={handleSubmit}>
+          <Box display="flex" justifyContent="center" mt={4}>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                color: colors.gray[900], // White text for contrast
+                backgroundColor: colors.primary["white"], // Green accent for visibility
+                // color: colors.primary["white"], // Ensure text visibility
+                "&:hover": {
+                  backgroundColor: colors.greenAccent[500], // Slightly darker shade on hover
+                },
+                textTransform: "none",
+                boxShadow: `0px 4px 6px ${colors.gray[700]}`, // Shadow for better contrast
+              }}>
+              ADD ANOTHER ENTRY
+            </Button>
+          </Box>
+        </form>
+      </>
+    );
+  };
+
   const sendCalorieData = async (payload) => {
     console.info("Data to be sent:", payload);
     const resp = await APIRequest(
@@ -415,6 +441,10 @@ const Exercise = () => {
                       handleChange,
                       handleSubmit
                     )}
+
+                  {/* Add Another Entry Button */}
+                  {Object.keys(calorieData)?.length > 0 &&
+                    renderAddEntryBtn(handleSubmit)}
                 </>
               )}
             </Formik>

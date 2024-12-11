@@ -22,7 +22,7 @@ const steps = [
   "Lifestyle Info",
   "Family History",
   "Address",
-  "Contact",
+  "Health Target",
 ];
 
 const Profile = () => {
@@ -31,13 +31,13 @@ const Profile = () => {
 
   // Retrieve user data from the previous page
   const { profile_data } = location.state || {};
-  const { firstName, lastName, email, dob, password } = profile_data || {};
+  const { firstName, lastName, email, dob, password, mobileNumber } =
+    profile_data || {};
 
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     weight: "",
     height: "",
-    bmi: "",
     waistCircumference: "",
     hipCircumference: "",
     gender: "",
@@ -59,7 +59,8 @@ const Profile = () => {
     city: "",
     province: "",
     country: "",
-    mobile_number: "",
+    calBurnedTarget: "",
+    calConsumptionsTarget: "",
   });
 
   // WITH DUMMY DATA FOR TESTING
@@ -88,7 +89,6 @@ const Profile = () => {
   //   city: "toronto",
   //   province: "ON",
   //   country: "CA",
-  //   mobile_number: "4163152396",
   // });
 
   const [age, setAge] = useState(null);
@@ -164,8 +164,6 @@ const Profile = () => {
           formData.province &&
           formData.country
         );
-      case 4: // Contact
-        return formData.mobile_number;
       default:
         return false;
     }
@@ -203,9 +201,11 @@ const Profile = () => {
       city: formData.city || "null",
       province: formData.province || "null",
       country: formData.country || "null",
-      mobile_number: formData.mobile_number || "null",
+      mobile_number: mobileNumber || "null",
       has_diabetes: formData.familyHistory.hasDiabetes || false,
       has_bp: formData.familyHistory.hasBP || false,
+      calBurnedTarget: formData.calBurnedTarget || "null",
+      calConsumptionsTarget: formData.calConsumptionsTarget || "null",
     };
 
     debuggingMode && console.log("Payload:", JSON.stringify(payload));
@@ -391,7 +391,7 @@ const Profile = () => {
               margin="normal"
             />
             <TextField
-              label="Family Income"
+              label="Family Income (CAD)"
               name="family_income"
               value={formData.family_income}
               onChange={handleChange}
@@ -445,13 +445,21 @@ const Profile = () => {
             />
           </Box>
         );
-      case 4: // Contact
+      case 4: // Health Target
         return (
           <Box>
             <TextField
-              label="Mobile Number"
-              name="mobile_number"
-              value={formData.mobile_number}
+              label="Calorie Burnt Target"
+              name="calBurnedTarget"
+              value={formData.calBurnedTarget}
+              onChange={handleChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Calorie Consumption Target"
+              name="calConsumptionsTarget"
+              value={formData.calConsumptionsTarget}
               onChange={handleChange}
               fullWidth
               margin="normal"

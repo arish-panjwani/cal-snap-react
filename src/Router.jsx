@@ -48,13 +48,13 @@ const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/profilesetup" element={<Profile />} />
+        <Route path="/profile-setup" element={<Profile />} />
         <Route path="/" element={<App />}>
+          <Route path="/login" element={<Login />} />
           <Route
             path="/dashboard"
             element={<PrivateRoute element={Dashboard} />}
           />
-          <Route path="/login" element={<Login />} />
           <Route
             path="/log-exercise"
             element={<PrivateRoute element={Exercise} />}

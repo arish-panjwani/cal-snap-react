@@ -1,0 +1,63 @@
+{
+	"Fetch API Data Hook": {
+	  "scope": "javascript,typescript,react",
+	  "prefix": "fetchDataHook",
+	  "body": [
+		"const [data, setData] = useState(null); // State to hold the API data",
+		"const [loading, setLoading] = useState(true); // State to manage loading",
+		"const [error, setError] = useState(null); // State to manage errors",
+		"",
+		"useEffect(() => {",
+		"  // Fetch API data when the component mounts",
+		"  const fetchInitialData = async () => {",
+		"    try {",
+		"      const userId = getAnyCookie(\"userId\");",
+		"      const resp = await APIRequest(",
+		"        \"${1:URL}/${userId}\",",
+		"        \"${2:METHOD}\",",
+		"        ${3:payload}"
+		"      );",
+		"      if (resp.statusCode === \"200\") {",
+		"        const result = await resp.json();",
+		"        setData(result);",
+		"        console.log(\"Data sent successfully\");",
+		"      } else {",
+		"        console.error(\"Failed to send data\");",
+		"      }",
+		"    } catch (error) {",
+		"      setError(error.message);",
+		"    } finally {",
+		"      setLoading(false);",
+		"    }",
+		"  };",
+		"",
+		"  fetchInitialData();",
+		"}, []);"
+	  ],
+	  "description": "A React hook to fetch data from an API on component mount."
+	},
+	"API Call Function": {
+	  "scope": "javascript,typescript",
+	  "prefix": "apiCallFunction",
+	  "body": [
+		"const fetchData = async (url, method, payload) => {",
+		"  try {",
+		"    const response = await APIRequest(url, method, payload);",
+		"    if (response.statusCode === \"200\") {",
+		"      const result = await response.json();",
+		"      console.log(\"Data fetched successfully\", result);",
+		"      return result;",
+		"    } else {",
+		"      console.error(\"Failed to fetch data\", response.statusText);",
+		"      return null;",
+		"    }",
+		"  } catch (error) {",
+		"    console.error(\"Error occurred during API call\", error);",
+		"    throw error;",
+		"  }",
+		"};"
+	  ],
+	  "description": "A reusable function for making API calls."
+	}
+  }
+  

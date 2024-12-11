@@ -6,6 +6,7 @@ export const PUT = "PUT";
 export const DELETE = "DELETE";
 
 export const BASE_URL = import.meta.env.VITE_API_URL;
+export const BASE_URL_IMG = import.meta.env.VITE_API_IMG_URL;
 
 // Exercise Calorie Open API Integration
 export const EXERCISE_CALORIE_URL = "https://api.api-ninjas.com/v1/";
@@ -15,19 +16,18 @@ export const EXERCISE_CALORIE_API_KEY_1 =
 export const URLs = {
   USER_LOGIN: {
     URL: `${BASE_URL}/login`,
-    // URL: `/login`,
     METHOD: GET,
   },
   GET_USERS: {
-    URL: `${BASE_URL}/getUsers`,
-    METHOD: POST,
+    URL: `${BASE_URL}/users/`,
+    METHOD: GET,
   },
   ADD_USER: {
     URL: `${BASE_URL}/users/save`,
     METHOD: POST,
   },
   UPDATE_USER: {
-    URL: `${BASE_URL}/updateUser`,
+    URL: `${BASE_URL}/users/update`,
     METHOD: PUT,
   },
   GET_USER_BY_ID: {
@@ -81,5 +81,9 @@ export const URLs = {
   DELETE_EXERCISE: {
     URL: `${BASE_URL}/exerciseRecords`,
     METHOD: DELETE,
+  },
+  IMAGE_REC: {
+    URL: `${BASE_URL_IMG}/upload`,
+    METHOD: POST,
   },
 };

@@ -41,7 +41,7 @@ function Signup() {
     console.log("User data submitted:", user);
     if (user.password === user.confirmPassword) {
       // Pass the user data to ProfileSetup page as profile_data
-      navigate("/profilesetup", {
+      navigate("/profile-setup", {
         state: { profile_data: user },
       });
     } else {

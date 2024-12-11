@@ -1,21 +1,22 @@
 /** @format */
 
-import React, { useState } from "react";
+import { CameraAlt, UploadFile } from "@mui/icons-material";
 import {
   Box,
   Button,
-  Typography,
   Modal,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { UploadFile, CameraAlt } from "@mui/icons-material";
-import { tokens } from "../../theme";
-import { Header } from "../../components";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader";
-import { APIRequest } from "../../api/helper";
 import { URLs } from "../../api/apiConstant";
+import { APIRequest } from "../../api/helper";
+import { Header } from "../../components";
+import Loader from "../../components/Loader";
+import { tokens } from "../../theme";
+import { predictFood } from "../calorie_info/predict";
 
 function SnapUpload() {
   const theme = useTheme();
@@ -83,15 +84,28 @@ function SnapUpload() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = async () => {
-        setSelectedFile(reader.result); // Save image URL
-        var response = await APIRequest(
-          URLs.GET_ITEM_NUTRIENT_BY_NAME.URL + foodName,
-          URLs.GET_ITEM_NUTRIENT_BY_NAME.METHOD
-        );
-        const foodDetails = response.data[0];
-        navigate("/calorie-info", {
-          state: { image: reader.result, foodDetails },
-        }); // Navigate to calorie info page
+        try {
+          setSelectedFile(reader.result); // Save image URL
+
+          // Call predictFood with the file
+          const prediction = await predictFood(file);
+          console.log("Prediction result:", prediction);
+
+          // Fetch food details based on prediction (e.g., predicted food name)
+          const response = await APIRequest(
+            URLs.GET_ITEM_NUTRIENT_BY_NAME.URL + prediction || foodName,
+            URLs.GET_ITEM_NUTRIENT_BY_NAME.METHOD
+          );
+
+          const foodDetails = response.data[0];
+
+          // Navigate to the calorie info page
+          navigate("/calorie-info", {
+            state: { image: reader.result, foodDetails },
+          });
+        } catch (error) {
+          console.error("Error during file prediction or data fetch:", error);
+        }
       };
       reader.readAsDataURL(file);
     }

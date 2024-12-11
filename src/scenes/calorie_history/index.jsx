@@ -15,6 +15,7 @@ import { APIRequest, getAnyCookie } from "../../api/helper";
 import { Header } from "../../components";
 import { tokens } from "../../theme";
 import Loader from "../../components/Loader";
+import { capitalizeFirstChar, formatDate } from "../../utils/helper";
 
 const CalorieHistory = () => {
   const theme = useTheme();
@@ -117,7 +118,7 @@ const CalorieHistory = () => {
             color={colors.greenAccent[500]}
             variant="h5"
             fontWeight="600">
-            {item.itemName}
+            {capitalizeFirstChar(item.itemName)}
           </Typography>
           <Typography color={colors.primary[200]} variant="body1">
             {item.time}
@@ -148,7 +149,7 @@ const CalorieHistory = () => {
             color={colors.primary[100]}
             variant="h6"
             marginBottom="10px">
-            {date}
+            {formatDate(date)}
           </Typography>
           {items.map((item) => renderFoodListItem(item))}
         </Box>
