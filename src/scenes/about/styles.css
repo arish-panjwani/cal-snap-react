@@ -1,0 +1,38 @@
+.about-us {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.product-description {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.product-description h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.product-description p {
+  width: 70%;
+  margin: 0 auto; 
+  text-align: center;
+  padding: 20px;
+}
+
+.team-members {
+  text-align: center;
+}
+
+.team-members h2 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 4.8%; 
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+}
