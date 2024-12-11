@@ -1,144 +1,54 @@
-import React from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import "./styles.css"; // Import custom styles
-import Image from "../../assets/images/avatar.png";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import './styles.css';
+import TeamMemberCard from './TeamMemberCard';
 
-function AboutPage() {
+const AboutUs = () => {
   const teamMembers = [
-    {
-        name: "Arish Panjwani",
-        role: "Front End Lead, Project Lead",
-        image: Image,
-    },
-    {
-        name: "Anju Sunny Chungath",
-        role: "Data Lead, Project Co-Lead",
-        image: Image,
-    },
-    {
-        name: "Adarsh Shriram Pednekar",
-        role: "Backend Developer, Data Scientist",
-        image: Image,
-    },
-    {
-        name: "Ashish Lama",
-        role: "Front End Developer, Data Scientist",
-        image: Image,
-    },
-    {
-        name: "Devanshi Adhikari",
-        role: "Front End Developer",
-        image: Image,
-    },
-    {
-        name: "Indraja Badepalli",
-        role: "Data Scientist, Documentation",
-        image: Image,
-    },
-    {
-        name: "Moksh Naresh Jaiswal",
-        role: "Data Analyst, Data Science Member",
-        image: Image,
-    },
-    {
-        name: "Mueez Ur Rehman Amjad",
-        role: "Data Scraping Team Lead, Data Science Team Member",
-        image: Image,
-    },
-    {
-        name: "Mukul Garg",
-        role: "Backend Lead",
-        image: Image,
-    },
-    {
-        name: "Neha Tamang",
-        role: "UI/UX Lead",
-        image: Image,
-    },
-    {
-        name: "Om Kiranbhai Patel",
-        role: "Front End Developer, Data Scientist",
-        image: Image,
-    },
-    {
-        name: "Safna Mohammed Fayas",
-        role: "Data Analyst",
-        image: Image,
-    },
-    {
-        name: "Shabda Kafle",
-        role: "UI/UX",
-        image: Image,
-    },
-    {
-        name: "Siddhi Pravinbhai Patel",
-        role: "Front End Developer, Data Analyst",
-        image: Image,
-    },
-    {
-        name: "Sri Datta Nadipolla",
-        role: "Data Science Team Lead",
-        image: Image,
-    },
-    {
-        name: "Stephen David Chitilapalli Mathew",
-        role: "DevOps Lead, Data Analyst",
-        image: Image,
-    },
-    {
-        name: "Thejaswee Badepalle",
-        role: "Data Scientist, Documentation",
-        image: Image,
-    },
-    {
-        name: "Utsav Harshadbhai Khamar",
-        role: "Data Analyst, Front End Developer",
-        image: Image,
-    },
-];
+    { "name": "Arish Panjwani", "role": "Front End Lead, Project Lead", "image": "Arish.jpeg" },
+    { "name": "Anju Sunny Chungath", "role": "Data Lead, Project Co-Lead", "image": "Anju.jpg" },
+    { "name": "Mueez Ur Rehman Amjad", "role": "Data Scraping Team Lead, Data Science Team Member", "image": "Mueez.jpeg" },
+    { "name": "Ashish Lama", "role": "Front End Developer, Data Scientist", "image": "Ashish.jpeg" },
+    { "name": "Om Kiranbhai Patel", "role": "Front End Developer, Data Scientist", "image": "Om.jpg" },
+    { "name": "Siddhi Pravinbhai Patel", "role": "Front End Developer, Data Analyst", "image": "Sidhi.jpeg" },
+    { "name": "Devanshi Adhikari", "role": "Front End Developer", "image": "Devanshi.jpg" },
+    { "name": "Neha Tamang", "role": "UI/UX Lead", "image": "Neha.jpg" },
+    { "name": "Shabda Kafle", "role": "UI/UX", "image": "Shabda.jpeg" },
+    { "name": "Utsav Harshadbhai Khamar", "role": "Data Analyst, Front End Developer", "image": "Utsav.jpeg" },
+    { "name": "Moksh Naresh Jaiswal", "role": "Data Analyst, Data Science Member", "image": "Moksh.jpg" },
+    { "name": "Stephen David Chitilapalli Mathew", "role": "DevOps Lead, Data Analyst", "image": "Male.png" },
+    { "name": "Mukul Garg", "role": "Backend Lead", "image": "Mukul.jpg" },
+    { "name": "Adarsh Shriram Pednekar", "role": "Backend Developer, Data Scientist", "image": "Adarsh.JPG" },
+    { "name": "Safna Mohammed Fayas", "role": "Data Analyst", "image": "Safna.jpg" },
+    { "name": "Sri Datta Nadipolla", "role": "Data Science Team Lead", "image": "Male.png" },
+    { "name": "Thejaswee Badepalle", "role": "Data Scientist, Documentation", "image": "Female.png" },
+    { "name": "Inderaja ", "role": "Data Scientist, Documentation", "image": "Female.png" },
 
+  ];
 
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div>
-          <h1 style={{ color: "inherit" }}>About Our Team</h1>
-          <p>
-            Welcome to CalSnap! We aim to provide the best service possible.
-          </p>
-          <p>
-            We are passionate about what we do and committed to excellence. Get to
-            know the faces behind our success.
-          </p>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <Container className="my-5">
-        <Row className="justify-content-center">
-          <Col xs={12} className="text-center">
-            <h2>Meet Our Team</h2>
-            <p>A little about the people who make things happen.</p>
-          </Col>
-        </Row>
-        <Row>
-          {teamMembers.map((member, index) => (
-            <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
-              <Card className="team-card text-center">
-                <Card.Img variant="top" src={member.image} className="card-img-top" />
-                <Card.Body>
-                  <Card.Title>{member.name}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">{member.role}</Card.Subtitle>
-                </Card.Body>
-              </Card>
-            </Col>
+    <div className="about-us">
+      <div className="product-description">
+        <h1>About Our Product</h1>
+        <p>
+          Our product is designed to solve modern-day challenges with innovative solutions. 
+          Empowering users to achieve their goals effortlessly.
+        </p>
+      </div>
+      <div className="team-members">
+        <h2>Meet Our Team</h2>
+        <div className="team-grid">
+          {teamMembers.map((member) => (
+            <TeamMemberCard
+              key={member.id}
+              name={member.name}
+              role={member.role}
+              image={member.image}
+            />
           ))}
-        </Row>
-      </Container>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default AboutPage;
+export default AboutUs;
