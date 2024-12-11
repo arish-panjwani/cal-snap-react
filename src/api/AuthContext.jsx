@@ -1,6 +1,6 @@
 /** @format */
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { URLs } from "./apiConstant";
 import { APIRequest, handleLogin } from "./helper";

@@ -78,4 +78,8 @@ export const URLs = {
     URL: `${BASE_URL}/exerciseRecords/UserId?userId=`,
     METHOD: GET,
   },
+  DELETE_EXERCISE: {
+    URL: `${BASE_URL}/exerciseRecords`,
+    METHOD: DELETE,
+  },
 };

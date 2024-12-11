@@ -103,6 +103,9 @@
   padding: 3rem;
   border-radius: 0 20px 20px 0;
   position: relative;
+  overflow: auto; /* Adds scrollbars when needed */
+  /* border: 1px solid transparent; */
+  scrollbar-width: none; /* For Firefox */
 }
 
 .logo-container {

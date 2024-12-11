@@ -10,7 +10,6 @@ import {
   Divider,
   FormControl,
   InputLabel,
-  LinearProgress,
   MenuItem,
   Select,
   TextField,
@@ -32,7 +31,9 @@ import {
   EXERCISE_CALORIE_URL,
   URLs,
 } from "../../api/apiConstant";
+import { APIRequest, getAnyCookie } from "../../api/helper";
 import { Header } from "../../components";
+import Loader from "../../components/Loader";
 import { tokens } from "../../theme";
 import {
   cyclingArr,
@@ -44,9 +45,6 @@ import {
   yogaArr,
 } from "./exerciseList";
 import "./styles.css";
-import Loader from "../../components/Loader";
-import { APIRequest, getAnyCookie } from "../../api/helper";
-import { send } from "vite";
 
 const initialValues = {
   exerciseType: "",
@@ -80,7 +78,7 @@ const Exercise = () => {
   const getCalorieData = (exercise) => {
     let finalItem = "";
     exercise &&
-      exercise.forEach((item, index) => {
+      exercise.forEach((item) => {
         if (item.name.includes(selectedSubExercise)) {
           finalItem = item;
         }
@@ -173,7 +171,7 @@ const Exercise = () => {
               variant={bodyFont}
               textAlign="center"
               sx={{
-                color: colors.primary.white, // Ensure text color adapts
+                color: colors.primary.white,
               }}>
               <strong>Workout Name:</strong> {selectedExercise || "N/A"}
             </Typography>
@@ -197,10 +195,9 @@ const Exercise = () => {
               variant={footerFont}
               textAlign="center"
               fontWeight="bold"
-              color={"teal"}
               sx={{
                 mt: 1,
-                color: colors.greenAccent[500], // Accent color for emphasis
+                color: colors.greenAccent[500],
               }}>
               <strong>Total Calories Burnt:</strong> {total_calories || 0} kcal
             </Typography>
@@ -225,19 +222,19 @@ const Exercise = () => {
             <InputLabel>Exercise Type</InputLabel>
             <Select
               value={values.exerciseType}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setExercise(e.target.value);
+              }}
               onBlur={handleBlur}
               name="exerciseType"
               label="Exercise Type"
               error={touched.exerciseType && Boolean(errors.exerciseType)}>
-              {exerciseArr.map((exercise, index) => {
-                setExercise(values.exerciseType);
-                return (
-                  <MenuItem key={index} value={exercise.name}>
-                    {exercise.name} {exercise.icon}
-                  </MenuItem>
-                );
-              })}
+              {exerciseArr.map((exercise, index) => (
+                <MenuItem key={index} value={exercise.name}>
+                  {exercise.name} {exercise.icon}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -246,19 +243,19 @@ const Exercise = () => {
               <InputLabel>Variation</InputLabel>
               <Select
                 value={values.exerciseSubType}
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setSubExercise(e.target.value);
+                }}
                 onBlur={handleBlur}
                 name="exerciseSubType"
                 label="Variation"
                 error={touched.exerciseType && Boolean(errors.exerciseType)}>
-                {subExerciseArr.map((item, index) => {
-                  setSubExercise(values.exerciseSubType);
-                  return (
-                    <MenuItem key={index} value={item}>
-                      {item}
-                    </MenuItem>
-                  );
-                })}
+                {subExerciseArr.map((item, index) => (
+                  <MenuItem key={index} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           )}
@@ -271,15 +268,12 @@ const Exercise = () => {
               onBlur={handleBlur}
               name="duration"
               label="Duration (in mins)"
-              error={touched.duration && Boolean(errors.duration)}
-              helperText={touched.duration && errors.duration}>
-              {durationArr.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item}>
-                    {item}
-                  </MenuItem>
-                );
-              })}
+              error={touched.duration && Boolean(errors.duration)}>
+              {durationArr.map((item, index) => (
+                <MenuItem key={index} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -305,42 +299,14 @@ const Exercise = () => {
     );
   };
 
-  const renderAddEntryBtn = (handleSubmit) => {
-    return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <Box display="flex" justifyContent="center" mt={4}>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                color: colors.gray[900], // White text for contrast
-                backgroundColor: colors.primary["white"], // Green accent for visibility
-                // color: colors.primary["white"], // Ensure text visibility
-                "&:hover": {
-                  backgroundColor: colors.greenAccent[500], // Slightly darker shade on hover
-                },
-                textTransform: "none",
-                boxShadow: `0px 4px 6px ${colors.gray[700]}`, // Shadow for better contrast
-              }}>
-              ADD ANOTHER ENTRY
-            </Button>
-          </Box>
-        </form>
-      </>
-    );
-  };
-
-  const sendCalorieData = async (data) => {
-    //TODO: Check when server is up
-    console.info("Data to be sent:", data);
-    resp = await APIRequest(
+  const sendCalorieData = async (payload) => {
+    console.info("Data to be sent:", payload);
+    const resp = await APIRequest(
       URLs.SEND_EXERCISE_ENTRY.URL,
-      SEND_EXERCISE_ENTRY.METHOD,
-      data
+      URLs.SEND_EXERCISE_ENTRY.METHOD,
+      payload
     );
-    if (data.statusCode == "200") {
-      // Navigate to Exercise Summary from here
+    if (resp.statusCode === "200") {
       console.log("Data sent successfully");
     } else {
       console.error("Failed to send data");
@@ -348,30 +314,38 @@ const Exercise = () => {
   };
 
   const handleSubmit = async (values, actions) => {
-    if (Object.keys(calorieData)?.length == 0) {
+    if (Object.keys(calorieData)?.length === 0) {
       try {
         setLoading(true);
         const params = new URLSearchParams();
         params.append("activity", values.exerciseType);
         if (values.duration) params.append("duration", values.duration);
         params.append("weight", weight);
+
         const generated_url = `${EXERCISE_CALORIE_URL}caloriesburned?${params.toString()}`;
         const response = await fetch(generated_url, {
           headers: {
             "X-Api-Key": EXERCISE_CALORIE_API_KEY_1,
           },
         });
-
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        const data = await response.json(); // Parse the JSON response
-        const finalExerciseData = await getCalorieData(data);
-        const timer = setTimeout(() => {
-          setCalorieData(finalExerciseData); // Save the parsed data into the state
-          sendCalorieData(finalExerciseData);
-          setLoading(false);
-        }, 3000);
+        const data = await response.json();
+        const finalExerciseData = getCalorieData(data);
+
+        const payload = {
+          exercise: values.exerciseType,
+          date: values.date,
+          duration: values.duration,
+          calories_burned: finalExerciseData.total_calories,
+          userId: getAnyCookie("userId"),
+          exerciseVariation: values.exerciseSubType,
+        };
+
+        await sendCalorieData(payload);
+        setCalorieData(finalExerciseData);
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching data:", err);
         setLoading(false);
@@ -381,7 +355,6 @@ const Exercise = () => {
     }
   };
 
-  // select Array of sub-exercises
   useEffect(() => {
     switch (selectedExercise) {
       case "Running":
@@ -402,8 +375,8 @@ const Exercise = () => {
       case "Weight Lifting":
         setSubExerciseArr(weightLiftingArr);
         break;
-
       default:
+        setSubExerciseArr([]);
         break;
     }
   }, [selectedExercise]);
@@ -442,10 +415,6 @@ const Exercise = () => {
                       handleChange,
                       handleSubmit
                     )}
-
-                  {/* Add Another Entry Button */}
-                  {Object.keys(calorieData)?.length > 0 &&
-                    renderAddEntryBtn(handleSubmit)}
                 </>
               )}
             </Formik>

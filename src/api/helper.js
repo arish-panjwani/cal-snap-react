@@ -22,7 +22,11 @@ export const APIRequest = async (url, method, data = null) => {
     return await response.json();
   } catch (error) {
     debuggingMode ? console.info("APIRequest catch", error) : undefined;
-    console.error("API Call Error:", JS.stringify(error.message));
+    console.error(
+      "API Call Error:",
+      typeof error.message === Object ||
+        (typeof error.message === string && JSON.stringify(error.message))
+    );
     throw error;
   }
 };
