@@ -91,4 +91,8 @@ export const URLs = {
     URL: `${BASE_HEALTH_SCORE_URL}/predict_health_risk`,
     METHOD: POST,
   },
+  SEND_HEALTH_RISK_SCORE: {
+    URL: `${BASE_URL}/healthScoreRecords/save`,
+    METHOD: POST,
+  },
 };

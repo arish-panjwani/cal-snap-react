@@ -111,14 +111,43 @@ const HealthScore = () => {
           } catch (error) {}
         } catch (error) {
           console.error("Error fetching data:", error.message);
-        } finally {
-          setLoading(false);
         }
       };
 
       fetchHealthScore();
     }
   }, [data]); // Dependency on data
+
+  useEffect(() => {
+    try {
+      const sendHealthScore = async () => {
+        const userId = getAnyCookie("userId");
+
+        const payload = {
+          userId: userId,
+          healthScore: healthScore,
+        };
+
+        const result = await APIRequest(
+          `${URLs.SEND_HEALTH_RISK_SCORE.URL}`,
+          URLs.SEND_HEALTH_RISK_SCORE.METHOD,
+          payload
+        );
+
+        if (result.statusCode === "200") {
+          console.log("Health Score sent successfully");
+        } else {
+          console.error("Failed to send health score");
+        }
+      };
+
+      sendHealthScore();
+    } catch (error) {
+      console.error("Error sending health score:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [healthScore]);
 
   const renderHealthScore = useCallback(() => {
     return <HealthGaugeChart value={Number(healthScore)} min={0} max={100} />;
