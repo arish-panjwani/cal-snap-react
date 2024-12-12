@@ -85,7 +85,7 @@ function CalorieInfo() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    navigate("/dashboard"); // Navigate to the home page
+    navigate("/calorie-history"); // Navigate to the home page
   };
 
   const handleInputChange = (e) => {

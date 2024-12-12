@@ -89,7 +89,7 @@ const AppRouter = () => {
             element={<PrivateRoute element={ExerciseHistory} />}
           />
           <Route
-            path="/disease-prediction"
+            path="/health-score"
             element={<PrivateRoute element={UnderConstruction} />}
           />
           <Route
