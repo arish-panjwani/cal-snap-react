@@ -88,15 +88,41 @@ const AboutUs = () => {
     },
   ];
 
+  const mentors = [
+    {
+      name: "Mr Soumo Mukherjee",
+      role: "Mentor",
+      image: "Male.png",
+    },
+    {
+      name: "Mr Bhavik Gandhi",
+      role: "Mentor",
+      image: "Male.png",
+    },
+  ];
+
   return (
     <div className="about-us">
       <div className="product-description">
         <h1>About CalSnap</h1>
         <Typography color={colors.primary[200]} variant="h5">
-          {
-            "CalSnap empowers users to achieve their wellness goals with personalized insights and easy-to-use tools for tracking diet, physical activity, and health data. Combining advanced machine learning with an intuitive interface, it simplifies health management for a balanced, healthier lifestyle."
-          }
+          {}
         </Typography>
+      </div>
+      <div className="mentors" style={{ margin: "20px 0" }}>
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Header title="Our Mentors" />
+        </Box>
+        <div className="team-grid">
+          {mentors.map((mentor) => (
+            <TeamMemberCard
+              key={mentor.name}
+              name={mentor.name}
+              role={mentor.role}
+              image={mentor.image}
+            />
+          ))}
+        </div>
       </div>
       <div className="team-members">
         <Box display="flex" alignItems="center" justifyContent="center">
@@ -105,7 +131,7 @@ const AboutUs = () => {
         <div className="team-grid">
           {teamMembers.map((member) => (
             <TeamMemberCard
-              key={member.id}
+              key={member.name}
               name={member.name}
               role={member.role}
               image={member.image}

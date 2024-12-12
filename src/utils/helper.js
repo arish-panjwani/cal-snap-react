@@ -9,7 +9,7 @@ export function capitalizeFirstChar(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export const debuggingMode = true;
+export const debuggingMode = false;
 
 export function formatDate(dateString) {
   // Parse the input date string into a Date object
@@ -79,35 +79,3 @@ function calculateCalorieRecommendations(tdee) {
     weightGain: tdee + 500, // Increase by 500 calories for weight gain
   };
 }
-
-// Example Usage:
-const weight = 70; // kg
-const height = 1.75; // meters
-const age = 30; // years
-const gender = "male";
-const activityLevel = "moderately active";
-
-// Calculate BMI
-const bmi = calculateBMI(weight, height);
-console.log(`BMI: ${bmi.toFixed(2)}`);
-
-// Calculate BMR
-const bmr = calculateBMR(weight, height * 100, age, gender); // Convert height to cm for BMR
-console.log(`BMR: ${bmr.toFixed(2)} calories/day`);
-
-// Calculate TDEE
-const tdee = calculateTDEE(bmr, activityLevel);
-console.log(`TDEE: ${tdee.toFixed(2)} calories/day`);
-
-// Calculate Calorie Recommendations
-const calorieRecommendations = calculateCalorieRecommendations(tdee);
-console.log(`Calorie Recommendations:`);
-console.log(
-  `  Maintenance: ${calorieRecommendations.maintenance.toFixed(2)} calories/day`
-);
-console.log(
-  `  Weight Loss: ${calorieRecommendations.weightLoss.toFixed(2)} calories/day`
-);
-console.log(
-  `  Weight Gain: ${calorieRecommendations.weightGain.toFixed(2)} calories/day`
-);

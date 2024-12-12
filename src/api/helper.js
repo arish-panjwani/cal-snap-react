@@ -7,7 +7,7 @@ import { debuggingMode } from "../utils/helper";
 export const APIRequest = async (url, method, data = null) => {
   try {
     debuggingMode
-      ? console.info("APIRequest try", { url, method, data })
+      ? console.info("APIRequest try", url, method, data)
       : undefined;
     const response = await fetch(url, {
       method,

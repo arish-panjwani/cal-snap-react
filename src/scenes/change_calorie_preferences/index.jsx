@@ -22,6 +22,7 @@ const ChangeCaloriePreferences = () => {
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
 
+  const [userData, setUserData] = useState(null);
   const [calorieConsumptionTarget, setCalorieConsumptionTarget] = useState(0);
   const [calorieBurntTarget, setCalorieBurntTarget] = useState(0);
   const [isConsumptionEditable, setIsConsumptionEditable] = useState(false);
@@ -45,6 +46,7 @@ const ChangeCaloriePreferences = () => {
         );
         if (resp.statusCode === "200") {
           const { calBurnedTarget, calConsumptionsTarget } = resp.data;
+          setUserData(resp.data);
           setCalorieBurntTarget(calBurnedTarget);
           setCalorieConsumptionTarget(calConsumptionsTarget);
           console.log("Data fetched successfully", resp.data);
@@ -78,6 +80,7 @@ const ChangeCaloriePreferences = () => {
 
       // Prepare API payload
       const payload = {
+        ...userData,
         id: userId,
         calBurnedTarget: calorieBurntTarget,
         calConsumptionsTarget: calorieConsumptionTarget,
