@@ -1,9 +1,9 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
-import { mockPieData as data } from "../data/mockData";
+// import { mockPieData as data } from "../data/mockData";
 
-const PieChart = () => {
+const PieChart = ({data}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -37,7 +37,7 @@ const PieChart = () => {
           },
         },
       }}
-      margin={{ top: 15, right: 30, bottom: 50, left: 30 }}
+      margin={{ top: 15, right: 30, bottom: 60, left: 30 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}

@@ -40,6 +40,9 @@ function Login() {
         setAnyCookie("email", response.data.email);
         setAnyCookie("bmi", response.data.bmi);
         setAnyCookie("weight", response.data.weight);
+        setAnyCookie("height", response.data.height);
+        setAnyCookie("age", response.data.age);
+        setAnyCookie("gender", response.data.gender);
         navigate("/dashboard");
       } else {
         debuggingMode && console.log("Login failed");

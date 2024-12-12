@@ -55,10 +55,7 @@ const HealthGaugeChart = ({ value, min, max }) => {
 HealthGaugeChart.propTypes = {
   value: PropTypes.number.isRequired,
   min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired
 };
 
 export default HealthGaugeChart;
