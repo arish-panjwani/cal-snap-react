@@ -50,9 +50,9 @@ export const URLs = {
     URL: `${BASE_URL}/getItemNutrients/`,
     METHOD: POST,
   },
-  GET_HEALTH_SCORE: {
-    URL: `${BASE_URL}/getItemNutrients/`,
-    METHOD: POST,
+  GET_HEALTH_RISK_SCORE: {
+    URL: `${BASE_URL}/healthScoreRecords/`,
+    METHOD: GET,
   },
   GET_CALORIE_CONSUMPTION_FOR_LINE_CHART: {
     URL: `${BASE_URL}/getItemNutrients/`,
@@ -85,5 +85,5 @@ export const URLs = {
   IMAGE_REC: {
     URL: `${BASE_URL_IMG}/upload`,
     METHOD: POST,
-  },
+  }
 };

@@ -218,6 +218,9 @@ const Profile = () => {
         setAnyCookie("email", data.data.email);
         setAnyCookie("bmi", data.data.bmi);
         setAnyCookie("weight", data.data.weight);
+        setAnyCookie("height", data.data.height);
+        setAnyCookie("age", data.data.age);
+        setAnyCookie("gender", data.data.gender);
         debuggingMode && console.log("Login successful");
         navigate("/dashboard");
       } else {
