@@ -38,12 +38,10 @@ const ExerciseHistory = () => {
 
       try {
         const url = `${URLs.GET_EXERCISE_DATA.URL}${userId}`;
-        console.info("41-->", url);
         const result = await UpdatedAPIRequest(
           url,
           URLs.GET_EXERCISE_DATA.METHOD
         );
-        console.info("46-->", result);
         if (
           result &&
           result.statusCode === "200" &&
