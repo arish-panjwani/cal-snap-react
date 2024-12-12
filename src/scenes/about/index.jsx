@@ -30,7 +30,7 @@ const AboutUs = () => {
     {
       name: "Ashish Lama",
       role: "Full Stack Developer, Data Scientist",
-      image: "Ashish.jpeg",
+      image: "Ashish.jpg",
     },
     {
       name: "Om Kiranbhai Patel",

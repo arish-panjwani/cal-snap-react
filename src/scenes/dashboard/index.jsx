@@ -315,7 +315,7 @@ function Dashboard() {
         setLoading(true);
         const result = await APIRequest(
           // `${URLs.GET_HEALTH_RISK_SCORE.URL}${userId}`,
-          `${URLs.GET_HEALTH_RISK_SCORE.URL}1`,
+          `${URLs.GET_HEALTH_RISK_SCORE_BY_USER_ID.URL}${userId}`,
           URLs.GET_HEALTH_RISK_SCORE.METHOD
         );
 

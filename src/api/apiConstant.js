@@ -84,7 +84,7 @@ export const URLs = {
     METHOD: DELETE,
   },
   IMAGE_REC: {
-    URL: `${BASE_URL_IMG}/upload`,
+    URL: `${BASE_URL_IMG}/classify_image`,
     METHOD: POST,
   },
   GET_HEALTH_SCORE: {
