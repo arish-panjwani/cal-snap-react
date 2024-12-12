@@ -38,6 +38,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     weight: "",
     height: "",
+    bmi: "",
     waistCircumference: "",
     hipCircumference: "",
     gender: "",
@@ -62,34 +63,6 @@ const Profile = () => {
     calBurnedTarget: "",
     calConsumptionsTarget: "",
   });
-
-  // WITH DUMMY DATA FOR TESTING
-  // const [formData, setFormData] = useState({
-  //   weight: "78",
-  //   height: "171",
-  //   bmi: "25",
-  //   waistCircumference: "38",
-  //   hipCircumference: "40",
-  //   gender: "Male",
-  //   alcoholConsumption: "Never",
-  //   monthlyEatingOutSpending: "400",
-  //   minutes_walk_bicycle: "60",
-  //   minutes_doing_recreational_activities: "60",
-  //   sleep_hours_weekend: "60",
-  //   no_of_cigarettes_perday: "0",
-  //   familyHistory: {
-  //     hasDiabetes: false,
-  //     hasBP: false,
-  //   },
-  //   marital_status: "Single",
-  //   family_size: "5",
-  //   family_income: "30000",
-  //   pinCode: "410006",
-  //   houseAddress: "43",
-  //   city: "toronto",
-  //   province: "ON",
-  //   country: "CA",
-  // });
 
   const [age, setAge] = useState(null);
 
@@ -169,7 +142,14 @@ const Profile = () => {
     }
   };
 
-  const handleNext = () => setActiveStep((prevStep) => prevStep + 1);
+  const handleNext = () => {
+    if (validateStep(activeStep)) {
+      setActiveStep((prevStep) => prevStep + 1);
+    } else {
+      alert("Please fill out all required fields for this step.");
+    }
+  };
+
   const handleBack = () => setActiveStep((prevStep) => prevStep - 1);
 
   const handleSubmit = async () => {
@@ -228,8 +208,6 @@ const Profile = () => {
       }
     } catch (error) {
       console.error("Login failed:", error.message);
-    } finally {
-      //   setIsLoggingIn(false);
     }
   };
 
@@ -238,311 +216,394 @@ const Profile = () => {
       case 0: // Basic Info
         return (
           <Box>
-            <TextField
-              label="Weight (kg)"
-              name="weight"
-              value={formData.weight}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Height (cm)"
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="BMI"
-              name="bmi"
-              value={formData.bmi}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Waist Circumference (inches)"
-              name="waistCircumference"
-              value={formData.waistCircumference}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Hip Circumference (inches)"
-              name="hipCircumference"
-              value={formData.hipCircumference}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Gender"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              select
-              fullWidth
-              margin="normal">
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </TextField>
+            <div className="input-field">
+              <label htmlFor="weight">Weight</label>
+              <input
+                type="number"
+                id="weight"
+                name="weight"
+                placeholder="Enter your weight"
+                value={formData.weight}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="height">Height</label>
+              <input
+                type="number"
+                id="height"
+                name="height"
+                placeholder="Enter your height"
+                value={formData.height}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="bmi">BMI</label>
+              <input
+                type="text"
+                id="bmi"
+                name="bmi"
+                placeholder="Enter your BMI"
+                value={formData.bmi}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="waistCircumference">Waist Circumference</label>
+              <input
+                type="number"
+                id="waistCircumference"
+                name="waistCircumference"
+                placeholder="Enter your waist circumference"
+                value={formData.waistCircumference}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="hipCircumference">Hip Circumference</label>
+              <input
+                type="number"
+                id="hipCircumference"
+                name="hipCircumference"
+                placeholder="Enter your hip circumference"
+                value={formData.hipCircumference}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="gender">Gender</label>
+              <select
+                id="gender"
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className="input"
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </Box>
         );
       case 1: // Lifestyle Info
         return (
           <Box>
-            <TextField
-              label="Alcohol Consumption"
-              name="alcoholConsumption"
-              value={formData.alcoholConsumption}
-              onChange={handleChange}
-              select
-              fullWidth
-              margin="normal">
-              <MenuItem value="Regular">Regular</MenuItem>
-              <MenuItem value="Casual">Casual</MenuItem>
-              <MenuItem value="Occasional">Occasional</MenuItem>
-              <MenuItem value="Never">Never</MenuItem>
-            </TextField>
-            <TextField
-              label="Money Spent Monthly on Eating Out"
-              name="monthlyEatingOutSpending"
-              value={formData.monthlyEatingOutSpending}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Minutes Walk/Bicycle per Day"
-              name="minutes_walk_bicycle"
-              value={formData.minutes_walk_bicycle}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Minutes Doing Recreational Activities per Day"
-              name="minutes_doing_recreational_activities"
-              value={formData.minutes_doing_recreational_activities}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Sleep Hours on Weekend"
-              name="sleep_hours_weekend"
-              value={formData.sleep_hours_weekend}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="No. of Cigarettes per Day"
-              name="no_of_cigarettes_perday"
-              value={formData.no_of_cigarettes_perday}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
+            <div className="input-field">
+              <label htmlFor="alcoholConsumption">Alcohol Consumption</label>
+              <select
+                id="alcoholConsumption"
+                name="alcoholConsumption"
+                value={formData.alcoholConsumption}
+                onChange={handleChange}
+                className="input"
+                required
+              >
+                <option value="">Select</option>
+                <option value="none">None</option>
+                <option value="moderate">Moderate</option>
+                <option value="heavy">Heavy</option>
+              </select>
+            </div>
+            <div className="input-field">
+              <label htmlFor="monthlyEatingOutSpending">
+                Monthly Eating Out Spending
+              </label>
+              <input
+                type="number"
+                id="monthlyEatingOutSpending"
+                name="monthlyEatingOutSpending"
+                placeholder="Enter amount"
+                value={formData.monthlyEatingOutSpending}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="minutes_walk_bicycle">Minutes Walk/Bicycle</label>
+              <input
+                type="number"
+                id="minutes_walk_bicycle"
+                name="minutes_walk_bicycle"
+                placeholder="Enter minutes"
+                value={formData.minutes_walk_bicycle}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="minutes_doing_recreational_activities">
+                Minutes Doing Recreational Activities
+              </label>
+              <input
+                type="number"
+                id="minutes_doing_recreational_activities"
+                name="minutes_doing_recreational_activities"
+                placeholder="Enter minutes"
+                value={formData.minutes_doing_recreational_activities}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="sleep_hours_weekend">Sleep Hours Weekend</label>
+              <input
+                type="number"
+                id="sleep_hours_weekend"
+                name="sleep_hours_weekend"
+                placeholder="Enter hours"
+                value={formData.sleep_hours_weekend}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="no_of_cigarettes_perday">
+                Number of Cigarettes Per Day
+              </label>
+              <input
+                type="number"
+                id="no_of_cigarettes_perday"
+                name="no_of_cigarettes_perday"
+                placeholder="Enter number"
+                value={formData.no_of_cigarettes_perday}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
           </Box>
         );
       case 2: // Family History
         return (
           <Box>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.familyHistory.hasDiabetes}
-                  onChange={handleFamilyHistoryChange}
-                  name="hasDiabetes"
-                />
-              }
-              label="Family Has Diabetes"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.familyHistory.hasBP}
-                  onChange={handleFamilyHistoryChange}
-                  name="hasBP"
-                />
-              }
-              label="Family Has BP"
-            />
-            <TextField
-              label="Marital Status"
-              name="marital_status"
-              value={formData.marital_status}
-              onChange={handleChange}
-              select
-              fullWidth
-              margin="normal">
-              <MenuItem value="Single">Single</MenuItem>
-              <MenuItem value="Married">Married</MenuItem>
-              <MenuItem value="Divorced">Divorced</MenuItem>
-            </TextField>
-            <TextField
-              label="Family Size"
-              name="family_size"
-              value={formData.family_size}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Family Income (CAD)"
-              name="family_income"
-              value={formData.family_income}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
+            <div className="input-field">
+              <label htmlFor="marital_status">Marital Status</label>
+              <select
+                id="marital_status"
+                name="marital_status"
+                value={formData.marital_status}
+                onChange={handleChange}
+                className="input"
+                required
+              >
+                <option value="">Select</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="divorced">Divorced</option>
+              </select>
+            </div>
+            <div className="input-field">
+              <label htmlFor="family_size">Family Size</label>
+              <input
+                type="number"
+                id="family_size"
+                name="family_size"
+                placeholder="Enter family size"
+                value={formData.family_size}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="family_income">Family Income</label>
+              <input
+                type="number"
+                id="family_income"
+                name="family_income"
+                placeholder="Enter family income"
+                value={formData.family_income}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label>Family History</label>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.familyHistory.hasDiabetes}
+                    onChange={handleFamilyHistoryChange}
+                    name="hasDiabetes"
+                  />
+                }
+                label="Has Diabetes"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.familyHistory.hasBP}
+                    onChange={handleFamilyHistoryChange}
+                    name="hasBP"
+                  />
+                }
+                label="Has Blood Pressure"
+              />
+            </div>
           </Box>
         );
       case 3: // Address
         return (
           <Box>
-            <TextField
-              label="House Address"
-              name="houseAddress"
-              value={formData.houseAddress}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="City"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Province"
-              name="province"
-              value={formData.province}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Country"
-              name="country"
-              value={formData.country}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Pin Code"
-              name="pinCode"
-              value={formData.pinCode}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
+            <div className="input-field">
+              <label htmlFor="houseAddress">House Address</label>
+              <input
+                type="text"
+                id="houseAddress"
+                name="houseAddress"
+                placeholder="Enter your house address"
+                value={formData.houseAddress}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="city">City</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Enter your city"
+                value={formData.city}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="province">Province</label>
+              <input
+                type="text"
+                id="province"
+                name="province"
+                placeholder="Enter your province"
+                value={formData.province}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="country">Country</label>
+              <select
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="input"
+                required
+              >
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="IN">India</option>
+                <option value="UK">United Kingdom</option>
+              </select>
+            </div>
+            <div className="input-field">
+              <label htmlFor="pinCode">PIN Code</label>
+              <input
+                type="text"
+                id="pinCode"
+                name="pinCode"
+                placeholder="Enter your PIN Code"
+                value={formData.pinCode}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
           </Box>
         );
       case 4: // Health Target
         return (
           <Box>
-            <TextField
-              label="Calorie Burnt Target"
-              name="calBurnedTarget"
-              value={formData.calBurnedTarget}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label="Calorie Consumption Target"
-              name="calConsumptionsTarget"
-              value={formData.calConsumptionsTarget}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
+            <div className="input-field">
+              <label htmlFor="calBurnedTarget">Calories Burned Target</label>
+              <input
+                type="number"
+                id="calBurnedTarget"
+                name="calBurnedTarget"
+                placeholder="Enter target calories burned"
+                value={formData.calBurnedTarget}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <label htmlFor="calConsumptionsTarget">Calories Consumption Target</label>
+              <input
+                type="number"
+                id="calConsumptionsTarget"
+                name="calConsumptionsTarget"
+                placeholder="Enter target calories consumption"
+                value={formData.calConsumptionsTarget}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
           </Box>
         );
       default:
-        return "Unknown Step";
+        return <div>Invalid step</div>;
     }
   };
 
   return (
-    <Box sx={{ width: "100%", margin: "auto", maxWidth: 600 }}>
-      <h3>Welcome {firstName || "User"}!</h3>
-      <p>Email: {email || "Not provided"}</p>
-      <p>Date of Birth: {dob || "Not provided"}</p>
-      <p>Age: {age || "Not calculated"}</p>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
+    <div className="container">
+      <h1>Profile Setup</h1>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      <Box sx={{ mt: 2, mb: 1 }}>{renderStepContent(activeStep)}</Box>
-      <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-        <Button
-          color="inherit"
-          disabled={activeStep === 0}
-          onClick={handleBack}
-          sx={{ mr: 1 }}>
-          Back
-        </Button>
-        <Box sx={{ flex: "1 1 auto" }} />
-        {activeStep === steps.length - 1 ? (
-          <Button onClick={handleSubmit}>Submit</Button>
-        ) : (
-          <Button onClick={handleNext} disabled={!validateStep(activeStep)}>
-            Next
+      <div>
+        {renderStepContent(activeStep)}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: 3,
+          }}
+        >
+          {activeStep !== 0 && (
+            <Button onClick={handleBack} variant="outlined">
+              Back
+            </Button>
+          )}
+          <Button
+            onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}
+            variant="contained"
+          >
+            {activeStep === steps.length - 1 ? "Submit" : "Next"}
           </Button>
-        )}
-      </Box>
-    </Box>
+        </Box>
+      </div>
+    </div>
   );
 };
 
 export default Profile;
-
-// API response for reference
-// {
-//     "first_name": "Mukul",
-//     "last_name": "Garg",
-//     "age": 27,
-//     "dob": "11-07-1997",
-//     "gender": "Male",
-//     "password": "pass",
-//     "mobile_number": "114234567790",
-//     "email": "mukulgarg155@gmail.com",
-//     "active": true,
-//     "admin": true,
-//     "pinCode": "L6Y 4R6",
-//     "houseAddress": "103, Beaconsfield Ave",
-//     "city": "Brampton",
-//     "province": "Ontario",
-//     "country": "Canada",
-//     "height": 186.0,
-//     "weight": 95.0,
-//     "bmi": 25.1,
-//     "waist_circumference": 34.0,
-//     "hip_circumference": 38.0,
-//     "marital_status": "Married",
-//     "family_size": 2.0,
-//     "family_income": 100000.0,
-//     "alcohol_consumption": "Occassionaly",
-//     "monthly_eatingout_spending": 500.0,
-//     "minutes_walk_bicycle": 0.0,
-//     "minutes_doing_recreational_activities": 0.0,
-//     "sleep_hours_weekdays": 8.0,
-//     "sleep_hours_weekend": 9.0,
-//     "no_of_cigarettes_perday": 0.0,
-//     "family_history_has_BP": false,
-//     "family_history_has_diabetes": false
-// }
