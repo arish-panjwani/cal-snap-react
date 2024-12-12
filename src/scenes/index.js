@@ -32,6 +32,7 @@ import Stream from "./stream";
 import Team from "./team";
 import UnderConstruction from "./under_construction";
 import UserProfile from "./user_profile";
+import HealthScore from "./health_score";
 
 export {
   AboutUs,
@@ -66,4 +67,5 @@ export {
   Team,
   UnderConstruction,
   UserProfile,
+  HealthScore,
 };

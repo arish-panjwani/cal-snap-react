@@ -30,6 +30,7 @@ import {
   SnapUpload,
   UnderConstruction,
   UserProfile,
+  HealthScore,
 } from "./scenes";
 import { debuggingMode } from "./utils/helper";
 
@@ -90,7 +91,7 @@ const AppRouter = () => {
           />
           <Route
             path="/health-score"
-            element={<PrivateRoute element={UnderConstruction} />}
+            element={<PrivateRoute element={HealthScore} />}
           />
           <Route
             path="/profile"

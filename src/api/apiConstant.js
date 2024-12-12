@@ -7,6 +7,7 @@ export const DELETE = "DELETE";
 
 export const BASE_URL = import.meta.env.VITE_API_URL;
 export const BASE_URL_IMG = import.meta.env.VITE_API_IMG_URL;
+export const BASE_HEALTH_SCORE_URL = import.meta.env.VITE_API_HEALTH_SCORE_URL;
 
 // Exercise Calorie Open API Integration
 export const EXERCISE_CALORIE_URL = "https://api.api-ninjas.com/v1/";
@@ -85,5 +86,9 @@ export const URLs = {
   IMAGE_REC: {
     URL: `${BASE_URL_IMG}/classify_image`,
     METHOD: POST,
-  }
+  },
+  GET_HEALTH_SCORE: {
+    URL: `${BASE_HEALTH_SCORE_URL}/predict_health_risk`,
+    METHOD: POST,
+  },
 };
