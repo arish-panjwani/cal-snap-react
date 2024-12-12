@@ -33,22 +33,20 @@ export const APIRequest = async (url, method, data = null) => {
 
 export const UpdatedAPIRequest = async (url, method, data = null) => {
   try {
-    const headers = {};
-
-    // Set headers only for JSON data
-    if (!(data instanceof FormData)) {
-      headers["Content-Type"] = "application/json";
-    }
-
-    // Debugging info
     debuggingMode
       ? console.info("APIRequest initiated:", { url, method, data })
       : undefined;
-
     const response = await fetch(url, {
       method,
-      headers,
-      body: data instanceof FormData ? data : JSON.stringify(data), // Handle FormData or JSON
+      headers:
+        data instanceof FormData
+          ? undefined
+          : { "Content-Type": "application/json" },
+      body: data
+        ? data instanceof FormData
+          ? data
+          : JSON.stringify(data)
+        : null,
     });
 
     debuggingMode

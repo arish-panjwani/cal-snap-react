@@ -215,6 +215,21 @@ const Exercise = () => {
     handleChange,
     handleSubmit
   ) => {
+    // Efficiently check for empty fields and errors using a helper function
+    const isFormInvalid = () => {
+      return (
+        !values.exerciseType ||
+        errors.exerciseType ||
+        !subExerciseArr?.length ||
+        !values.exerciseSubType ||
+        errors.exerciseSubType ||
+        !values.duration ||
+        errors.duration ||
+        !values.date ||
+        errors.date
+      );
+    };
+
     return (
       <form onSubmit={handleSubmit}>
         <Box display="flex" flexDirection="column" gap="16px">
@@ -291,7 +306,11 @@ const Exercise = () => {
           />
         </Box>
         <Box display="flex" justifyContent="center" mt={4}>
-          <Button type="submit" color="secondary" variant="contained">
+          <Button
+            disabled={isFormInvalid()} // Dynamically set disabled based on form validity
+            type="submit"
+            color="secondary"
+            variant="contained">
             Log Exercise
           </Button>
         </Box>

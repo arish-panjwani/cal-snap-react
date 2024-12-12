@@ -89,17 +89,25 @@ const AppRouter = () => {
             element={<PrivateRoute element={ExerciseHistory} />}
           />
           <Route
-            path="/disease-prediction"
+            path="/health-score"
             element={<PrivateRoute element={UnderConstruction} />}
           />
           <Route
+            path="/profile"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          <Route
+            path="/health-profile"
+            element={<PrivateRoute element={UnderConstruction} />}
+          />
+          {/* <Route
             path="/profile"
             element={<PrivateRoute element={UserProfile} />}
           />
           <Route
             path="/health-profile"
             element={<PrivateRoute element={MedicalProfile} />}
-          />
+          /> */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/change-password" element={<ForgotChangePassword />} />

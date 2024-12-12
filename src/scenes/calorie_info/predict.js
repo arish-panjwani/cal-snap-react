@@ -4,7 +4,8 @@ import axios from "axios";
 import FormData from "form-data";
 
 export async function predictFood(file) {
-  const url = "/api/upload"; // Proxy path instead of full backend URL
+  const url = "http://20.106.175.143:8080/upload"; // Proxy path instead of full backend URL
+  // const url = "/api/upload"; // Proxy path instead of full backend URL
 
   const formData = new FormData();
   formData.append("file", file);
