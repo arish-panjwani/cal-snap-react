@@ -87,7 +87,8 @@ const HealthProfileCard = ({
             </Typography>
           </Grid>
 
-          <Grid item xs={6}>
+          {/* //TODO: Take the below data from API and total it */}
+          {/* <Grid item xs={6}>
             <Typography
               variant="body2"
               color={colors.primary[200]}
@@ -113,7 +114,7 @@ const HealthProfileCard = ({
             <Typography variant="body2" color={colors.primary[200]}>
               {calorieBurnt}
             </Typography>
-          </Grid>
+          </Grid> */}
         </Grid>
       </CardContent>
     </Card>

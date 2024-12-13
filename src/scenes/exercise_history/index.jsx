@@ -113,12 +113,12 @@ const ExerciseHistory = () => {
             </Typography>
           </Box>
         ))}
-        <Box display="flex" justifyContent="flex-end" width="100%">
+        {/* <Box display="flex" justifyContent="flex-end" width="100%">
           <DeleteIcon
             onClick={() => onPressDelete(itemId)} // Pass the key if needed
             style={{ color: "red", cursor: "pointer", marginTop: "10px" }}
           />
-        </Box>
+        </Box> */}
       </>
     );
   };
