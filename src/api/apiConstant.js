@@ -16,7 +16,7 @@ export const EXERCISE_CALORIE_API_KEY_1 =
 export const URLs = {
   USER_LOGIN: {
     URL: `${BASE_URL}/login`,
-    METHOD: GET,
+    METHOD: POST,
   },
   GET_USERS: {
     URL: `${BASE_URL}/users/`,
@@ -81,6 +81,10 @@ export const URLs = {
   DELETE_EXERCISE: {
     URL: `${BASE_URL}/exerciseRecords`,
     METHOD: DELETE,
+  },
+  LOGOUT: {
+    URL: `${BASE_URL}/logout`,
+    METHOD: POST,
   },
   IMAGE_REC: {
     URL: `${BASE_URL_IMG}/upload`,

@@ -3,7 +3,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { URLs } from "./apiConstant";
-import { APIRequest, handleLogin } from "./helper";
+import { APIRequest, handleLogin, handleLogout } from "./helper";
 
 const AuthContext = createContext();
 
@@ -45,16 +45,29 @@ export const AuthProvider = ({ children }) => {
     setIsLoggingIn(true);
     setLoginError(null);
     try {
-      const data = await APIRequest(URLs.USER_LOGIN.URL, "POST", credentials);
-      if (data.statusCode == "200") {
-        handleLogin(String(data.data.userId));
-        localStorage.setItem("authToken", data.data.userId); // Save token
+      const data = await APIRequest(
+        URLs.USER_LOGIN.URL,
+        URLs.USER_LOGIN.METHOD,
+        credentials
+      );
+
+      if (data.statusCode === "200") {
+        const userId = String(data.data.userId);
+        handleLogin(userId);
+        localStorage.setItem("authToken", userId);
+
         const userData = await APIRequest(
-          URLs.GET_USER_BY_ID.URL + String(data.data.userId),
-          "GET"
+          URLs.GET_USER_BY_ID.URL + userId,
+          URLs.GET_USER_BY_ID.METHOD
         );
-        setUser(userData); // Update user state upon successful login
+
+        setUser(userData);
         return userData;
+      } else {
+        const message =
+          data.message || "Login failed. Please check your credentials.";
+        setLoginError(message);
+        throw new Error(message);
       }
     } catch (error) {
       setLoginError(error.message);
@@ -67,9 +80,15 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await APIRequest({ URL: "/logout", METHOD: "POST" });
+      // Attempt to notify backend about logout; ignore failures gracefully
+      try {
+        await APIRequest(URLs.LOGOUT.URL, URLs.LOGOUT.METHOD);
+      } catch (err) {
+        console.error("Backend logout failed:", err.message);
+      }
+
+      handleLogout();
       setUser(null);
-      localStorage.removeItem("authToken"); // Clear token
       queryClient.invalidateQueries(["authUser"]);
     } catch (error) {
       console.error("Logout failed:", error.message);

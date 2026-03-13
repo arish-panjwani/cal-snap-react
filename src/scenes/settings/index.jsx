@@ -5,12 +5,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { LogoutOutlined } from "@mui/icons-material";
-import { handleLogout } from "../../api/helper";
+import { useAuth } from "../../api/AuthContext";
 
 const SettingsPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleCalorieChange = () => {
     navigate("/change-calorie-preferences");
@@ -20,9 +21,12 @@ const SettingsPage = () => {
     navigate("/change-password");
   };
 
-  const handleLogoutFunc = () => {
-    handleLogout();
-    navigate("/login");
+  const handleLogoutFunc = async () => {
+    try {
+      await logout();
+    } finally {
+      navigate("/login");
+    }
   };
 
   return (

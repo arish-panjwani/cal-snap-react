@@ -28,13 +28,12 @@ function Login() {
     event.preventDefault();
     const body = {
       username: email,
-      password: password, //TODO: remove later
     };
     debuggingMode &&
       console.log("Credentials sending... ", email + " " + password);
     try {
-      var response = await login(body);
-      if (response.statusCode == "200") {
+      const response = await login(body);
+      if (response && response.statusCode === "200") {
         debuggingMode && console.log("Login successful");
         setAnyCookie("first_name", response.data.first_name);
         setAnyCookie("email", response.data.email);
@@ -44,12 +43,8 @@ function Login() {
       } else {
         debuggingMode && console.log("Login failed");
       }
-      // login(mockUserData);
-      // navigate("/");
-      // console.log("Logged in successfully");
     } catch (error) {
       console.error("Login failed: ", error);
-      alert("Login failed !!!");
     }
   };
 
@@ -116,10 +111,18 @@ function Login() {
                   </label>
                 </div>
               </div>
-              <button type="submit" className="login-button">
-                Login
+              <button
+                type="submit"
+                className="login-button"
+                disabled={isLoggingIn}>
+                {isLoggingIn ? "Logging in..." : "Login"}
               </button>
             </form>
+            {loginError && (
+              <p className="error-message" style={{ color: "red" }}>
+                {loginError}
+              </p>
+            )}
             <p className="signup-link">
               New Here? <a href="/signup">Sign Up</a>
             </p>
