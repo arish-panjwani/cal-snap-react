@@ -21,8 +21,14 @@ export const AuthProvider = ({ children }) => {
   } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
-      const urlRequest = { URL: "/user", METHOD: "GET" };
-      return APIRequest({ urlRequest });
+      const userId = localStorage.getItem("authToken");
+      if (!userId) {
+        throw new Error("No stored user id");
+      }
+      return APIRequest(
+        URLs.GET_USER_BY_ID.URL + userId,
+        URLs.GET_USER_BY_ID.METHOD
+      );
     },
     onSuccess: (data) => {
       setUser(data); // Set the user on successful fetch
