@@ -39,7 +39,7 @@ export const URLs = {
     METHOD: DELETE,
   },
   GET_ITEM_NUTRIENTS: {
-    URL: `${BASE_URL}/getItemNutrients`,
+    URL: `${BASE_URL}/itemsNutrients/itemsNutrientsAll`,
     METHOD: GET,
   },
   GET_ITEM_NUTRIENT_BY_NAME: {
@@ -47,20 +47,20 @@ export const URLs = {
     METHOD: GET,
   },
   GET_CALORIE_CONSUMPTION: {
-    URL: `${BASE_URL}/getItemNutrients/`,
-    METHOD: POST,
+    URL: `${BASE_URL}/caloriesConsumptionRecords/UserId?userId=`,
+    METHOD: GET,
   },
   GET_HEALTH_SCORE: {
-    URL: `${BASE_URL}/getItemNutrients/`,
-    METHOD: POST,
+    URL: `${BASE_URL}/healthScoreRecords/UserId?userId=`,
+    METHOD: GET,
   },
   GET_CALORIE_CONSUMPTION_FOR_LINE_CHART: {
-    URL: `${BASE_URL}/getItemNutrients/`,
-    METHOD: POST,
+    URL: `${BASE_URL}/caloriesConsumptionRecords/UserId?userId=`,
+    METHOD: GET,
   },
   GET_MACRO_NUTRIENT_DATA: {
-    URL: `${BASE_URL}/getItemNutrients/`,
-    METHOD: POST,
+    URL: `${BASE_URL}/caloriesConsumptionRecords/UserId?userId=`,
+    METHOD: GET,
   },
   POST_FOOD_ITEM_NUTRIENTS: {
     URL: `${BASE_URL}/caloriesConsumptionRecords/save`,
