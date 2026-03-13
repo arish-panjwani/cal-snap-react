@@ -35,7 +35,7 @@ export const URLs = {
     METHOD: GET,
   },
   DELETE_USER_BY_ID: {
-    URL: `${BASE_URL}/deleteUser/`,
+    URL: `${BASE_URL}/users/`,
     METHOD: DELETE,
   },
   GET_ITEM_NUTRIENTS: {
