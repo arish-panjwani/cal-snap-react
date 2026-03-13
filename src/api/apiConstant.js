@@ -15,7 +15,7 @@ export const EXERCISE_CALORIE_API_KEY_1 =
 
 export const URLs = {
   USER_LOGIN: {
-    URL: `${BASE_URL}/login`,
+    URL: `${BASE_URL}/customer/login`,
     METHOD: POST,
   },
   GET_USERS: {
