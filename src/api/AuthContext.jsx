@@ -86,13 +86,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      // Attempt to notify backend about logout; ignore failures gracefully
-      try {
-        await APIRequest(URLs.LOGOUT.URL, URLs.LOGOUT.METHOD);
-      } catch (err) {
-        console.error("Backend logout failed:", err.message);
-      }
-
       handleLogout();
       setUser(null);
       queryClient.invalidateQueries(["authUser"]);
